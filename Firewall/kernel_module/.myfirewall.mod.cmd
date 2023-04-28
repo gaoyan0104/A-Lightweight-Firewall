@@ -1,0 +1,1 @@
+cmd_/home/ubuntu/Desktop/Firewall/kernel_module/myfirewall.mod := { echo  /home/ubuntu/Desktop/Firewall/kernel_module/myfirewall.o;  echo; } > /home/ubuntu/Desktop/Firewall/kernel_module/myfirewall.mod

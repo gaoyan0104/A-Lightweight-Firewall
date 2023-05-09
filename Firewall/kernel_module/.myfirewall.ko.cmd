@@ -1,1 +1,0 @@
-cmd_/home/ubuntu/Desktop/Firewall/kernel_module/myfirewall.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000 -z noexecstack   --build-id  -T ./scripts/module-common.lds -o /home/ubuntu/Desktop/Firewall/kernel_module/myfirewall.ko /home/ubuntu/Desktop/Firewall/kernel_module/myfirewall.o /home/ubuntu/Desktop/Firewall/kernel_module/myfirewall.mod.o;  true

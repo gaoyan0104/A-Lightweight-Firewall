@@ -32,7 +32,7 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 
 	spin_lock(&log_lock);    //加锁
 
-	f = filp_open("/home/ubuntu/Firewall/log.txt", O_WRONLY|O_CREAT|O_APPEND, 0644);
+	f = filp_open(LOG_FILE, O_WRONLY|O_CREAT|O_APPEND, 0644);
     if (IS_ERR(f))
 	{
         printk("Failed to open file\n");
@@ -45,10 +45,10 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 	struct rtc_time tm;
 	k_time = ktime_get_real();
 	tm = rtc_ktime_to_tm(k_time);     
-	printk( "time: %d-%d-%d %d:%d:%d\n", tm.tm_year+1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec);
+	// printk( "Time: %d-%d-%d %d:%d:%d\n", tm.tm_year+1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec);
 
-	len = snprintf(buf, sizeof(buf), "Time：%d-%d-%d %d:%d:%d\t\tSource IP：%d.%d.%d.%d\t\tDestination IP：%d.%d.%d.%d\t\tFilter Rule：%s\t\tAction：Deny\n", 
-	tm.tm_year+1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec, 
+	len = snprintf(buf, sizeof(buf), "Time: %d-%d-%d %d:%d:%d\t\tSource IP: %d.%d.%d.%d\t\tDestination IP: %d.%d.%d.%d\t\tFilter Rule: %s\t\tAction：Deny\n", 
+	tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec, 
 	(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
 	(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24, rule_str);
 	
@@ -60,11 +60,29 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 
 unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_state* state)
 {
-	if (rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
-	
+	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
+
+	if(rules.settime_status == 1)
+	{
+		time_t current_time = get_seconds();
+		// printk("当前日期： %ld  开始日期： %ld  结束日期： %ld\n", current_time, rules.start_date, rules.end_date);
+		if(current_time < rules.start_date || current_time >= rules.end_date)
+		{
+			printk("当前时间不在防火墙生效时间段内，放包\n");
+			return NF_ACCEPT;
+		}
+	}
+
 	struct iphdr *iph = ip_hdr(skb);                    
 	struct tcphdr *tcph = tcp_hdr(skb);    
 	struct udphdr *udph = udp_hdr(skb);    
+
+	//获取系统当前时间
+	ktime_t k_time;
+	struct rtc_time tm;
+	k_time = ktime_get_real();
+	tm = rtc_ktime_to_tm(k_time);     
+	// printk( "Time: %d-%d-%d %d:%d:%d\n", tm.tm_year+1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec);
 
 	//基于源ip地址访问控制，若rules.ip_status为1并且源ip地址与禁用的ip地址相同，丢弃该数据包 
 	if (rules.sip_status == 1)
@@ -245,12 +263,23 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	//关闭所有连接功能的控制
 	if(rules.close_status == 1)
 	{
-		printk("------------------\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\n的访问已拒绝\n------------------\n", 
-		(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-		(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24);
+		time_t current_time = get_seconds();
+		// printk("curr: %ld\n", current_time);
+		// printk("start: %ld\n", rules.start_time);
+		// printk("end: %ld\n", rules.end_time);
+		if(rules.start_time <= current_time && rules.end_time >= current_time)
+		{
+			printk("------------------\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\n的访问已拒绝\n------------------\n", 
+			(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
+			(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24);
 
-		wirte_log(iph, "关闭所有连接");
-		return NF_DROP;
+			wirte_log(iph, "关闭所有连接");
+			return NF_DROP;
+		}
+		else
+		{
+			printk("不在防火墙生效时间段，放包\n");
+		}
 	}
 
 	//如果以上情况都不符合，则不应拦截该数据包，返回NF_ACCEPT
@@ -264,7 +293,18 @@ unsigned int hookLocalOut(void* priv, struct sk_buff* skb, const struct nf_hook_
 
 unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hook_state* state)
 {
-	if (rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
+	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
+
+	if(rules.settime_status == 1)
+	{
+		time_t current_time = get_seconds();
+		// printk("当前日期： %ld  开始日期： %ld  结束日期： %ld\n", current_time, rules.start_date, rules.end_date);
+		if(current_time < rules.start_date || current_time >= rules.end_date)
+		{
+			printk("当前时间段防火墙未启用，直接放包\n");
+			return NF_ACCEPT;
+		}
+	}
 
 	struct iphdr *iph = ip_hdr(skb); 	                    
 	struct tcphdr *tcph = tcp_hdr(skb);    
@@ -319,8 +359,8 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 	if(rules.combin_status == 1)
 	{
 		int combin_numberi;
-		for(combin_numberi = 0; combin_numberi < rules.combineNum; combin_numberi++)
-		{
+		for(combin_numberi = 0; combin_numberi < rules.combineNum; combin_numberi++)      	//遍历每一个自定义的访问控制策略
+		{			
 			int flag_banSip = !rules.ban_combin[combin_numberi].banSip_status;
 			int flag_banDip = !rules.ban_combin[combin_numberi].banDip_status;
 			int flag_banSport = !rules.ban_combin[combin_numberi].banSport_status;
@@ -393,6 +433,11 @@ int hookSockoptSet(struct sock* sock, int cmd, void __user* user, unsigned int l
 		case OPENSTATE:           //改变防火墙开启状态
 			rules.open_status = recv.open_status;
 			break;
+		case SETTIME:             //改变防火墙开启时间段
+			rules.settime_status = recv.settime_status;
+			rules.start_date = recv.start_date;
+			rules.end_date = recv.end_date;
+			break;
 		case BANSIP:              //基于源IP地址的访问控制
 			rules.sip_status = recv.sip_status;
 			rules.sipNum = recv.sipNum;
@@ -425,6 +470,8 @@ int hookSockoptSet(struct sock* sock, int cmd, void __user* user, unsigned int l
 			break;
 		case BANALL:              //关闭所有连接功能的控制
 			rules.close_status = recv.close_status;
+			rules.start_time = recv.start_time;
+			rules.end_time = recv.end_time;
 			break;
 		case BANPING:             //PING功能的控制 
 			rules.ping_status = recv.ping_status;
@@ -469,6 +516,7 @@ int myfirewall_init(void)
 	rules.dip_status = 0;        //初始化基于目的IP访问控制的状态为不封禁 
 	rules.sport_status = 0;      //初始化基于源端口访问控制的状态为不封禁 
 	rules.dport_status = 0;      //初始化基于目的端口访问控制的状态为不封禁 
+	rules.settime_status = 0;	 //初始化关闭防火墙时间段功能
 	rules.ping_status = 0;       //初始化不封禁PING功能
 	rules.http_status = 0;       //初始化不封禁HTTP/HTTPS功能
 	rules.telnet_status = 0;     //初始化不封禁TELNET功能

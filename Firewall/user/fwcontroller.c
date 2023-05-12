@@ -7,12 +7,14 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <signal.h>
+#include <time.h>
 #include <errno.h>  
 #include "../kernel_module/myfirewall.h"
 
 ban_status rules;
 
 void open_firewall(int sockfd, socklen_t len);              /*功能函数：开启/关闭防火墙*/
+void set_opentime(int sockfd, socklen_t len);               /*功能函数：设置防火墙开启时间段*/
 void get_status();                                          /*功能函数：获取当前防火墙过滤规则*/
 void change_status(int sockfd, socklen_t len);              /*功能函数：改变防火墙过滤规则*/
 void change_ping(int sockfd, socklen_t len);                /*功能函数：改变PING规则*/
@@ -31,6 +33,11 @@ void printError(char * msg);                                /*功能函数：打
 
 int main(void)
 {
+	time_t timer0;
+	timer0= time(NULL);
+	struct tm* tm = localtime(&timer0);
+	printf("\nTime:%d-%d-%d %d:%d:%d\n", tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, tm->tm_hour + 8, tm->tm_min, tm->tm_sec);
+
 	int sockfd;
 	socklen_t len;
 	if ((sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) == -1)
@@ -71,7 +78,20 @@ int main(void)
 
 void get_status() 
 {	
-	printf("\n当前防火墙过滤规则为:\n");
+	printf("-------------------------------------------------------------------------------\n");
+	if (rules.settime_status == 1)
+	{
+		//将时间戳转换为tm结构体
+		struct tm start_date, end_date;	
+    	localtime_r(&rules.start_date, &start_date);     
+    	localtime_r(&rules.end_date, &end_date);
+
+		// printf("%ld ~ %ld", rules.start_date, rules.end_date);
+		printf("防火墙启用时间段: %d-%d-%d 00:00:00  ~  %d-%d-%d 23:59:59\n", start_date.tm_year+1900, 
+		start_date.tm_mon + 1, start_date.tm_mday + 1, end_date.tm_year+1900, end_date.tm_mon + 1, end_date.tm_mday);
+	}
+	
+	printf("当前防火墙过滤规则为:\n");
 	printf("--------------------------------------\n");
 
 	printf("根据源IP过滤功能：\t\t");
@@ -164,7 +184,8 @@ void get_status()
 	printf("自定义访问控制策略功能：\t");
 	if(rules.combin_status == 1)
 	{
-		printf("开启\n");	
+		printf("开启\n");
+		printf("共%d个自定义访问控制策略\n", rules.combineNum);
 		for(int i = 0; i < rules.combineNum; i++)
 		{
 			printf("\n第%d个自定义访问控制策略:\n", i + 1);
@@ -259,10 +280,11 @@ void change_status(int sockfd, socklen_t len)
 {
 	int choice;
 	printf("\n选择需要修改的防火墙过滤规则:\n");
-	printf("1.开启/关闭防火墙\t2.查看日志\t\t3.过滤源IP\t\t4.过滤目的IP\n");
-	printf("5.过滤源端口\t\t6.过滤目的端口\t\t7.过滤MAC地址\t\t8.自定义访问控制策略\n"); 
-	printf("9.关闭所有连接\t\t10.PING功能\t\t11.HTTP/HTTPS功能\t12.Telnet功能\n");
-	printf("0.exit\n\n");
+	printf("1.开启/关闭防火墙\t2.查看日志\t\t3.设置防火墙生效时间\t4.自定义访问控制策略\n");
+	printf("5.过滤源IP\t\t6.过滤目的IP\t\t7.过滤源端口\t\t8.过滤目的端口\n"); 
+	printf("9.过滤MAC地址\t\t10.PING功能\t\t11.HTTP/HTTPS功能\t12.Telnet功能\n");
+	printf("13.关闭所有连接\t\t0.exit\n");
+	printf("-------------------------------------------------------------------------------\n");
 	// printf("选项：");
 
 	scanf("%d", &choice);
@@ -275,25 +297,25 @@ void change_status(int sockfd, socklen_t len)
 			show_log();
 			break;
 		case 3:   
-			change_sip(sockfd, len);
+			set_opentime(sockfd, len);
 			break;
 		case 4:   
-			change_dip(sockfd, len);
+			change_combin(sockfd, len); 
 			break;
 		case 5:   
-			change_sport(sockfd, len);
+			change_sip(sockfd, len);
 			break;
-		case 6:   
-			change_dport(sockfd, len);
+		case 6:
+			change_dip(sockfd, len);   
 			break;
 		case 7:   
-			change_mac(sockfd, len);
+			change_sport(sockfd, len);	
 			break;
 		case 8:
-			change_combin(sockfd, len);  
+			change_dport(sockfd, len);
 			break;
 		case 9:
-			change_close(sockfd, len);
+			change_mac(sockfd, len);
 			break;
 		case 10:   
 			change_ping(sockfd, len);
@@ -303,6 +325,9 @@ void change_status(int sockfd, socklen_t len)
 			break;
 		case 12:
 			change_telnet(sockfd, len);
+			break;
+		case 13:
+			change_close(sockfd, len);	
 			break;
 		case 0:
 			exit(0);
@@ -328,6 +353,9 @@ void open_firewall(int sockfd, socklen_t len)
 	{
 		printf("过滤规则同步至内核空间失败");
 	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 // 功能函数：改变源IP过滤规则
@@ -373,6 +401,70 @@ void change_sip(int sockfd, socklen_t len)
 		//输入错误
 		printf("选项号有误\n");
 	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
+}
+
+// 功能函数：设置防火墙开启时间段
+void set_opentime(int sockfd, socklen_t len)
+{
+	rules.settime_status = !rules.settime_status;
+	if (rules.settime_status == 1)
+	{
+		struct tm start_date, end_date;
+		// char start_date_str[32] = "2023-05-11";  
+		// char end_date_str[32] = "2023-05-11";
+		char start_date_str[32];
+		char end_date_str[32];	
+
+		printf("请输入防火墙开始日期（格式：YYYY-MM-DD）：\n");
+		scanf("%s", start_date_str);
+		printf("请输入防火墙结束日期（格式：YYYY-MM-DD）：\n");
+		scanf("%s", end_date_str);
+
+		if (strptime(start_date_str, "%Y-%m-%d", &start_date) == NULL) {
+			printf("输入格式有误，请重新设置！\n");
+			rules.settime_status = 0;
+			printf("Press enter to continue...\n");
+			getchar(); 
+			getchar(); 
+			return;
+		}
+		start_date.tm_hour = 0 - 8;
+		start_date.tm_min = 0;
+		start_date.tm_sec = 0;
+		start_date.tm_isdst = -1;  // 自动判断夏令时
+
+		if (strptime(end_date_str, "%Y-%m-%d", &end_date) == NULL) {
+			printf("输入格式有误，请重新设置！\n");
+			rules.settime_status = 0;
+			printf("Press enter to continue...\n");
+			getchar(); 
+			getchar(); 
+			return;
+		}
+		end_date.tm_hour = 23 - 8;
+		end_date.tm_min = 59;
+		end_date.tm_sec = 59;
+		end_date.tm_isdst = -1;    // 自动判断夏令时
+
+		printf("防火墙启用时间段: %d-%d-%d %d:%d:%d  ~  %d-%d-%d %d:%d:%d\n", start_date.tm_year+1900, start_date.tm_mon + 1, start_date.tm_mday, start_date.tm_hour + 8, 
+		start_date.tm_min, start_date.tm_sec, end_date.tm_year+1900, end_date.tm_mon + 1, end_date.tm_mday, end_date.tm_hour + 8, end_date.tm_min, end_date.tm_sec);
+
+		rules.start_date = mktime(&start_date);
+		rules.end_date = mktime(&end_date);
+		// printf("开始日期时间戳： %ld\n", rules.start_date);
+		// printf("结束日期时间戳： %ld\n", rules.end_date);
+	}
+
+	if(setsockopt(sockfd, IPPROTO_IP, SETTIME, &rules, len))
+	{
+		printf("过滤规则同步至内核空间失败");
+	}
+    printf("Press enter to continue...\n");
+	getchar(); 
+	getchar(); 
 }
 
 // 功能函数：改变目的IP过滤规则
@@ -418,6 +510,9 @@ void change_dip(int sockfd, socklen_t len)
 		//输入错误
 		printf("选项号有误\n");
 	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 // 功能函数：改变源端口过滤规则
@@ -460,6 +555,9 @@ void change_sport(int sockfd, socklen_t len)
 		//输入错误
 		printf("选项号有误\n");
 	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 // 功能函数：改变目的端口过滤规则
@@ -480,7 +578,7 @@ void change_dport(int sockfd, socklen_t len)
 			unsigned short dport;
 			scanf("%hu", &dport);
 			// printf("用户层输入的端口号: %hu\n", dport);
-			if(dport == 0) break;	         //0代表输入完成 提前退出循环
+			if(dport == 0) break;	         //0代表输入完成，提前退出循环
 			rules.ban_dport[i] = dport;      //把每一个端口号写进数组保存
 			rules.dportNum = i + 1;          //设置当前禁用的端口总数
 		}
@@ -504,7 +602,9 @@ void change_dport(int sockfd, socklen_t len)
 		//输入错误
 		printf("选项号有误\n");
 	}
-
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 // 功能函数：改变自定义访问控制规则
@@ -638,6 +738,9 @@ void change_combin(int sockfd, socklen_t len)
 		//输入错误
 		printf("选项号有误\n");
 	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 // 功能函数：改变PING规则
@@ -648,6 +751,9 @@ void change_ping(int sockfd, socklen_t len)
 	{
 		printf("过滤规则同步至内核空间失败");
 	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 // 功能函数：改变HTTP/HTTPS规则
@@ -658,6 +764,9 @@ void change_http(int sockfd, socklen_t len)
 	{
 		printf("过滤规则同步至内核空间失败");		
 	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 // 功能函数：改变Telnet规则
@@ -668,6 +777,9 @@ void change_telnet(int sockfd, socklen_t len)
 	{
 		printf("过滤规则同步至内核空间失败");		
 	}	
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }     
 
 // 工具函数：将MAC地址分割并存入mac_addr
@@ -722,16 +834,56 @@ void change_mac(int sockfd, socklen_t len)
 			printf("过滤规则同步至内核空间失败");			
 		}
 	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 // 功能函数：改变关闭所有连接规则
 void change_close(int sockfd, socklen_t len)
 {
 	rules.close_status = !rules.close_status;
+	if (rules.close_status == 1)
+	{
+		struct tm start_time, end_time;
+    	time_t t = time(NULL);            // 获取当前时间的时间戳
+
+		//将当前时间的时间戳转换为tm结构体并复制给start_time、end_time。
+    	localtime_r(&t, &start_time);     
+    	localtime_r(&t, &end_time);
+
+		int start_hour, end_hour;
+
+		printf("请输入规则开启时间(h)：\n");
+		scanf("%d", &start_hour);
+		printf("请输入规则结束时间(h)：\n");
+		scanf("%d", &end_hour);
+
+		// 设置修改后的开始时间
+    	start_time.tm_hour = start_hour - 8; 
+    	start_time.tm_min = 0;
+    	start_time.tm_sec = 0;
+
+		// 设置修改后的结束时间
+    	end_time.tm_hour = end_hour - 8; 
+    	end_time.tm_min = 59;
+    	end_time.tm_sec = 59;
+
+		printf("规则生效时间段: %d-%d-%d %d:%d:%d  ~  %d-%d-%d %d:%d:%d\n", start_time.tm_year+1900, start_time.tm_mon + 1, start_time.tm_mday, start_time.tm_hour + 8, 
+		start_time.tm_min, start_time.tm_sec, end_time.tm_year+1900, end_time.tm_mon + 1, end_time.tm_mday, end_time.tm_hour + 8, end_time.tm_min, end_time.tm_sec);
+
+		// 将tm结构体转换为时间戳并存储rules
+    	rules.start_time = mktime(&start_time);
+    	rules.end_time = mktime(&end_time);
+	}
+	
 	if(setsockopt(sockfd, IPPROTO_IP, BANALL, &rules, len))  
 	{
 		printf("过滤规则同步至内核空间失败");		
 	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 // 功能函数：查看当前日志
@@ -740,7 +892,7 @@ void show_log()
     FILE *fp;
     char buffer[255];
 
-    fp = fopen("/home/ubuntu/Firewall/log.txt", "r");
+    fp = fopen(LOG_FILE, "r");
     if (fp == NULL) {
         printf("Failed to open file\n");
         return;
@@ -752,6 +904,9 @@ void show_log()
     }
 
     fclose(fp);
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
 }
 
 //功能函数：打印错误信息

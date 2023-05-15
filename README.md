@@ -17,4 +17,8 @@
   
     sudo ./fwcontroller
 
+操作系统：Ubuntu 20.04
+内核版本：Linux 5.4.0-148-generic
+编译环境：gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)
+
 小提示：记得在头文件myfirewall.h中修改一下防火墙日志文件的路径LOG_FILE，我的路径是/home/ubuntu/Firewall/log.txt。

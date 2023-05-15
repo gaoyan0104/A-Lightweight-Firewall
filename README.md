@@ -23,4 +23,4 @@
 
 编译环境：gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)
 
-小提示：记得在头文件myfirewall.h中修改一下防火墙日志文件的路径LOG_FILE，我的路径是/home/ubuntu/Firewall/log.txt。
+小提示：记得在头文件 myfirewall.h 中修改一下防火墙日志文件的路径LOG_FILE，我的路径是 /home/ubuntu/Firewall/log.txt。

@@ -19,7 +19,7 @@
   
     cd user/
   
-    sudo gcc fwcontroller.c -o fwcontroller
+    sudo gcc fwcontroller.c -o fwcontroller -D _XOPEN_SOURCE
   
     sudo ./fwcontroller
 

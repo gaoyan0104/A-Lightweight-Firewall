@@ -12,15 +12,17 @@
 #define BANMAC                0x1011			                  //禁MAC地址功能编号
 #define BANCOMBIN             0x1012                              //自定义访问控制策略功能编号
 #define SETTIME               0x1013                              //设置防火墙启用时间段功能编号
+#define RESTORE               0x1014                              //恢复默认设置功能编号
 #define SOE_MAX		          0x1100                              //驱动程序处理最大值 
 #define IP_NUM_MAX            10                                  //过滤IP地址个数的最大值
 #define PORT_NUM_MAX          10                                  //过滤端口个数的最大值
 #define MAC_NUM_MAX           10                                  //过滤MAC地址个数的最大值
 #define COMBINE_NUM_MAX       10                                  //用户自定义访问控制策略个数的最大值
 #define MAC_LEN               6                                   //MAC地址的字节数
+#define HASH_SIZE             1000001							  //状态检测哈希表长度
 #define LOG_FILE              "/home/ubuntu/Firewall/log.txt"     //日志文件存储路径
 
-//存储用户自定义访问控制策略的结构体
+//存储用户自定义访问控制策略
 typedef struct banCombin{
 	int banSip_status;                                 //是否根据源IP地址过滤
 	int banDip_status;                                 //是否根据目的IP地址过滤
@@ -34,7 +36,7 @@ typedef struct banCombin{
 	unsigned char banMac[MAC_LEN];                     //存储过滤的自定义MAC地址
 }banCombin;
 
-//存储防火墙过滤规则的结构体，其中 int *_status (1：禁止，0：允许)
+//存储防火墙过滤规则，其中 int *_status (1：禁止，0：允许)
 typedef struct ban_status{
 	int open_status;                                   //防火墙开启状态
 	int sip_status;                                    //源IP控制开启状态

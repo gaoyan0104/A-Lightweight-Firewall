@@ -21,7 +21,12 @@ static struct nf_hook_ops nfhoForwarding;     	//在数据路由后处理转发�
 static struct nf_hook_ops nfhoPostRouting;      //在本地数据路由之后的钩子
 static struct nf_sockopt_ops nfhoSockopt;       //处理内核和用户间通信钩子
 
+// 存储防火墙过滤规则
 ban_status rules, recv;
+// 状态检测Hash表
+time_t hashTable[HASH_SIZE]={0};
+// HASH锁
+char hashLock = 0;
 
 // 写防火墙日志文件
 void wirte_log(struct iphdr *iph, char *rule_str)
@@ -58,6 +63,133 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 	spin_unlock(&log_lock);    //解锁
 }
 
+// Hash函数
+static unsigned get_hash(int k) 
+{
+	unsigned a, b, c = 4;
+    a = b = 0x9e3779b9;
+    a += k;
+	a -= b; a -= c; a ^= (c >> 13); 
+	b -= c; b -= a; b ^= (a << 8); 
+	c -= a; c -= b; c ^= (b >> 13); 
+	a -= b; a -= c; a ^= (c >> 12);  
+	b -= c; b -= a; b ^= (a << 16); 
+	c -= a; c -= b; c ^= (b >> 5); 
+	a -= b; a -= c; a ^= (c >> 3);  
+	b -= c; b -= a; b ^= (a << 10); 
+	c -= a; c -= b; c ^= (b >> 15); 
+    return c % HASH_SIZE;
+}
+
+// 检测该数据包是否在状态检测哈希数组中
+bool check_conn(struct sk_buff *skb) 
+{
+	if(!skb) return true;
+
+	struct iphdr *ip = ip_hdr(skb);
+	unsigned int src_ip = ntohl(ip->saddr);
+	unsigned int dst_ip = ntohl(ip->daddr);
+
+	int src_port;
+	int dst_port;
+	int protocol;
+
+	if (ip->protocol == IPPROTO_TCP) 
+	{
+		struct tcphdr *tcp = tcp_hdr(skb);
+		src_port = ntohs(tcp->source);
+		dst_port = ntohs(tcp->dest);
+		protocol = 1;
+	}
+	else if (ip->protocol == IPPROTO_UDP) 
+	{
+		struct udphdr *udp = udp_hdr(skb);
+		src_port = ntohs(udp->source);
+		dst_port = ntohs(udp->dest);
+		protocol = 2;
+	}
+	else if (ip->protocol == IPPROTO_ICMP)
+	{
+		src_port = -1;
+		dst_port = -1;
+		protocol = 3;
+	}
+	else 
+	{
+		// 不记录状态
+		return false;
+	}
+
+	unsigned int scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
+	unsigned int pos = get_hash(scode);
+
+	while(hashLock);  // 等待开锁
+	hashLock = 1;     // 上锁
+
+	//当前时间戳减Hash表中的时间戳为间隔时间
+	if (hashTable[pos] && get_seconds() - hashTable[pos] < 10) 
+	{
+		// printk("状态检测通过  pos:%d   hash:%ld\n", pos, hashTable[pos]);
+		// 更新时间为当前时间戳
+		hashTable[pos] = get_seconds();
+		hashLock = 0;   // 开锁
+		return true;
+	}
+	// 连接不存在，返回插入位置
+	else 
+	{
+		hashLock = 0;	// 开锁
+	}
+
+	// printk("状态检测不通过\n");
+	return false;
+}
+
+// 更新状态检测哈希数组
+void update_hashTable(struct sk_buff *skb) 
+{
+	struct iphdr *ip = ip_hdr(skb);
+	unsigned int src_ip = ntohl(ip->saddr);
+	unsigned int dst_ip = ntohl(ip->daddr);
+
+	int src_port;
+	int dst_port;
+	int protocol;
+
+	if (ip->protocol == IPPROTO_TCP) 
+	{
+		struct tcphdr *tcp = tcp_hdr(skb);
+		src_port = ntohs(tcp->source);
+		dst_port = ntohs(tcp->dest);
+		protocol = 1;
+	}
+	else if (ip->protocol == IPPROTO_UDP) 
+	{
+		struct udphdr *udp = udp_hdr(skb);
+		src_port = ntohs(udp->source);
+		dst_port = ntohs(udp->dest);
+		protocol = 2;
+	}
+	else if (ip->protocol == IPPROTO_ICMP) 
+	{
+		src_port = -1;
+		dst_port = -1;
+		protocol = 3;
+	}
+
+	unsigned int scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
+	unsigned int pos = get_hash(scode);
+
+	while(hashLock);  // 等待开锁
+	hashLock = 1;	  // 上锁
+
+	// 更新为当前时间戳
+	hashTable[pos] = get_seconds(); 
+	
+	hashLock = 0;	  // 开锁
+	// printk("更新哈希表 pos:%d  zhi: %ld\n", pos, hashTable[pos]);
+}
+
 unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_state* state)
 {
 	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
@@ -72,6 +204,8 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 			return NF_ACCEPT;
 		}
 	}
+
+	if(check_conn(skb)) return NF_ACCEPT;   //状态检测
 
 	struct iphdr *iph = ip_hdr(skb);                    
 	struct tcphdr *tcph = tcp_hdr(skb);    
@@ -118,7 +252,6 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 				return NF_DROP;
 			}
 		}
-		
 	}
 
 	//基于源端口的访问控制，若rules.sport_status为1并且目的端口与禁用的端口相同则丢弃该数据包 
@@ -283,6 +416,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	}
 
 	//如果以上情况都不符合，则不应拦截该数据包，返回NF_ACCEPT
+	update_hashTable(skb);
 	return NF_ACCEPT;
 }
 
@@ -481,6 +615,10 @@ int hookSockoptSet(struct sock* sock, int cmd, void __user* user, unsigned int l
 			break;
 		case BANTELNET:           //TELNET功能的控制
 			rules.telnet_status = recv.telnet_status;
+			break;
+		case RESTORE:             //恢复默认设置的控制
+			memset(&rules, 0, sizeof(rules));	
+			rules.open_status = 1;
 			break;
 		default:
 			break;

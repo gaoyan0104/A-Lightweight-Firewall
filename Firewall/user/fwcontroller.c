@@ -11,6 +11,7 @@
 #include <errno.h>  
 #include "../kernel_module/myfirewall.h"
 
+// 存储防火墙过滤规则
 ban_status rules;
 
 void open_firewall(int sockfd, socklen_t len);              /*功能函数：开启/关闭防火墙*/
@@ -28,7 +29,8 @@ void change_mac(int sockfd, socklen_t len);                 /*功能函数：改
 void change_close(int sockfd, socklen_t len);               /*功能函数：改变关闭所有连接规则*/
 void change_combin(int sockfd, socklen_t len);              /*功能函数：改变自定义过滤规则*/
 void mac_format(char *mac_str, unsigned char *mac_addr);    /*功能函数：将MAC地址分割并存入mac_addr*/
-void show_log();                                            /*功能函数：查看当前日志*/
+void show_log();                                            /*功能函数：查看日志*/
+void restore_default(int sockfd, socklen_t len);            /*功能函数：恢复默认设置*/
 void printError(char * msg);                                /*功能函数：打印错误信息*/
 
 int main(void)
@@ -69,13 +71,13 @@ int main(void)
 					if(choice == 1) open_firewall(sockfd, len);    //开启防火墙
 					else if(choice == 0) exit(0);                  //退出
 				}
-
 			}
 		}
 	}
 	return 0;
 }
 
+//功能函数：获取当前防火墙过滤规则
 void get_status() 
 {	
 	printf("-------------------------------------------------------------------------------\n");
@@ -276,6 +278,7 @@ void get_status()
 	printf("--------------------------------------\n");
 }
 
+//功能函数：改变防火墙过滤规则
 void change_status(int sockfd, socklen_t len)
 {
 	int choice;
@@ -283,7 +286,7 @@ void change_status(int sockfd, socklen_t len)
 	printf("1.开启/关闭防火墙\t2.查看日志\t\t3.设置防火墙生效时间\t4.自定义访问控制策略\n");
 	printf("5.过滤源IP\t\t6.过滤目的IP\t\t7.过滤源端口\t\t8.过滤目的端口\n"); 
 	printf("9.过滤MAC地址\t\t10.PING功能\t\t11.HTTP/HTTPS功能\t12.Telnet功能\n");
-	printf("13.关闭所有连接\t\t0.exit\n");
+	printf("13.关闭所有连接\t\t14.恢复默认设置\t\t0.exit\n");
 	printf("-------------------------------------------------------------------------------\n");
 	// printf("选项：");
 
@@ -328,6 +331,9 @@ void change_status(int sockfd, socklen_t len)
 			break;
 		case 13:
 			change_close(sockfd, len);	
+			break;
+		case 14:
+			restore_default(sockfd, len);	
 			break;
 		case 0:
 			exit(0);
@@ -908,10 +914,23 @@ void show_log()
     getchar(); 
 	getchar(); 
 }
+// 功能函数：恢复默认设置
+void restore_default(int sockfd, socklen_t len)
+{
+	memset(&rules, 0, sizeof(rules));	
+	rules.open_status = 1;
+
+	if(setsockopt(sockfd, IPPROTO_IP, RESTORE, &rules, len))  
+	{
+		printf("过滤规则同步至内核空间失败");		
+	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 	
+}
 
 //功能函数：打印错误信息
 void printError(char * msg)
 {
 	printf("%s error %d: %s\n", msg, errno, strerror(errno));
 }
-

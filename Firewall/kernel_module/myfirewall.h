@@ -19,7 +19,7 @@
 #define MAC_NUM_MAX           10                                  //过滤MAC地址个数的最大值
 #define COMBINE_NUM_MAX       10                                  //用户自定义访问控制策略个数的最大值
 #define MAC_LEN               6                                   //MAC地址的字节数
-#define HASH_SIZE             1000001							  //状态检测哈希表长度
+#define TABLE_SIZE            1000001							  //状态检测哈希表长度
 #define LOG_FILE              "/home/ubuntu/Firewall/log.txt"     //日志文件存储路径
 
 //存储用户自定义访问控制策略

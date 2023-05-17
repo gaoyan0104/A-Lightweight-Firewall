@@ -80,7 +80,12 @@ int main(void)
 //功能函数：获取当前防火墙过滤规则
 void get_status() 
 {	
+	time_t timer0;
+	timer0= time(NULL);
+	struct tm* tm = localtime(&timer0);
+	printf("\nTime:%d-%d-%d %d:%d:%d\n", tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, tm->tm_hour + 8, tm->tm_min, tm->tm_sec);
 	printf("-------------------------------------------------------------------------------\n");
+	
 	if (rules.settime_status == 1)
 	{
 		//将时间戳转换为tm结构体
@@ -914,6 +919,7 @@ void show_log()
     getchar(); 
 	getchar(); 
 }
+
 // 功能函数：恢复默认设置
 void restore_default(int sockfd, socklen_t len)
 {

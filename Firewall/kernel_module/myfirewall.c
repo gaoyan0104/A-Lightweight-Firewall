@@ -24,7 +24,7 @@ static struct nf_sockopt_ops nfhoSockopt;       //处理内核和用户间通信
 // 存储防火墙过滤规则
 ban_status rules, recv;
 // 状态检测Hash表
-time_t hashTable[HASH_SIZE]={0};
+time_t hashTable[TABLE_SIZE]={0};
 // HASH锁
 char hashLock = 0;
 
@@ -33,7 +33,9 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 {
 	struct file *f;
 	int len;         
-	char buf[256];   
+	char buf[256]; 
+	ktime_t k_time;
+	struct rtc_time tm;  
 
 	spin_lock(&log_lock);    //加锁
 
@@ -46,8 +48,6 @@ void wirte_log(struct iphdr *iph, char *rule_str)
     }
 
 	//获取系统当前时间
-	ktime_t k_time;
-	struct rtc_time tm;
 	k_time = ktime_get_real();
 	tm = rtc_ktime_to_tm(k_time);     
 	// printk( "Time: %d-%d-%d %d:%d:%d\n", tm.tm_year+1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec);
@@ -78,14 +78,12 @@ static unsigned get_hash(int k)
 	a -= b; a -= c; a ^= (c >> 3);  
 	b -= c; b -= a; b ^= (a << 10); 
 	c -= a; c -= b; c ^= (b >> 15); 
-    return c % HASH_SIZE;
+    return c % TABLE_SIZE;
 }
 
 // 检测该数据包是否在状态检测哈希数组中
 bool check_conn(struct sk_buff *skb) 
 {
-	if(!skb) return true;
-
 	struct iphdr *ip = ip_hdr(skb);
 	unsigned int src_ip = ntohl(ip->saddr);
 	unsigned int dst_ip = ntohl(ip->daddr);
@@ -93,6 +91,10 @@ bool check_conn(struct sk_buff *skb)
 	int src_port;
 	int dst_port;
 	int protocol;
+	unsigned int scode;
+	unsigned int pos;    // 状态表的位置
+
+	if(!skb) return true;
 
 	if (ip->protocol == IPPROTO_TCP) 
 	{
@@ -120,8 +122,8 @@ bool check_conn(struct sk_buff *skb)
 		return false;
 	}
 
-	unsigned int scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
-	unsigned int pos = get_hash(scode);
+	scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
+	pos = get_hash(scode);
 
 	while(hashLock);  // 等待开锁
 	hashLock = 1;     // 上锁
@@ -155,6 +157,8 @@ void update_hashTable(struct sk_buff *skb)
 	int src_port;
 	int dst_port;
 	int protocol;
+	unsigned int scode;
+	unsigned int pos;    // 状态表的位置
 
 	if (ip->protocol == IPPROTO_TCP) 
 	{
@@ -177,8 +181,8 @@ void update_hashTable(struct sk_buff *skb)
 		protocol = 3;
 	}
 
-	unsigned int scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
-	unsigned int pos = get_hash(scode);
+	scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
+	pos = get_hash(scode);
 
 	while(hashLock);  // 等待开锁
 	hashLock = 1;	  // 上锁
@@ -192,6 +196,12 @@ void update_hashTable(struct sk_buff *skb)
 
 unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_state* state)
 {
+	struct iphdr *iph = ip_hdr(skb);                    
+	struct tcphdr *tcph = tcp_hdr(skb);    
+	struct udphdr *udph = udp_hdr(skb); 
+	ktime_t k_time;
+	struct rtc_time tm;
+
 	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
 
 	if(rules.settime_status == 1)
@@ -207,13 +217,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 
 	if(check_conn(skb)) return NF_ACCEPT;   //状态检测
 
-	struct iphdr *iph = ip_hdr(skb);                    
-	struct tcphdr *tcph = tcp_hdr(skb);    
-	struct udphdr *udph = udp_hdr(skb);    
-
 	//获取系统当前时间
-	ktime_t k_time;
-	struct rtc_time tm;
 	k_time = ktime_get_real();
 	tm = rtc_ktime_to_tm(k_time);     
 	// printk( "Time: %d-%d-%d %d:%d:%d\n", tm.tm_year+1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec);
@@ -275,9 +279,9 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 
 						wirte_log(iph, "源端口");
 						return NF_DROP;
-						break;
 					}
 				}
+				break;
 			}
 			case IPPROTO_UDP:
 			{
@@ -295,9 +299,9 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 
 						wirte_log(iph, "源端口");
 						return NF_DROP;
-						break;
 					}
 				}
+				break;
 			}
 		}
 	}
@@ -327,9 +331,9 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 
 						wirte_log(iph, "目的端口");
 						return NF_DROP;
-						break;
 					}
 				}
+				break;
 			}
 			case IPPROTO_UDP:
 			{
@@ -346,9 +350,9 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 
 						wirte_log(iph, "目的端口");
 						return NF_DROP;
-						break;
 					}
 				}
+				break;
 			}
 		}
 	}
@@ -416,7 +420,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	}
 
 	//如果以上情况都不符合，则不应拦截该数据包，返回NF_ACCEPT
-	update_hashTable(skb);
+	update_hashTable(skb);   //更新状态检测哈希表
 	return NF_ACCEPT;
 }
 
@@ -427,6 +431,14 @@ unsigned int hookLocalOut(void* priv, struct sk_buff* skb, const struct nf_hook_
 
 unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hook_state* state)
 {
+
+	struct iphdr *iph = ip_hdr(skb); 	                    
+	struct tcphdr *tcph = tcp_hdr(skb);    
+	struct udphdr *udph = udp_hdr(skb);   
+	struct ethhdr *ethhdr = eth_hdr(skb);
+	unsigned short sport, dport;            //存储当前数据包的源端口号和目的端口号
+	unsigned char mac_source[ETH_ALEN];     //存储当前数据包的MAC地址
+
 	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
 
 	if(rules.settime_status == 1)
@@ -435,32 +447,27 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		// printk("当前日期： %ld  开始日期： %ld  结束日期： %ld\n", current_time, rules.start_date, rules.end_date);
 		if(current_time < rules.start_date || current_time >= rules.end_date)
 		{
-			printk("当前时间段防火墙未启用，直接放包\n");
+			printk("当前时间不在防火墙生效时间段内，放包\n");
 			return NF_ACCEPT;
 		}
 	}
 
-	struct iphdr *iph = ip_hdr(skb); 	                    
-	struct tcphdr *tcph = tcp_hdr(skb);    
-	struct udphdr *udph = udp_hdr(skb);   
-	struct ethhdr *ethhdr = eth_hdr(skb);
-
-	unsigned short sport, dport;           //存储当前数据包的源端口号和目的端口号
 	switch(iph->protocol)  
 	{          
 		case IPPROTO_TCP:
 		{
 			sport = tcph->source;
 			dport = tcph->dest;
+			break;
 		}
 		case IPPROTO_UDP:
 		{
 			sport = udph->source;
 			dport = udph->dest;
+			break;
 		}
 	}
 
-	unsigned char mac_source[ETH_ALEN];    //存储当前数据包的MAC地址
 	memcpy(mac_source, ethhdr->h_source, ETH_ALEN);    
 
 	if(rules.mac_status == 1)

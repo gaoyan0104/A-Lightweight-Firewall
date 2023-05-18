@@ -13,7 +13,7 @@
 
     cd /home/ubuntu/Firewall/kernel_module/
   
-    make testload
+    make load
   
     cd ..
   

@@ -30,16 +30,16 @@ __used __section(__versions) = {
 	{ 0x9fdd072c, "nf_register_sockopt" },
 	{ 0x62a38e34, "nf_register_net_hook" },
 	{ 0x30cb0399, "init_net" },
-	{ 0x953e1b9e, "ktime_get_real_seconds" },
-	{ 0xdecd0b29, "__stack_chk_fail" },
 	{ 0x5ab904eb, "pv_ops" },
 	{ 0x5e5292c, "filp_close" },
 	{ 0x4e1bcc1b, "kernel_write" },
-	{ 0x656e4a6e, "snprintf" },
-	{ 0xe4c2c66c, "rtc_ktime_to_tm" },
-	{ 0xc4f0da12, "ktime_get_with_offset" },
 	{ 0xddd346a3, "filp_open" },
 	{ 0xdbf17652, "_raw_spin_lock" },
+	{ 0x656e4a6e, "snprintf" },
+	{ 0xdecd0b29, "__stack_chk_fail" },
+	{ 0xe4c2c66c, "rtc_ktime_to_tm" },
+	{ 0xc4f0da12, "ktime_get_with_offset" },
+	{ 0x953e1b9e, "ktime_get_real_seconds" },
 	{ 0xb44ad4b3, "_copy_to_user" },
 	{ 0xc5850110, "printk" },
 	{ 0x362ef408, "_copy_from_user" },
@@ -49,4 +49,4 @@ __used __section(__versions) = {
 MODULE_INFO(depends, "");
 
 
-MODULE_INFO(srcversion, "448828FC9E94EA25564CCF9");
+MODULE_INFO(srcversion, "EE8A3AD281299362D616BA8");

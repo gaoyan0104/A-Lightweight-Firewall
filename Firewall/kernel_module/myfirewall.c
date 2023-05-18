@@ -28,41 +28,6 @@ time_t hashTable[TABLE_SIZE]={0};
 // HASH锁
 char hashLock = 0;
 
-// 写防火墙日志文件
-void wirte_log(struct iphdr *iph, char *rule_str)
-{
-	struct file *f;
-	int len;         
-	char buf[256]; 
-	ktime_t k_time;
-	struct rtc_time tm;  
-
-	spin_lock(&log_lock);    //加锁
-
-	f = filp_open(LOG_FILE, O_WRONLY|O_CREAT|O_APPEND, 0644);
-    if (IS_ERR(f))
-	{
-        printk("Failed to open file\n");
-        spin_unlock(&log_lock);
-        return;
-    }
-
-	//获取系统当前时间
-	k_time = ktime_get_real();
-	tm = rtc_ktime_to_tm(k_time);     
-	// printk( "Time: %d-%d-%d %d:%d:%d\n", tm.tm_year+1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec);
-
-	len = snprintf(buf, sizeof(buf), "Time: %d-%d-%d %d:%d:%d\t\tSource IP: %d.%d.%d.%d\t\tDestination IP: %d.%d.%d.%d\t\tFilter Rule: %s\t\tAction：Deny\n", 
-	tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec, 
-	(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-	(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24, rule_str);
-	
-	kernel_write(f, buf, len, &f->f_pos);
-
-	filp_close(f, NULL);
-	spin_unlock(&log_lock);    //解锁
-}
-
 // Hash函数
 static unsigned get_hash(int k) 
 {
@@ -194,13 +159,61 @@ void update_hashTable(struct sk_buff *skb)
 	// printk("更新哈希表 pos:%d  zhi: %ld\n", pos, hashTable[pos]);
 }
 
+//获取系统当前时间
+struct rtc_time get_time(void)
+{
+	ktime_t k_time;
+	struct rtc_time tm;  
+	k_time = ktime_get_real();
+	tm = rtc_ktime_to_tm(k_time);  
+	return tm;
+}
+
+// 转换IP地址格式
+void convert_ip(unsigned int ip, char* ip_str, size_t size)
+{
+	snprintf(ip_str, size, "%u.%u.%u.%u", 
+	(ip & 0x000000ff) >> 0,(ip & 0x0000ff00) >> 8,(ip & 0x00ff0000) >> 16,(ip & 0xff000000) >> 24);
+}
+
+// 写防火墙日志文件
+void wirte_log(struct iphdr *iph, char *rule_str)
+{
+	struct file *f;
+	int len;         
+	char buf[256]; 
+	struct rtc_time tm = get_time();  //获取系统当前时间
+
+	spin_lock(&log_lock);    //加锁
+
+	f = filp_open(LOG_FILE, O_WRONLY|O_CREAT|O_APPEND, 0644);
+    if (IS_ERR(f))
+	{
+        // printk("Failed to open file\n");
+        spin_unlock(&log_lock);
+        return;
+    }
+
+	len = snprintf(buf, sizeof(buf), "Time: %d-%d-%d %d:%d:%d\t\tSource IP: %d.%d.%d.%d\t\tDestination IP: %d.%d.%d.%d\t\tFilter Rule: %s\t\tAction：Deny\n", 
+	tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec, 
+	(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
+	(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24, rule_str);
+	
+	kernel_write(f, buf, len, &f->f_pos);
+
+	filp_close(f, NULL);
+	spin_unlock(&log_lock);    //解锁
+}
+
 unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_state* state)
 {
 	struct iphdr *iph = ip_hdr(skb);                    
 	struct tcphdr *tcph = tcp_hdr(skb);    
 	struct udphdr *udph = udp_hdr(skb); 
-	ktime_t k_time;
-	struct rtc_time tm;
+	char src_ip_str[16];
+	char dst_ip_str[16];
+	convert_ip(iph->saddr, src_ip_str, sizeof(src_ip_str));
+	convert_ip(iph->daddr, dst_ip_str, sizeof(dst_ip_str));
 
 	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
 
@@ -215,12 +228,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	if(check_conn(skb)) return NF_ACCEPT;   //状态检测
-
-	//获取系统当前时间
-	k_time = ktime_get_real();
-	tm = rtc_ktime_to_tm(k_time);     
-	// printk( "Time: %d-%d-%d %d:%d:%d\n", tm.tm_year+1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec);
+	// if(check_conn(skb)) return NF_ACCEPT;   //状态检测
 
 	//基于源ip地址访问控制，若rules.ip_status为1并且源ip地址与禁用的ip地址相同，丢弃该数据包 
 	if (rules.sip_status == 1)
@@ -230,10 +238,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		{
 			if (rules.ban_sip[sip_number] == iph->saddr)
 			{  	
-				printk("------------------\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\n的访问已拒绝\n------------------\n", 
-				(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-				(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24);
-
+				printk("源ip: %s\t目的ip: %s 的访问已拒绝\n", src_ip_str, dst_ip_str);
 				wirte_log(iph, "源IP");
 				return NF_DROP;
 			}
@@ -248,10 +253,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		{
 			if (rules.ban_dip[dip_number] == iph->daddr)
 			{  
-				printk("------------------\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\n的访问已拒绝\n------------------\n", 
-				(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-				(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24);
-
+				printk("源ip: %s\t目的ip: %s 的访问已拒绝\n", src_ip_str, dst_ip_str);
 				wirte_log(iph, "目的IP");
 				return NF_DROP;
 			}
@@ -272,11 +274,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short sport = ntohs(rules.ban_sport[sport_numberi]);
 					if(tcph->source == sport)
 					{
-						printk("------------------\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\n源端口: %hu 的访问已拒绝\n------------------\n", 
-						(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-						(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24, sport);
-						// printk("源端口 %hu 的访问已拒绝", sport);
-
+						printk("源ip: %s\t目的ip: %s\t源端口: %hu 的访问已拒绝\n", src_ip_str, dst_ip_str, sport);
 						wirte_log(iph, "源端口");
 						return NF_DROP;
 					}
@@ -292,11 +290,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short sport = ntohs(rules.ban_sport[sport_numberj]);
 					if(udph->source == sport)
 					{
-						printk("------------------\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\n源端口: %hu 的访问已拒绝\n------------------\n", 
-						(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-						(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24, sport);
-						// printk("源端口 %hu 的访问已拒绝", sport);
-
+						printk("源ip: %s\t目的ip: %s\t源端口: %hu 的访问已拒绝\n", src_ip_str, dst_ip_str, sport);
 						wirte_log(iph, "源端口");
 						return NF_DROP;
 					}
@@ -325,10 +319,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short dport = ntohs(rules.ban_dport[dport_numberi]);
 					if(tcph->dest == dport)
 					{	
-						printk("------------------\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\n目的端口: %hu 的访问已拒绝\n------------------\n", 
-						(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-						(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24, dport);
-
+						printk("源ip: %s\t目的ip: %s\t目的端口: %hu 的访问已拒绝\n", src_ip_str, dst_ip_str, dport);
 						wirte_log(iph, "目的端口");
 						return NF_DROP;
 					}
@@ -344,10 +335,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short dport = ntohs(rules.ban_dport[dport_numberj]);
 					if(udph->dest == dport)
 					{
-						printk("------------------\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\n目的端口: %hu 的访问已拒绝\n------------------\n", 
-						(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-						(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24, dport);
-
+						printk("源ip: %s\t目的ip: %s\t目的端口: %hu 的访问已拒绝\n", src_ip_str, dst_ip_str, dport);
 						wirte_log(iph, "目的端口");
 						return NF_DROP;
 					}
@@ -360,9 +348,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	//PING功能的控制，如果数据包协议是ICMP且rules.ping_status为1则丢弃数据包 
 	if(iph->protocol == IPPROTO_ICMP && rules.ping_status == 1)
 	{
-		printk("来自%d.%d.%d.%d的PING已拒绝\n", 
-		(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24);
-		
+		printk("来自%s的PING已拒绝\n", src_ip_str);
 		wirte_log(iph, "PING禁用");
 		return NF_DROP;
 	}
@@ -378,7 +364,6 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 			{
 				//如果rules.http_status为1，数据包是tcp并且目的端口号80或443，丢弃该数据包
 				printk("HTTP/HTTPS请求已拒绝\n");
-
 				wirte_log(iph, "HTTP/HTTPS禁用");
 				return NF_DROP;		
 			}
@@ -391,7 +376,6 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		if(iph->protocol == IPPROTO_TCP && tcph->dest == htons(23))
 		{
 			printk("TELNET请求已拒绝\n");
-
 			wirte_log(iph, "Telnet禁用");
 			return NF_DROP;
 		}
@@ -406,10 +390,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		// printk("end: %ld\n", rules.end_time);
 		if(rules.start_time <= current_time && rules.end_time >= current_time)
 		{
-			printk("------------------\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\n的访问已拒绝\n------------------\n", 
-			(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-			(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24);
-
+			printk("源ip: %s\t目的ip: %s 的访问已拒绝\n", src_ip_str, dst_ip_str);
 			wirte_log(iph, "关闭所有连接");
 			return NF_DROP;
 		}
@@ -420,7 +401,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	}
 
 	//如果以上情况都不符合，则不应拦截该数据包，返回NF_ACCEPT
-	update_hashTable(skb);   //更新状态检测哈希表
+	// update_hashTable(skb);   //更新状态检测哈希表
 	return NF_ACCEPT;
 }
 
@@ -438,6 +419,10 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 	struct ethhdr *ethhdr = eth_hdr(skb);
 	unsigned short sport, dport;            //存储当前数据包的源端口号和目的端口号
 	unsigned char mac_source[ETH_ALEN];     //存储当前数据包的MAC地址
+	char src_ip_str[16];
+	char dst_ip_str[16];
+	convert_ip(iph->saddr, src_ip_str, sizeof(src_ip_str));
+	convert_ip(iph->daddr, dst_ip_str, sizeof(dst_ip_str));
 
 	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
 
@@ -480,10 +465,8 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		   	(rules.ban_mac[mac_number][4] == mac_source[4]) && (rules.ban_mac[mac_number][5] == mac_source[5]))
 			{
 				// struct iphdr *iph = ip_hdr(skb); 
-				printk("已拒绝来自MAC地址: %02X:%02X:%02X:%02X:%02X:%02X 的访问\n其IP地址为: %d.%d.%d.%d\n",
-				mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5],
-				(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24);
-
+				printk("已拒绝来自MAC地址: %02X:%02X:%02X:%02X:%02X:%02X 的访问  IP地址为: %s\n",
+				mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5], src_ip_str);
 				wirte_log(iph, "MAC地址");
 				return NF_DROP;
 			}	
@@ -537,11 +520,8 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 			if(flag_banSip && flag_banDip && flag_banSport && flag_banDport && flag_banMAC == 1)
 			{
 				//满足自定义的访问控制规则，拦截该数据包
-				printk("自定义访问控制拦截成功\n源ip: %d.%d.%d.%d\n目的ip: %d.%d.%d.%d\nMAC地址: %02X:%02X:%02X:%02X:%02X:%02X\n该数据包已拦截\n", 
-				(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
-				(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24,
-				mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5]);
-
+				printk("自定义访问控制策略命中，该数据包已拦截\n源ip: %s\t目的ip: %s\tMAC地址: %02X:%02X:%02X:%02X:%02X:%02X\n", 
+				src_ip_str, dst_ip_str, mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5]);
 				wirte_log(iph, "用户自定义");
 				return NF_DROP;
 			}

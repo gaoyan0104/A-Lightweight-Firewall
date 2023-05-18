@@ -35,11 +35,6 @@ void printError(char * msg);                                /*功能函数：打
 
 int main(void)
 {
-	time_t timer0;
-	timer0= time(NULL);
-	struct tm* tm = localtime(&timer0);
-	printf("\nTime:%d-%d-%d %d:%d:%d\n", tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, tm->tm_hour + 8, tm->tm_min, tm->tm_sec);
-
 	int sockfd;
 	socklen_t len;
 	if ((sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) == -1)
@@ -375,7 +370,7 @@ void change_sip(int sockfd, socklen_t len)
 	char str_ip[20];
 	int choice;
 
-	printf("是否开启过滤IP功能? (1 开启   2 关闭)\n");
+	printf("是否开启过滤源IP功能? (1 开启   2 关闭)\n");
 	scanf("%d", &choice);
 	if(choice == 1)   // 1 开启 、 2 关闭
 	{

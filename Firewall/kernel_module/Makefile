@@ -8,10 +8,10 @@ all:
 	make -C $(LINUX_KERNEL_PATH) M=$(CURRENT_PATH) modules
 clean:
 	make -C $(LINUX_KERNEL_PATH) M=$(CURRENT_PATH) clean
-testload:
+load:
 	make clean
 	make 
 	sudo insmod myfirewall.ko
-testunload:
+unload:
 	make clean
 	sudo rmmod myfirewall.ko

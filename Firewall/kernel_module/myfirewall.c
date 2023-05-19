@@ -228,7 +228,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	// if(check_conn(skb)) return NF_ACCEPT;   //状态检测
+	if(check_conn(skb)) return NF_ACCEPT;   //状态检测
 
 	//基于源ip地址访问控制，若rules.ip_status为1并且源ip地址与禁用的ip地址相同，丢弃该数据包 
 	if (rules.sip_status == 1)
@@ -401,7 +401,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	}
 
 	//如果以上情况都不符合，则不应拦截该数据包，返回NF_ACCEPT
-	// update_hashTable(skb);   //更新状态检测哈希表
+	update_hashTable(skb);   //更新状态检测哈希表
 	return NF_ACCEPT;
 }
 

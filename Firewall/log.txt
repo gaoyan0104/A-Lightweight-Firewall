@@ -472,4 +472,23 @@ Time: 2023-5-18 19:13:41		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filte
 Time: 2023-5-18 19:14:14		Source IP: 34.107.221.82		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
 Time: 2023-5-18 19:14:19		Source IP: 34.107.221.82		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
 Time: 2023-5-18 19:14:27		Source IP: 110.242.68.66		Destination IP: 192.168.220.128		Filter Rule: 关闭所有连接		Action：Deny
-
+Time: 2023-5-19 14:46:3		Source IP: 34.117.237.239		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:3		Source IP: 34.107.221.82		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:3		Source IP: 34.107.221.82		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:3		Source IP: 34.160.144.191		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 34.120.208.123		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 34.160.144.191		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 34.117.65.55		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 34.120.208.123		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 34.107.221.82		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 34.120.208.123		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 220.181.174.161		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 34.149.100.209		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 110.242.68.66		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 23.215.188.51		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 220.181.174.161		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 34.149.100.209		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 23.215.188.51		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 34.149.100.209		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:4		Source IP: 110.242.68.66		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny
+Time: 2023-5-19 14:46:5		Source IP: 34.117.65.55		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS禁用		Action：Deny

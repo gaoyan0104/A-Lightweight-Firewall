@@ -1,18 +1,19 @@
 #define SOE_MIN		          0x1000                              //驱动程序处理最小值
 #define OPENSTATE             0x1001                              //改变防火墙开启状态编号 
-#define BANSIP                0x1002                              //禁源IP功能编号 
-#define BANDIP                0x1003                              //禁目的IP功能编号
-#define BANSPORT              0x1004                              //禁源端口功能编号 
-#define BANDPORT              0x1005                              //禁目的端口功能编号
-#define BANPING               0x1006                              //PING功能编号 
-#define BANHTTP    	          0x1007                              //HTTP/HTTPS功能编号
-#define BANTELNET             0x1008			                  //Telnet功能编号
-#define NOWRULE               0x1009                              //获取防火墙当前规则功能编号
-#define BANALL                0x1010                              //关闭所以连接功能编号
-#define BANMAC                0x1011			                  //禁MAC地址功能编号
-#define BANCOMBIN             0x1012                              //自定义访问控制策略功能编号
-#define SETTIME               0x1013                              //设置防火墙启用时间段功能编号
-#define RESTORE               0x1014                              //恢复默认设置功能编号
+#define INPSTATE              0x1002                              //改变防火墙开启状态编号 
+#define BANSIP                0x1003                              //禁源IP功能编号 
+#define BANDIP                0x1004                              //禁目的IP功能编号
+#define BANSPORT              0x1005                              //禁源端口功能编号 
+#define BANDPORT              0x1006                              //禁目的端口功能编号
+#define BANPING               0x1007                              //PING功能编号 
+#define BANHTTP    	          0x1008                              //HTTP/HTTPS功能编号
+#define BANTELNET             0x1009			                  //Telnet功能编号
+#define NOWRULE               0x1010                              //获取防火墙当前规则功能编号
+#define BANALL                0x1011                              //关闭所以连接功能编号
+#define BANMAC                0x1012			                  //禁MAC地址功能编号
+#define BANCOMBIN             0x1013                              //自定义访问控制策略功能编号
+#define SETTIME               0x1014                              //设置防火墙启用时间段功能编号
+#define RESTORE               0x1015                              //恢复默认设置功能编号
 #define SOE_MAX		          0x1100                              //驱动程序处理最大值 
 #define IP_NUM_MAX            10                                  //过滤IP地址个数的最大值
 #define PORT_NUM_MAX          10                                  //过滤端口个数的最大值
@@ -39,6 +40,7 @@ typedef struct banCombin{
 //存储防火墙过滤规则，其中 int *_status (1：禁止，0：允许)
 typedef struct ban_status{
 	int open_status;                                   //防火墙开启状态
+	int inp_status;                                    //状态检测功能开启状态
 	int sip_status;                                    //源IP控制开启状态
 	int dip_status;                                    //目的IP控制开启状态
 	int sport_status;                                  //源端口控制开启状态

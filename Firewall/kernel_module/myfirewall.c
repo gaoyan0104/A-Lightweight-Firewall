@@ -46,7 +46,7 @@ static unsigned get_hash(int k)
     return c % TABLE_SIZE;
 }
 
-// 检测该数据包是否在状态检测哈希数组中
+// 检测该数据包是否在状态检测连接表数组中
 bool check_conn(struct sk_buff *skb) 
 {
 	struct iphdr *ip = ip_hdr(skb);
@@ -112,7 +112,7 @@ bool check_conn(struct sk_buff *skb)
 	return false;
 }
 
-// 更新状态检测哈希数组
+// 更新状态检测连接表数组
 void update_hashTable(struct sk_buff *skb) 
 {
 	struct iphdr *ip = ip_hdr(skb);
@@ -169,11 +169,46 @@ struct rtc_time get_time(void)
 	return tm;
 }
 
-// 转换IP地址格式
+// IP地址格式转换
 void convert_ip(unsigned int ip, char* ip_str, size_t size)
 {
 	snprintf(ip_str, size, "%u.%u.%u.%u", 
 	(ip & 0x000000ff) >> 0,(ip & 0x0000ff00) >> 8,(ip & 0x00ff0000) >> 16,(ip & 0xff000000) >> 24);
+}
+
+// 判断是否为PING包
+bool is_PING(struct iphdr *iph)
+{
+	if(iph->protocol == IPPROTO_ICMP)
+	{
+		return true;
+	}
+	return false;
+}
+
+// 判断是否为HTTP/HTTPS包
+bool is_HTTP(struct iphdr *iph, struct tcphdr *tcph)
+{
+	if(iph->protocol == IPPROTO_TCP)
+	{		
+		if((tcph->dest == htons(80)) || (tcph->dest == htons(443)) || (tcph->dest == htons(8080)) 
+		|| (tcph->source == htons(80)) || (tcph->source == htons(443)) || (tcph->source == htons(8080)))
+		{
+			// 数据包是TCP且端口号80、443、8080
+			return true;	
+		}
+	}
+	return false;
+}
+
+// 判断是否为Telnet包
+bool is_TELNET(struct iphdr *iph, struct tcphdr *tcph)
+{
+	if(iph->protocol == IPPROTO_TCP && tcph->dest == htons(23))
+	{
+		return true;
+	}
+	return false;
 }
 
 // 写防火墙日志文件
@@ -228,10 +263,17 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	if(check_conn(skb)) return NF_ACCEPT;   //状态检测
+	if(rules.inp_status == 1)            //状态检测
+	{
+		if(check_conn(skb)) 
+		{
+			// printk("状态检测通过\n");
+			return NF_ACCEPT;  
+		}
+	}
 
-	//基于源ip地址访问控制，若rules.ip_status为1并且源ip地址与禁用的ip地址相同，丢弃该数据包 
-	if (rules.sip_status == 1)
+	//基于源ip地址访问控制
+	if(rules.sip_status == 1)
 	{
 		int sip_number;
 		for(sip_number = 0; sip_number < rules.sipNum; sip_number++)
@@ -245,8 +287,8 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//基于目的ip地址访问控制，若rules.ip_status为1并且源ip地址与禁用的ip地址相同，丢弃该数据包 
-	if (rules.dip_status == 1)
+	//基于目的ip地址访问控制
+	if(rules.dip_status == 1)
 	{
 		int dip_number;
 		for(dip_number = 0; dip_number < rules.dipNum; dip_number++)
@@ -260,7 +302,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//基于源端口的访问控制，若rules.sport_status为1并且目的端口与禁用的端口相同则丢弃该数据包 
+	//基于源端口的访问控制
 	if(rules.sport_status == 1)
 	{
 		switch(iph->protocol)  // 区分tcp和udp
@@ -300,12 +342,12 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//基于目的端口的访问控制，若rules.dport_status为1并且目的端口与禁用的端口相同则丢弃该数据包 
+	//基于目的端口的访问控制
 	if(rules.dport_status == 1)
 	{
-		// int tooli;
-		// for(tooli = 0; tooli < rules.dportNum; tooli++){
-		// 	unsigned short dport = ntohs(rules.ban_dport[tooli]);
+		// int i;
+		// for(i = 0; i < rules.dportNum; i++){
+		// 	unsigned short dport = ntohs(rules.ban_dport[i]);
 		// 	printk("内核空间接收的主机字节序端口号：%hu\n", dport);
 		// }
 		switch(iph->protocol)  // 区分tcp和udp
@@ -344,36 +386,33 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 			}
 		}
 	}
-
-	//PING功能的控制，如果数据包协议是ICMP且rules.ping_status为1则丢弃数据包 
-	if(iph->protocol == IPPROTO_ICMP && rules.ping_status == 1)
+	
+	//PING功能的控制
+	if(rules.ping_status == 1)
 	{
-		printk("来自%s的PING已拒绝\n", src_ip_str);
-		wirte_log(iph, "PING禁用");
-		return NF_DROP;
+		if(is_PING(iph))
+		{
+			printk("来自%s的PING已拒绝\n", src_ip_str);
+			wirte_log(iph, "PING禁用");
+			return NF_DROP;
+		}
 	}
 
 	//HTTP/HTTPS功能的控制
 	if(rules.http_status == 1)
 	{
-		if(iph->protocol == IPPROTO_TCP)
+		if(is_HTTP(iph, tcph))
 		{
-			// tcph = tcp_hdr(skb);                      
-			if((tcph->dest == htons(80)) || (tcph->dest == htons(443)) || (tcph->dest == htons(8080)) 
-			|| (tcph->source == htons(80)) || (tcph->source == htons(443)) || (tcph->source == htons(8080)))
-			{
-				//如果rules.http_status为1，数据包是tcp并且目的端口号80或443，丢弃该数据包
-				printk("HTTP/HTTPS请求已拒绝\n");
-				wirte_log(iph, "HTTP/HTTPS禁用");
-				return NF_DROP;		
-			}
+			printk("HTTP/HTTPS请求已拒绝\n");
+			wirte_log(iph, "HTTP/HTTPS禁用");
+			return NF_DROP;		
 		}
 	}
 
 	//Telnet功能的控制
 	if(rules.telnet_status == 1)
 	{
-		if(iph->protocol == IPPROTO_TCP && tcph->dest == htons(23))
+		if(is_TELNET(iph, tcph))
 		{
 			printk("TELNET请求已拒绝\n");
 			wirte_log(iph, "Telnet禁用");
@@ -400,8 +439,12 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//如果以上情况都不符合，则不应拦截该数据包，返回NF_ACCEPT
-	update_hashTable(skb);   //更新状态检测哈希表
+	if(rules.inp_status == 1)
+	{
+		update_hashTable(skb);    //更新状态检测连接表
+	}
+
+	//以上情况均不符合，则不拦截该数据包
 	return NF_ACCEPT;
 }
 
@@ -423,6 +466,7 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 	char dst_ip_str[16];
 	convert_ip(iph->saddr, src_ip_str, sizeof(src_ip_str));
 	convert_ip(iph->daddr, dst_ip_str, sizeof(dst_ip_str));
+	memcpy(mac_source, ethhdr->h_source, ETH_ALEN);  
 
 	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
 
@@ -451,10 +495,9 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 			dport = udph->dest;
 			break;
 		}
-	}
+	}  
 
-	memcpy(mac_source, ethhdr->h_source, ETH_ALEN);    
-
+	//基于MAC地址的访问控制
 	if(rules.mac_status == 1)
 	{					
 		int mac_number;
@@ -480,6 +523,7 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		}
 	}
 	
+	//基于用户自定义策略的访问控制
 	if(rules.combin_status == 1)
 	{
 		int combin_numberi;
@@ -553,6 +597,9 @@ int hookSockoptSet(struct sock* sock, int cmd, void __user* user, unsigned int l
 	{
 		case OPENSTATE:           //改变防火墙开启状态
 			rules.open_status = recv.open_status;
+			break;
+		case INPSTATE:            //改变防火墙状态检测功能开启状态
+			rules.inp_status = recv.inp_status;
 			break;
 		case SETTIME:             //改变防火墙开启时间段
 			rules.settime_status = recv.settime_status;
@@ -637,11 +684,12 @@ int hookSockoptGet(struct sock* sock, int cmd, void __user* user, int* len)
 int myfirewall_init(void)
 {
 	rules.open_status = 1;       //初始化防火墙的状态为开启
+	rules.inp_status = 1;        //初始化防火墙状态检测功能为开启
 	rules.sip_status = 0;        //初始化基于源IP访问控制的状态为不封禁 
 	rules.dip_status = 0;        //初始化基于目的IP访问控制的状态为不封禁 
 	rules.sport_status = 0;      //初始化基于源端口访问控制的状态为不封禁 
 	rules.dport_status = 0;      //初始化基于目的端口访问控制的状态为不封禁 
-	rules.settime_status = 0;	 //初始化关闭防火墙时间段功能
+	rules.settime_status = 0;	 //初始化防火墙时间段功能为关闭
 	rules.ping_status = 0;       //初始化不封禁PING功能
 	rules.http_status = 0;       //初始化不封禁HTTP/HTTPS功能
 	rules.telnet_status = 0;     //初始化不封禁TELNET功能

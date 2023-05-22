@@ -15,6 +15,7 @@
 ban_status rules;
 
 void open_firewall(int sockfd, socklen_t len);              /*功能函数：开启/关闭防火墙*/
+void open_stateInp(int sockfd, socklen_t len);              /*功能函数：开启/关闭状态检测功能*/
 void set_opentime(int sockfd, socklen_t len);               /*功能函数：设置防火墙开启时间段*/
 void get_status();                                          /*功能函数：获取当前防火墙过滤规则*/
 void change_status(int sockfd, socklen_t len);              /*功能函数：改变防火墙过滤规则*/
@@ -94,6 +95,17 @@ void get_status()
 	}
 	
 	printf("当前防火墙过滤规则为:\n");
+	printf("--------------------------------------\n");
+
+	printf("防火墙状态检测功能：\t\t");
+	if(rules.inp_status == 1)
+	{
+		printf("开启\n");
+	}
+	else
+	{
+		printf("关闭\n");
+	}
 	printf("--------------------------------------\n");
 
 	printf("根据源IP过滤功能：\t\t");
@@ -283,10 +295,10 @@ void change_status(int sockfd, socklen_t len)
 {
 	int choice;
 	printf("\n选择需要修改的防火墙过滤规则:\n");
-	printf("1.开启/关闭防火墙\t2.查看日志\t\t3.设置防火墙生效时间\t4.自定义访问控制策略\n");
+	printf("1.开启/关闭防火墙\t2.状态检测功能\t\t3.设置防火墙生效时间\t4.自定义访问控制策略\n");
 	printf("5.过滤源IP\t\t6.过滤目的IP\t\t7.过滤源端口\t\t8.过滤目的端口\n"); 
 	printf("9.过滤MAC地址\t\t10.PING功能\t\t11.HTTP/HTTPS功能\t12.Telnet功能\n");
-	printf("13.关闭所有连接\t\t14.恢复默认设置\t\t0.exit\n");
+	printf("13.查看日志关闭\t\t14.关闭所有连接\t\t15.恢复默认设置\t\t0.exit\n");
 	printf("-------------------------------------------------------------------------------\n");
 	// printf("选项：");
 
@@ -297,7 +309,7 @@ void change_status(int sockfd, socklen_t len)
 			open_firewall(sockfd, len);
 			break;	
 		case 2:
-			show_log();
+			open_stateInp(sockfd, len);
 			break;
 		case 3:   
 			set_opentime(sockfd, len);
@@ -330,9 +342,12 @@ void change_status(int sockfd, socklen_t len)
 			change_telnet(sockfd, len);
 			break;
 		case 13:
-			change_close(sockfd, len);	
+			show_log();
 			break;
 		case 14:
+			change_close(sockfd, len);	
+			break;
+		case 15:
 			restore_default(sockfd, len);	
 			break;
 		case 0:
@@ -356,6 +371,28 @@ void open_firewall(int sockfd, socklen_t len)
 	}
 
 	if (setsockopt(sockfd, IPPROTO_IP, OPENSTATE, &rules, len))
+	{
+		printf("过滤规则同步至内核空间失败");
+	}
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
+}
+
+// 功能函数：开启/关闭防火墙状态检测功能
+void open_stateInp(int sockfd, socklen_t len)
+{
+	rules.inp_status = !rules.inp_status;     
+	if(rules.inp_status == 1)
+	{
+		printf("防火墙状态检测已开启!\n");
+	}
+	else
+	{
+		printf("防火墙状态检测已关闭!\n");
+	}
+
+	if (setsockopt(sockfd, IPPROTO_IP, INPSTATE, &rules, len))
 	{
 		printf("过滤规则同步至内核空间失败");
 	}

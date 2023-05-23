@@ -298,7 +298,7 @@ void change_status(int sockfd, socklen_t len)
 	printf("1.开启/关闭防火墙\t2.状态检测功能\t\t3.设置防火墙生效时间\t4.自定义访问控制策略\n");
 	printf("5.过滤源IP\t\t6.过滤目的IP\t\t7.过滤源端口\t\t8.过滤目的端口\n"); 
 	printf("9.过滤MAC地址\t\t10.PING功能\t\t11.HTTP/HTTPS功能\t12.Telnet功能\n");
-	printf("13.查看日志关闭\t\t14.关闭所有连接\t\t15.恢复默认设置\t\t0.exit\n");
+	printf("13.查看日志\t\t14.关闭所有连接\t\t15.恢复默认设置\t\t0.exit\n");
 	printf("-------------------------------------------------------------------------------\n");
 	// printf("选项：");
 

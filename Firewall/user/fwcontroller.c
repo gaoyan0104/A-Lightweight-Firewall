@@ -11,7 +11,7 @@
 #include <errno.h>  
 #include "../kernel_module/myfirewall.h"
 
-// 存储防火墙过滤规则
+// 防火墙过滤规则
 ban_status rules;
 
 void open_firewall(int sockfd, socklen_t len);              /*功能函数：开启/关闭防火墙*/
@@ -40,14 +40,14 @@ int main(void)
 	socklen_t len;
 	if ((sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) == -1)
 	{
-		printError("创建套接字");
+		printError("create socket");
 	}
 	else
 	{
 		len = sizeof(rules);
 		if(getsockopt(sockfd, IPPROTO_IP, NOWRULE, (void *)&rules, &len))
 		{
-			printError("从内核空间获取过滤规则");
+			printError("get filtering rules from kernel space");
 		}
 		else
 		{
@@ -151,7 +151,7 @@ void get_status()
 		printf("关闭端口: ");
 		for(int i = 0; i < rules.sportNum; i++)
 		{
-			printf("%hu ", rules.ban_sport[i]);   //打印当前所有禁用的源端口号
+			printf("%hu ", rules.ban_sport[i]);   
 		}
 		printf("\n");
 	}
@@ -168,7 +168,7 @@ void get_status()
 		printf("关闭端口: ");
 		for(int i = 0; i < rules.dportNum; i++)
 		{
-			printf("%hu ", rules.ban_dport[i]);   //打印当前所有禁用的目的端口号
+			printf("%hu ", rules.ban_dport[i]);   
 		}
 		printf("\n");
 	}
@@ -372,7 +372,7 @@ void open_firewall(int sockfd, socklen_t len)
 
 	if (setsockopt(sockfd, IPPROTO_IP, OPENSTATE, &rules, len))
 	{
-		printf("过滤规则同步至内核空间失败");
+		printf("Filter rule synchronization to kernel space failed\n");
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -394,7 +394,7 @@ void open_stateInp(int sockfd, socklen_t len)
 
 	if (setsockopt(sockfd, IPPROTO_IP, INPSTATE, &rules, len))
 	{
-		printf("过滤规则同步至内核空间失败");
+		printf("Filter rule synchronization to kernel space failed\n");
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -426,17 +426,17 @@ void change_sip(int sockfd, socklen_t len)
 		}
 		if (setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");
+			printf("Filter rule synchronization to kernel space failed\n");
 		}
 	}
 	else if(choice == 2)
 	{
 		rules.sip_status = 0;
-		memset(rules.ban_sip, '\0', sizeof(rules.ban_sip));   //将存储禁用IP的数组置空
+		memset(rules.ban_sip, '\0', sizeof(rules.ban_sip));   
 		rules.sipNum = 0;
 		if(setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");
+			printf("Filter rule synchronization to kernel space failed\n");
 		}
 	}
 	else
@@ -497,13 +497,11 @@ void set_opentime(int sockfd, socklen_t len)
 
 		rules.start_date = mktime(&start_date);
 		rules.end_date = mktime(&end_date);
-		// printf("开始日期时间戳： %ld\n", rules.start_date);
-		// printf("结束日期时间戳： %ld\n", rules.end_date);
 	}
 
 	if(setsockopt(sockfd, IPPROTO_IP, SETTIME, &rules, len))
 	{
-		printf("过滤规则同步至内核空间失败");
+		printf("Filter rule synchronization to kernel space failed\n");
 	}
     printf("Press enter to continue...\n");
 	getchar(); 
@@ -535,17 +533,17 @@ void change_dip(int sockfd, socklen_t len)
 		}
 		if (setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");
+			printf("Filter rule synchronization to kernel space failed\n");
 		}
 	}
 	else if(choice == 2)
 	{
 		rules.dip_status = 0;
-		memset(rules.ban_dip, '\0', sizeof(rules.ban_dip));   //将存储禁用IP的数组置空
+		memset(rules.ban_dip, '\0', sizeof(rules.ban_dip));   
 		rules.dipNum = 0;
 		if(setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");
+			printf("Filter rule synchronization to kernel space failed\n");
 		}
 	}
 	else
@@ -575,22 +573,22 @@ void change_sport(int sockfd, socklen_t len)
 			unsigned short sport;
 			scanf("%hu", &sport);
 			if(sport == 0) break;	        //0代表输入完成，提前退出循环
-			rules.ban_sport[i] = sport;     //把每一个端口号写进数组保存
-			rules.sportNum = i + 1;         //设置当前禁用端口的总数
+			rules.ban_sport[i] = sport;     
+			rules.sportNum = i + 1;         
 		}
 		if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");
+			printf("Filter rule synchronization to kernel space failed\n");
 		}
 	}
 	else if(choice == 2)
 	{
 		rules.sport_status = 0;
-		memset(rules.ban_sport, 0, sizeof(rules.ban_sport));   //将存储禁用端口的数组置空
+		memset(rules.ban_sport, 0, sizeof(rules.ban_sport));  
 		rules.sportNum = 0;
 		if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");
+			printf("Filter rule synchronization to kernel space failed\n");
 		}	
 	}
 	else
@@ -620,24 +618,23 @@ void change_dport(int sockfd, socklen_t len)
 			printf("请输入第 %d 个需要过滤的端口号 (退出: 0):", i + 1);
 			unsigned short dport;
 			scanf("%hu", &dport);
-			// printf("用户层输入的端口号: %hu\n", dport);
 			if(dport == 0) break;	         //0代表输入完成，提前退出循环
-			rules.ban_dport[i] = dport;      //把每一个端口号写进数组保存
-			rules.dportNum = i + 1;          //设置当前禁用的端口总数
+			rules.ban_dport[i] = dport;      
+			rules.dportNum = i + 1;          
 		}
 		if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");
+			printf("Filter rule synchronization to kernel space failed\n");
 		}
 	}
 	else if(choice == 2)
 	{
 		rules.dport_status = 0;
-		memset(rules.ban_dport, 0, sizeof(rules.ban_dport));   //将存储禁用端口的数组置空
+		memset(rules.ban_dport, 0, sizeof(rules.ban_dport));   
 		rules.dportNum = 0;
 		if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");
+			printf("Filter rule synchronization to kernel space failed\n");
 		}	
 	}
 	else
@@ -763,7 +760,7 @@ void change_combin(int sockfd, socklen_t len)
 
 		if (setsockopt(sockfd, IPPROTO_IP, BANCOMBIN, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");			
+			printf("Filter rule synchronization to kernel space failed\n");			
 		}
 	}
 	else if(choice == 2)
@@ -773,7 +770,7 @@ void change_combin(int sockfd, socklen_t len)
 
 		if(setsockopt(sockfd, IPPROTO_IP, BANCOMBIN, &rules, len)) 
 		{
-			printf("过滤规则同步至内核空间失败");			
+			printf("Filter rule synchronization to kernel space failed\n");			
 		}
 	}
 	else
@@ -792,7 +789,7 @@ void change_ping(int sockfd, socklen_t len)
 	rules.ping_status = !rules.ping_status;
 	if(setsockopt(sockfd, IPPROTO_IP, BANPING, &rules, len))
 	{
-		printf("过滤规则同步至内核空间失败");
+		printf("Filter rule synchronization to kernel space failed\n");
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -805,7 +802,7 @@ void change_http(int sockfd, socklen_t len)
 	rules.http_status = !rules.http_status;
 	if(setsockopt(sockfd, IPPROTO_IP, BANHTTP, &rules, len))  
 	{
-		printf("过滤规则同步至内核空间失败");		
+		printf("Filter rule synchronization to kernel space failed\n");		
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -818,7 +815,7 @@ void change_telnet(int sockfd, socklen_t len)
 	rules.telnet_status = !rules.telnet_status;
 	if(setsockopt(sockfd, IPPROTO_IP, BANTELNET, &rules, len))  
 	{
-		printf("过滤规则同步至内核空间失败");		
+		printf("Filter rule synchronization to kernel space failed\n");		
 	}	
     printf("Press enter to continue...\n");
     getchar(); 
@@ -853,7 +850,6 @@ void change_mac(int sockfd, socklen_t len)
 			scanf("%s", mac_str);
 			if(!strcmp(mac_str, "0"))
 			{
-				// printf("\n输入完毕\n");
 				break;
 			}
 			mac_format(mac_str, mac_addr);
@@ -863,7 +859,7 @@ void change_mac(int sockfd, socklen_t len)
 
 		if (setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len))
 		{
-			printf("过滤规则同步至内核空间失败");			
+			printf("Filter rule synchronization to kernel space failed\n");			
 		}
 	}
 	else
@@ -874,7 +870,7 @@ void change_mac(int sockfd, socklen_t len)
 
 		if(setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len)) 
 		{
-			printf("过滤规则同步至内核空间失败");			
+			printf("Filter rule synchronization to kernel space failed\n");			
 		}
 	}
     printf("Press enter to continue...\n");
@@ -922,7 +918,7 @@ void change_close(int sockfd, socklen_t len)
 	
 	if(setsockopt(sockfd, IPPROTO_IP, BANALL, &rules, len))  
 	{
-		printf("过滤规则同步至内核空间失败");		
+		printf("Filter rule synchronization to kernel space failed\n");		
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -960,7 +956,7 @@ void restore_default(int sockfd, socklen_t len)
 
 	if(setsockopt(sockfd, IPPROTO_IP, RESTORE, &rules, len))  
 	{
-		printf("过滤规则同步至内核空间失败");		
+		printf("Filter rule synchronization to kernel space failed\n");		
 	}
     printf("Press enter to continue...\n");
     getchar(); 

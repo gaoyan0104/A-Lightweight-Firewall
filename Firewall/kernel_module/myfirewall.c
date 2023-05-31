@@ -46,7 +46,7 @@ static unsigned get_hash(int k)
     return c % TABLE_SIZE;
 }
 
-// 检测该数据包是否在状态检测连接表数组中
+// 检测该数据包是否在状态检测连接表中
 bool check_conn(struct sk_buff *skb) 
 {
 	struct iphdr *ip = ip_hdr(skb);
@@ -57,7 +57,7 @@ bool check_conn(struct sk_buff *skb)
 	int dst_port;
 	int protocol;
 	unsigned int scode;
-	unsigned int pos;    // 状态表的位置
+	unsigned int pos;    
 
 	if(!skb) return true;
 
@@ -90,29 +90,27 @@ bool check_conn(struct sk_buff *skb)
 	scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
 	pos = get_hash(scode);
 
-	while(hashLock);  // 等待开锁
-	hashLock = 1;     // 上锁
+	while(hashLock);  
+	hashLock = 1;     
 
 	//当前时间戳减Hash表中的时间戳为间隔时间
 	if (hashTable[pos] && get_seconds() - hashTable[pos] < 10) 
 	{
-		// printk("状态检测通过  pos:%d   hash:%ld\n", pos, hashTable[pos]);
+		// printk("status check passed.  pos:%d   hash:%ld\n", pos, hashTable[pos]);
 		// 更新时间为当前时间戳
 		hashTable[pos] = get_seconds();
-		hashLock = 0;   // 开锁
+		hashLock = 0;   
 		return true;
 	}
-	// 连接不存在，返回插入位置
 	else 
 	{
-		hashLock = 0;	// 开锁
+		hashLock = 0;	
 	}
 
-	// printk("状态检测不通过\n");
 	return false;
 }
 
-// 更新状态检测连接表数组
+// 更新状态检测连接表
 void update_hashTable(struct sk_buff *skb) 
 {
 	struct iphdr *ip = ip_hdr(skb);
@@ -123,7 +121,7 @@ void update_hashTable(struct sk_buff *skb)
 	int dst_port;
 	int protocol;
 	unsigned int scode;
-	unsigned int pos;    // 状态表的位置
+	unsigned int pos;   
 
 	if (ip->protocol == IPPROTO_TCP) 
 	{
@@ -149,14 +147,14 @@ void update_hashTable(struct sk_buff *skb)
 	scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
 	pos = get_hash(scode);
 
-	while(hashLock);  // 等待开锁
-	hashLock = 1;	  // 上锁
+	while(hashLock);  
+	hashLock = 1;	  
 
 	// 更新为当前时间戳
 	hashTable[pos] = get_seconds(); 
 	
-	hashLock = 0;	  // 开锁
-	// printk("更新哈希表 pos:%d  zhi: %ld\n", pos, hashTable[pos]);
+	hashLock = 0;	  
+	// printk("update hash table. pos:%d  zhi: %ld\n", pos, hashTable[pos]);
 }
 
 //获取系统当前时间
@@ -194,7 +192,6 @@ bool is_HTTP(struct iphdr *iph, struct tcphdr *tcph)
 		if((tcph->dest == htons(80)) || (tcph->dest == htons(443)) || (tcph->dest == htons(8080)) 
 		|| (tcph->source == htons(80)) || (tcph->source == htons(443)) || (tcph->source == htons(8080)))
 		{
-			// 数据包是TCP且端口号80、443、8080
 			return true;	
 		}
 	}
@@ -217,7 +214,7 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 	struct file *f;
 	int len;         
 	char buf[256]; 
-	struct rtc_time tm = get_time();  //获取系统当前时间
+	struct rtc_time tm = get_time(); 
 
 	spin_lock(&log_lock);    //加锁
 
@@ -250,24 +247,25 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	convert_ip(iph->saddr, src_ip_str, sizeof(src_ip_str));
 	convert_ip(iph->daddr, dst_ip_str, sizeof(dst_ip_str));
 
-	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
+	if(rules.open_status == 0) return NF_ACCEPT;   
 
 	if(rules.settime_status == 1)
 	{
 		time_t current_time = get_seconds();
-		// printk("当前日期： %ld  开始日期： %ld  结束日期： %ld\n", current_time, rules.start_date, rules.end_date);
+		// printk("current date： %ld  Start date： %ld  end date： %ld\n", current_time, rules.start_date, rules.end_date);
 		if(current_time < rules.start_date || current_time >= rules.end_date)
 		{
-			printk("当前时间不在防火墙生效时间段内，放包\n");
+			printk("The firewall is not in effect at the current time\n");
 			return NF_ACCEPT;
 		}
 	}
 
-	if(rules.inp_status == 1)            //状态检测
+	if(rules.inp_status == 1)            
 	{
+		//状态检测
 		if(check_conn(skb)) 
 		{
-			// printk("状态检测通过\n");
+			// printk("status check passed\n");
 			return NF_ACCEPT;  
 		}
 	}
@@ -280,8 +278,8 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		{
 			if (rules.ban_sip[sip_number] == iph->saddr)
 			{  	
-				printk("源ip: %s\t目的ip: %s 的访问已拒绝\n", src_ip_str, dst_ip_str);
-				wirte_log(iph, "源IP");
+				printk("Request is deny. \nSrc IP: %s\tDest IP: %s\n", src_ip_str, dst_ip_str);
+				wirte_log(iph, "Source IP");
 				return NF_DROP;
 			}
 		}
@@ -295,8 +293,8 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		{
 			if (rules.ban_dip[dip_number] == iph->daddr)
 			{  
-				printk("源ip: %s\t目的ip: %s 的访问已拒绝\n", src_ip_str, dst_ip_str);
-				wirte_log(iph, "目的IP");
+				printk("Request is deny. \nSrc IP: %s\tDest IP: %s\n", src_ip_str, dst_ip_str);
+				wirte_log(iph, "Destination IP");
 				return NF_DROP;
 			}
 		}
@@ -305,19 +303,18 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	//基于源端口的访问控制
 	if(rules.sport_status == 1)
 	{
-		switch(iph->protocol)  // 区分tcp和udp
+		switch(iph->protocol)  
 		{          
 			case IPPROTO_TCP:
 			{
 				int sport_numberi;
 				for(sport_numberi = 0; sport_numberi < rules.sportNum; sport_numberi++)
 				{
-					// 遍历端口数组中的每一个端口进行对比
 					unsigned short sport = ntohs(rules.ban_sport[sport_numberi]);
 					if(tcph->source == sport)
 					{
-						printk("源ip: %s\t目的ip: %s\t源端口: %hu 的访问已拒绝\n", src_ip_str, dst_ip_str, sport);
-						wirte_log(iph, "源端口");
+						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n", src_ip_str, dst_ip_str, sport);
+						wirte_log(iph, "Source port");
 						return NF_DROP;
 					}
 				}
@@ -328,12 +325,11 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 				int sport_numberj;
 				for(sport_numberj = 0; sport_numberj < rules.sportNum; sport_numberj++)
 				{
-					// 遍历端口数组中的每一个端口进行对比
 					unsigned short sport = ntohs(rules.ban_sport[sport_numberj]);
 					if(udph->source == sport)
 					{
-						printk("源ip: %s\t目的ip: %s\t源端口: %hu 的访问已拒绝\n", src_ip_str, dst_ip_str, sport);
-						wirte_log(iph, "源端口");
+						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n", src_ip_str, dst_ip_str, sport);
+						wirte_log(iph, "Source port");
 						return NF_DROP;
 					}
 				}
@@ -348,21 +344,20 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		// int i;
 		// for(i = 0; i < rules.dportNum; i++){
 		// 	unsigned short dport = ntohs(rules.ban_dport[i]);
-		// 	printk("内核空间接收的主机字节序端口号：%hu\n", dport);
+		// 	printk("Host endianness port number received by kernel space：%hu\n", dport);
 		// }
-		switch(iph->protocol)  // 区分tcp和udp
+		switch(iph->protocol)  
 		{           
 			case IPPROTO_TCP:
 			{
 				int dport_numberi;
 				for(dport_numberi = 0; dport_numberi < rules.dportNum; dport_numberi++)
 				{
-					// 遍历端口数组中的每一个端口进行对比
 					unsigned short dport = ntohs(rules.ban_dport[dport_numberi]);
 					if(tcph->dest == dport)
 					{	
-						printk("源ip: %s\t目的ip: %s\t目的端口: %hu 的访问已拒绝\n", src_ip_str, dst_ip_str, dport);
-						wirte_log(iph, "目的端口");
+						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n", src_ip_str, dst_ip_str, dport);
+						wirte_log(iph, "Destination port");
 						return NF_DROP;
 					}
 				}
@@ -373,12 +368,11 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 				int dport_numberj;
 				for(dport_numberj = 0; dport_numberj < rules.dportNum; dport_numberj++)
 				{
-					// 遍历端口数组中的每一个端口进行对比
 					unsigned short dport = ntohs(rules.ban_dport[dport_numberj]);
 					if(udph->dest == dport)
 					{
-						printk("源ip: %s\t目的ip: %s\t目的端口: %hu 的访问已拒绝\n", src_ip_str, dst_ip_str, dport);
-						wirte_log(iph, "目的端口");
+						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n", src_ip_str, dst_ip_str, dport);
+						wirte_log(iph, "Destination port");
 						return NF_DROP;
 					}
 				}
@@ -392,8 +386,8 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	{
 		if(is_PING(iph))
 		{
-			printk("来自%s的PING已拒绝\n", src_ip_str);
-			wirte_log(iph, "PING禁用");
+			printk("PING from %s is deny\n", src_ip_str);
+			wirte_log(iph, "PING Disabled");
 			return NF_DROP;
 		}
 	}
@@ -403,8 +397,8 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	{
 		if(is_HTTP(iph, tcph))
 		{
-			printk("HTTP/HTTPS请求已拒绝\n");
-			wirte_log(iph, "HTTP/HTTPS禁用");
+			printk("HTTP/HTTPS request is deny\n");
+			wirte_log(iph, "HTTP/HTTPS Disabled");
 			return NF_DROP;		
 		}
 	}
@@ -414,8 +408,8 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	{
 		if(is_TELNET(iph, tcph))
 		{
-			printk("TELNET请求已拒绝\n");
-			wirte_log(iph, "Telnet禁用");
+			printk("Telnet request is deny\n");
+			wirte_log(iph, "Telnet Disabled");
 			return NF_DROP;
 		}
 	}
@@ -429,14 +423,14 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		// printk("end: %ld\n", rules.end_time);
 		if(rules.start_time <= current_time && rules.end_time >= current_time)
 		{
-			printk("源ip: %s\t目的ip: %s 的访问已拒绝\n", src_ip_str, dst_ip_str);
-			wirte_log(iph, "关闭所有连接");
+			printk("Request is deny. \nSrc IP: %s\tDest IP: %s\n", src_ip_str, dst_ip_str);
+			wirte_log(iph, "Close all connections");
 			return NF_DROP;
 		}
-		else
-		{
-			printk("不在防火墙生效时间段，放包\n");
-		}
+		// else
+		// {
+		// 	printk("This function is not enabled at the current time\n");
+		// }
 	}
 
 	if(rules.inp_status == 1)
@@ -444,7 +438,6 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		update_hashTable(skb);    //更新状态检测连接表
 	}
 
-	//以上情况均不符合，则不拦截该数据包
 	return NF_ACCEPT;
 }
 
@@ -468,7 +461,7 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 	convert_ip(iph->daddr, dst_ip_str, sizeof(dst_ip_str));
 	memcpy(mac_source, ethhdr->h_source, ETH_ALEN);  
 
-	if(rules.open_status == 0) return NF_ACCEPT;   //防火墙为关闭状态，直接放包
+	if(rules.open_status == 0) return NF_ACCEPT;   
 
 	if(rules.settime_status == 1)
 	{
@@ -476,7 +469,7 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		// printk("当前日期： %ld  开始日期： %ld  结束日期： %ld\n", current_time, rules.start_date, rules.end_date);
 		if(current_time < rules.start_date || current_time >= rules.end_date)
 		{
-			printk("当前时间不在防火墙生效时间段内，放包\n");
+			printk("The firewall is not in effect at the current time\n");
 			return NF_ACCEPT;
 		}
 	}
@@ -508,17 +501,16 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		   	(rules.ban_mac[mac_number][4] == mac_source[4]) && (rules.ban_mac[mac_number][5] == mac_source[5]))
 			{
 				// struct iphdr *iph = ip_hdr(skb); 
-				printk("已拒绝来自MAC地址: %02X:%02X:%02X:%02X:%02X:%02X 的访问  IP地址为: %s\n",
+				printk("Request is deny. \nMAC: %02X:%02X:%02X:%02X:%02X:%02X  Src IP: %s\n",
 				mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5], src_ip_str);
-				wirte_log(iph, "MAC地址");
+				wirte_log(iph, "MAC");
 				return NF_DROP;
 			}	
 			// else
 			// {
-			// 	printk("当前数据包MAC地址: %02X:%02X:%02X:%02X:%02X:%02X \n需过滤的MAC地址: %02X:%02X:%02X:%02X:%02X:%02X\n",
+			// 	printk("MAC: %02X:%02X:%02X:%02X:%02X:%02X \n filter MAC: %02X:%02X:%02X:%02X:%02X:%02X\n",
 			// 	mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5],
 			// 	rules.ban_mac[mac_number][0], rules.ban_mac[mac_number][1], rules.ban_mac[mac_number][2], rules.ban_mac[mac_number][3], rules.ban_mac[mac_number][4], rules.ban_mac[mac_number][5]);
-			// 	printk("放包\n");
 			// }	
 		}
 	}
@@ -563,16 +555,14 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 
 			if(flag_banSip && flag_banDip && flag_banSport && flag_banDport && flag_banMAC == 1)
 			{
-				//满足自定义的访问控制规则，拦截该数据包
-				printk("自定义访问控制策略命中，该数据包已拦截\n源ip: %s\t目的ip: %s\tMAC地址: %02X:%02X:%02X:%02X:%02X:%02X\n", 
+				printk("Custom filter rules hits, request is deny.\nSrc IP: %s\tDest IP: %s\tMAC: %02X:%02X:%02X:%02X:%02X:%02X\n", 
 				src_ip_str, dst_ip_str, mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5]);
-				wirte_log(iph, "用户自定义");
+				wirte_log(iph, "Custom filter rules");
 				return NF_DROP;
 			}
 		}
 	}
 
-	//如果以上情况都不符合，则不应拦截该数据包，返回NF_ACCEPT
 	return NF_ACCEPT;
 }
 
@@ -661,7 +651,7 @@ int hookSockoptSet(struct sock* sock, int cmd, void __user* user, unsigned int l
 	if (ret != 0)
 	{
 		ret = -EINVAL;
-		printk("从用户空间拷贝到内核空间错误");
+		printk("Error copying from user space to kernel space");
 	}
 	return ret;
 }
@@ -675,7 +665,7 @@ int hookSockoptGet(struct sock* sock, int cmd, void __user* user, int* len)
 	if (ret != 0)
 	{
 		ret = -EINVAL;
-		printk("从内核空间拷贝到用户空间错误");
+		printk("Error copying from kernel space to user space");
 	}
 	return ret;
 }
@@ -737,7 +727,7 @@ int myfirewall_init(void)
 
 	nf_register_sockopt(&nfhoSockopt);
 
-	printk("防火墙内核模块加载成功\n");
+	printk("Firewall kernel module loaded successfully\n");
 	return 0;
 }
 
@@ -754,7 +744,7 @@ void myfirewall_exit(void)
 	//注销通信的钩子
 	nf_unregister_sockopt(&nfhoSockopt);
 
-	printk("防火墙内核模块已卸载\n");
+	printk("Firewall kernel module unloaded successfully\n");
 }
 
 module_init(myfirewall_init);

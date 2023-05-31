@@ -23,7 +23,7 @@
 #define TABLE_SIZE            1000001							  //状态检测哈希表长度
 #define LOG_FILE              "/home/ubuntu/Firewall/log.txt"     //日志文件存储路径
 
-//存储用户自定义访问控制策略
+//用户自定义访问控制策略
 typedef struct banCombin{
 	int banSip_status;                                 //是否根据源IP地址过滤
 	int banDip_status;                                 //是否根据目的IP地址过滤
@@ -37,7 +37,7 @@ typedef struct banCombin{
 	unsigned char banMac[MAC_LEN];                     //存储过滤的自定义MAC地址
 }banCombin;
 
-//存储防火墙过滤规则，其中 int *_status (1：禁止，0：允许)
+//防火墙过滤规则，其中 int *_status (1：禁止，0：允许)
 typedef struct ban_status{
 	int open_status;                                   //防火墙开启状态
 	int inp_status;                                    //状态检测功能开启状态

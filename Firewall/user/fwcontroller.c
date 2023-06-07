@@ -12,7 +12,7 @@
 #include "../kernel_module/myfirewall.h"
 
 // 防火墙过滤规则
-ban_status rules;
+ban_status rules; 
 
 void open_firewall(int sockfd, socklen_t len);              /*功能函数：开启/关闭防火墙*/
 void open_stateInp(int sockfd, socklen_t len);              /*功能函数：开启/关闭状态检测功能*/
@@ -32,7 +32,7 @@ void change_combin(int sockfd, socklen_t len);              /*功能函数：改
 void mac_format(char *mac_str, unsigned char *mac_addr);    /*功能函数：将MAC地址分割并存入mac_addr*/
 void show_log();                                            /*功能函数：查看日志*/
 void restore_default(int sockfd, socklen_t len);            /*功能函数：恢复默认设置*/
-void printError(char * msg);                                /*功能函数：打印错误信息*/
+void printError(char *msg);                                 /*功能函数：打印错误信息*/
 
 int main(void)
 {
@@ -53,10 +53,10 @@ int main(void)
 		{
 			while(1)
 			{
-				if(rules.open_status == 1)              //防火墙状态为开启
+				if(rules.open_status == 1)              // 防火墙状态为开启
 				{
-					get_status();                       //循环打印当前防火墙过滤规则
-					change_status(sockfd, len);         //循环打印规则菜单，直至用户层选择退出
+					get_status();                       // 循环打印当前防火墙过滤规则
+					change_status(sockfd, len);         // 循环打印规则菜单，直至用户层选择退出
 				}
 				else
 				{
@@ -64,8 +64,8 @@ int main(void)
 					printf("是否开启防火墙（1 开启  0 exit）\n");
 					int choice;
 					scanf("%d", &choice);
-					if(choice == 1) open_firewall(sockfd, len);    //开启防火墙
-					else if(choice == 0) exit(0);                  //退出
+					if(choice == 1) open_firewall(sockfd, len);    // 开启防火墙
+					else if(choice == 0) exit(0);                  // 退出
 				}
 			}
 		}
@@ -73,7 +73,7 @@ int main(void)
 	return 0;
 }
 
-//功能函数：获取当前防火墙过滤规则
+// 功能函数：获取当前防火墙过滤规则
 void get_status() 
 {	
 	time_t timer0;
@@ -84,7 +84,7 @@ void get_status()
 	
 	if (rules.settime_status == 1)
 	{
-		//将时间戳转换为tm结构体
+		// 将时间戳转换为tm结构体
 		struct tm start_date, end_date;	
     	localtime_r(&rules.start_date, &start_date);     
     	localtime_r(&rules.end_date, &end_date);
@@ -290,7 +290,7 @@ void get_status()
 	printf("--------------------------------------\n");
 }
 
-//功能函数：改变防火墙过滤规则
+// 功能函数：改变防火墙过滤规则
 void change_status(int sockfd, socklen_t len)
 {
 	int choice;
@@ -300,7 +300,7 @@ void change_status(int sockfd, socklen_t len)
 	printf("9.过滤MAC地址\t\t10.PING功能\t\t11.HTTP/HTTPS功能\t12.Telnet功能\n");
 	printf("13.查看日志\t\t14.关闭所有连接\t\t15.恢复默认设置\t\t0.exit\n");
 	printf("-------------------------------------------------------------------------------\n");
-	// printf("选项：");
+	// printf("选项：\t");
 
 	scanf("%d", &choice);
 	switch (choice)
@@ -351,9 +351,10 @@ void change_status(int sockfd, socklen_t len)
 			restore_default(sockfd, len);	
 			break;
 		case 0:
+			printf("Exit the fwcontroller...\n");
 			exit(0);
 		default:
-			printf("选项输入错误\n");
+			printf("Bad parameter.\n");
 	}
 }
 
@@ -382,20 +383,67 @@ void open_firewall(int sockfd, socklen_t len)
 // 功能函数：开启/关闭防火墙状态检测功能
 void open_stateInp(int sockfd, socklen_t len)
 {
-	rules.inp_status = !rules.inp_status;     
-	if(rules.inp_status == 1)
+	int choice;
+	printf("1. 开启/关闭状态检测功能     2. 查看当前连接     3. 清空当前连接\n");
+	scanf("%d", &choice);
+	if(choice == 1)   
 	{
-		printf("防火墙状态检测已开启!\n");
+		rules.inp_status = !rules.inp_status;     
+		if(rules.inp_status == 1)
+		{
+			printf("防火墙状态检测已开启!\n");
+		}
+		else
+		{
+			printf("防火墙状态检测已关闭!\n");
+		}
+		rules.connNum = 0;
+		memset(rules.connNode, 0, sizeof(rules.connNode));   
+		if (setsockopt(sockfd, IPPROTO_IP, INPSTATE, &rules, len))
+		{
+			printf("Filter rule synchronization to kernel space failed\n");
+		}
+	}
+	else if(choice == 2)
+	{
+		if(getsockopt(sockfd, IPPROTO_IP, CONNGET, (void *)&rules, &len))
+		{
+			printError("get filtering rules from kernel space");
+		}
+		if (rules.connNum == 0)
+		{
+			printf("当前无连接\n");
+		}
+		else
+		{
+			printf("当前共%d个连接，分别为：\n", rules.connNum);
+			for (int i = 0; i < rules.connNum; i++)
+			{
+				printf("源IP地址: %d.%d.%d.%d\t目的IP地址: %d.%d.%d.%d\t源端口:%d\t目的端口:%d\n", 
+				(rules.connNode[i].src_ip & 0x000000ff) >> 0, (rules.connNode[i].src_ip & 0x0000ff00) >> 8,
+				(rules.connNode[i].src_ip & 0x00ff0000) >> 16, (rules.connNode[i].src_ip & 0xff000000) >> 24, 
+				(rules.connNode[i].dst_ip & 0x000000ff) >> 0, (rules.connNode[i].dst_ip & 0x0000ff00) >> 8,
+				(rules.connNode[i].dst_ip & 0x00ff0000) >> 16, (rules.connNode[i].dst_ip & 0xff000000) >> 24,
+				rules.connNode[i].src_port, rules.connNode[i].dst_port);
+			}
+		}	
+	}
+	else if(choice == 3)
+	{
+		rules.inp_status = 1;    
+		rules.connNum = 0;
+		memset(rules.connNode, 0, sizeof(rules.connNode));   
+		if (setsockopt(sockfd, IPPROTO_IP, INPSTATE, &rules, len))
+		{
+			printf("Filter rule synchronization to kernel space failed\n");
+		}
+		printf("连接已清空\n");
 	}
 	else
 	{
-		printf("防火墙状态检测已关闭!\n");
+		printf("Bad parameter.\n");
 	}
 
-	if (setsockopt(sockfd, IPPROTO_IP, INPSTATE, &rules, len))
-	{
-		printf("Filter rule synchronization to kernel space failed\n");
-	}
     printf("Press enter to continue...\n");
     getchar(); 
 	getchar(); 
@@ -421,7 +469,7 @@ void change_sip(int sockfd, socklen_t len)
 				// printf("\n输入完毕\n");
 				break;
 			}
-			rules.ban_sip[i] = inet_addr(str_ip);   //将字符串形式的IP地址转换为网络字节序
+			rules.ban_sip[i] = inet_addr(str_ip);   // 将字符串形式的IP地址转换为网络字节序
 			rules.sipNum = i + 1;
 		}
 		if (setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
@@ -441,8 +489,8 @@ void change_sip(int sockfd, socklen_t len)
 	}
 	else
 	{
-		//输入错误
-		printf("选项号有误\n");
+		// 输入错误
+		printf("Bad parameter.\n");
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -456,8 +504,6 @@ void set_opentime(int sockfd, socklen_t len)
 	if (rules.settime_status == 1)
 	{
 		struct tm start_date, end_date;
-		// char start_date_str[32] = "2023-05-11";  
-		// char end_date_str[32] = "2023-05-11";
 		char start_date_str[32];
 		char end_date_str[32];	
 
@@ -528,7 +574,7 @@ void change_dip(int sockfd, socklen_t len)
 				// printf("\n输入完毕\n");
 				break;
 			}
-			rules.ban_dip[i] = inet_addr(str_ip);    //将字符串形式的IP地址转换为网络字节序
+			rules.ban_dip[i] = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
 			rules.dipNum = i + 1;
 		}
 		if (setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
@@ -548,8 +594,8 @@ void change_dip(int sockfd, socklen_t len)
 	}
 	else
 	{
-		//输入错误
-		printf("选项号有误\n");
+		// 输入错误
+		printf("Bad parameter.\n");
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -572,7 +618,7 @@ void change_sport(int sockfd, socklen_t len)
 			printf("请输入第 %d 个需要过滤的端口号 (退出: 0):", i + 1);
 			unsigned short sport;
 			scanf("%hu", &sport);
-			if(sport == 0) break;	        //0代表输入完成，提前退出循环
+			if(sport == 0) break;	        // 0代表输入完成，提前退出循环
 			rules.ban_sport[i] = sport;     
 			rules.sportNum = i + 1;         
 		}
@@ -593,8 +639,8 @@ void change_sport(int sockfd, socklen_t len)
 	}
 	else
 	{
-		//输入错误
-		printf("选项号有误\n");
+		// 输入错误
+		printf("Bad parameter.\n");
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -610,7 +656,7 @@ void change_dport(int sockfd, socklen_t len)
 
 	if(choice == 1)
 	{
-		//开启
+		// 开启
 		rules.dport_status = 1;
 		int i;
 		for(i = 0; i < PORT_NUM_MAX; i++)
@@ -618,7 +664,7 @@ void change_dport(int sockfd, socklen_t len)
 			printf("请输入第 %d 个需要过滤的端口号 (退出: 0):", i + 1);
 			unsigned short dport;
 			scanf("%hu", &dport);
-			if(dport == 0) break;	         //0代表输入完成，提前退出循环
+			if(dport == 0) break;	         // 0代表输入完成，提前退出循环
 			rules.ban_dport[i] = dport;      
 			rules.dportNum = i + 1;          
 		}
@@ -639,8 +685,8 @@ void change_dport(int sockfd, socklen_t len)
 	}
 	else
 	{
-		//输入错误
-		printf("选项号有误\n");
+		// 输入错误
+		printf("Bad parameter.\n");
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -650,9 +696,9 @@ void change_dport(int sockfd, socklen_t len)
 // 功能函数：改变自定义访问控制规则
 void change_combin(int sockfd, socklen_t len)
 {
-	unsigned char mac_str[20];  	//存储输入的MAC地址字符串
-	unsigned char mac_addr[6];      //存储将字符串分割后的MAC地址
-	char str_ip[20];                //存储输入的IP地址
+	unsigned char mac_str[20];  	// 存储输入的MAC地址字符串
+	unsigned char mac_addr[6];      // 存储将字符串分割后的MAC地址
+	char str_ip[20];                // 存储输入的IP地址
 
 	int choice;
 	printf("是否开启自定义访问控制策略功能? (1 开启   2 关闭)\n");
@@ -660,7 +706,7 @@ void change_combin(int sockfd, socklen_t len)
 
 	if(choice == 1)
 	{
-		//开启
+		// 开启
 		rules.combin_status = 1;
 		for(int i = 0; i < COMBINE_NUM_MAX; i++)
 		{
@@ -673,7 +719,7 @@ void change_combin(int sockfd, socklen_t len)
 				rules.ban_combin[i].banSip_status = 1;
 				printf("请输入需要过滤的源IP地址:");
 				scanf("%s", str_ip);
-				rules.ban_combin[i].banSip = inet_addr(str_ip);    //将字符串形式的IP地址转换为网络字节序
+				rules.ban_combin[i].banSip = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
 			}
 			else if(select == 2)
 			{
@@ -691,7 +737,7 @@ void change_combin(int sockfd, socklen_t len)
 				rules.ban_combin[i].banDip_status = 1;
 				printf("请输入需要过滤的目的IP地址:");
 				scanf("%s", str_ip);
-				rules.ban_combin[i].banDip = inet_addr(str_ip);    //将字符串形式的IP地址转换为网络字节序
+				rules.ban_combin[i].banDip = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
 			}
 			else if(select == 2)
 			{
@@ -775,8 +821,8 @@ void change_combin(int sockfd, socklen_t len)
 	}
 	else
 	{
-		//输入错误
-		printf("选项号有误\n");
+		// 输入错误
+		printf("Bad parameter.\n");
 	}
     printf("Press enter to continue...\n");
     getchar(); 
@@ -837,8 +883,8 @@ void mac_format(char *mac_str, unsigned char *mac_addr)
 // 功能函数：改变MAC地址过滤规则	
 void change_mac(int sockfd, socklen_t len)
 {
-	unsigned char mac_str[20];  	//存储输入的MAC地址字符串
-	unsigned char mac_addr[6];      //存储将字符串分割后的MAC地址
+	unsigned char mac_str[20];  	// 存储输入的MAC地址字符串
+	unsigned char mac_addr[6];      // 存储将字符串分割后的MAC地址
 
 	if(rules.mac_status == 0)
 	{  
@@ -887,7 +933,7 @@ void change_close(int sockfd, socklen_t len)
 		struct tm start_time, end_time;
     	time_t t = time(NULL);            // 获取当前时间的时间戳
 
-		//将当前时间的时间戳转换为tm结构体并复制给start_time、end_time。
+		// 将当前时间的时间戳转换为tm结构体并复制给start_time、end_time。
     	localtime_r(&t, &start_time);     
     	localtime_r(&t, &end_time);
 
@@ -937,7 +983,7 @@ void show_log()
         return;
     }
 
-	printf("防火墙访问控制日志内容：\n");
+	printf("Firewall access control log content:\n");
     while (fgets(buffer, 255, fp)) {
         printf("%s", buffer);
     }
@@ -963,7 +1009,7 @@ void restore_default(int sockfd, socklen_t len)
 	getchar(); 	
 }
 
-//功能函数：打印错误信息
+// 功能函数：打印错误信息
 void printError(char * msg)
 {
 	printf("%s error %d: %s\n", msg, errno, strerror(errno));

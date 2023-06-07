@@ -12,19 +12,27 @@
 #include <linux/spinlock.h>
 #include "myfirewall.h"
 
-static DEFINE_SPINLOCK(log_lock);               //定义静态自旋锁变量
+static DEFINE_SPINLOCK(log_lock);               // 定义静态自旋锁变量
 
-static struct nf_hook_ops nfhoLocalIn;  	    //在数据路由后处理本机数据包的钩子
-static struct nf_hook_ops nfhoLocalOut;  	    //在本地数据未路由之前的钩子
-static struct nf_hook_ops nfhoPreRouting;     	//在数据路由之前的钩子
-static struct nf_hook_ops nfhoForwarding;     	//在数据路由后处理转发数据包的钩子
-static struct nf_hook_ops nfhoPostRouting;      //在本地数据路由之后的钩子
-static struct nf_sockopt_ops nfhoSockopt;       //处理内核和用户间通信钩子
+static struct nf_hook_ops nfhoLocalIn;  	    // 在数据路由后处理本机数据包的钩子
+static struct nf_hook_ops nfhoLocalOut;  	    // 在本地数据未路由之前的钩子
+static struct nf_hook_ops nfhoPreRouting;     	// 在数据路由之前的钩子
+static struct nf_hook_ops nfhoForwarding;     	// 在数据路由后处理转发数据包的钩子
+static struct nf_hook_ops nfhoPostRouting;      // 在本地数据路由之后的钩子
+static struct nf_sockopt_ops nfhoSockopt;       // 处理内核和用户间通信钩子
 
-// 存储防火墙过滤规则
+// 防火墙过滤规则
 ban_status rules, recv;
+
+// 状态连接链表的表头和表尾
+Connection connHead, connEnd;
+
+// 定时器变量
+static struct timer_list connect_timer;
+
 // 状态检测Hash表
-time_t hashTable[TABLE_SIZE]={0};
+time_t hashTable[TABLE_SIZE] = {0};
+
 // HASH锁
 char hashLock = 0;
 
@@ -46,7 +54,7 @@ static unsigned get_hash(int k)
     return c % TABLE_SIZE;
 }
 
-// 检测该数据包是否在状态检测连接表中
+// 检测该数据包的连接是否已建立
 bool check_conn(struct sk_buff *skb) 
 {
 	struct iphdr *ip = ip_hdr(skb);
@@ -93,24 +101,20 @@ bool check_conn(struct sk_buff *skb)
 	while(hashLock);  
 	hashLock = 1;     
 
-	//当前时间戳减Hash表中的时间戳为间隔时间
-	if (hashTable[pos] && get_seconds() - hashTable[pos] < 10) 
+	if(hashTable[pos])
 	{
-		// printk("status check passed.  pos:%d   hash:%ld\n", pos, hashTable[pos]);
-		// 更新时间为当前时间戳
-		hashTable[pos] = get_seconds();
-		hashLock = 0;   
+		// 更新连接时间
+		hashTable[pos] = CONNECT_TIME;
+		// 开锁
+		hashLock = 0;
 		return true;
 	}
-	else 
-	{
-		hashLock = 0;	
-	}
 
+	hashLock = 0;
 	return false;
 }
 
-// 更新状态检测连接表
+// 更新状态检测连接哈希表
 void update_hashTable(struct sk_buff *skb) 
 {
 	struct iphdr *ip = ip_hdr(skb);
@@ -122,42 +126,108 @@ void update_hashTable(struct sk_buff *skb)
 	int protocol;
 	unsigned int scode;
 	unsigned int pos;   
+	Connection *p;
 
-	if (ip->protocol == IPPROTO_TCP) 
+	if (rules.connNum < CONN_NUM_MAX)
 	{
-		struct tcphdr *tcp = tcp_hdr(skb);
-		src_port = ntohs(tcp->source);
-		dst_port = ntohs(tcp->dest);
-		protocol = 1;
+		// 区分协议类型
+		if (ip->protocol == IPPROTO_TCP) 
+		{
+			struct tcphdr *tcp = tcp_hdr(skb);
+			src_port = ntohs(tcp->source);
+			dst_port = ntohs(tcp->dest);
+			protocol = 1;
+		}
+		else if (ip->protocol == IPPROTO_UDP) 
+		{
+			struct udphdr *udp = udp_hdr(skb);
+			src_port = ntohs(udp->source);
+			dst_port = ntohs(udp->dest);
+			protocol = 2;
+		}
+		else if (ip->protocol == IPPROTO_ICMP) 
+		{
+			src_port = -1;
+			dst_port = -1;
+			protocol = 3;
+		}
+
+		scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
+		pos = get_hash(scode);
+
+		while(hashLock);  
+		hashLock = 1;	  
+
+		hashTable[pos] = CONNECT_TIME;
+		// 开锁
+		hashLock = 0;
+
+		++rules.connNum;
+		p = (Connection *)kmalloc(sizeof(Connection), GFP_ATOMIC);
+		p->src_ip = src_ip;
+		p->dst_ip = dst_ip;
+		p->src_port = src_port;
+		p->dst_port = dst_port;
+		p->index = pos;
+
+		// printk("Add connnection.   src IP: %d.%d.%d.%d\n", 
+		// (src_ip & 0x000000ff) >> 0,
+		// (src_ip & 0x0000ff00) >> 8,
+		// (src_ip & 0x00ff0000) >> 16,
+		// (src_ip & 0xff000000) >> 24);
+
+		// 头插法
+		p->next = connHead.next;  
+		connHead.next = p;	
 	}
-	else if (ip->protocol == IPPROTO_UDP) 
+	else
 	{
-		struct udphdr *udp = udp_hdr(skb);
-		src_port = ntohs(udp->source);
-		dst_port = ntohs(udp->dest);
-		protocol = 2;
+		printk("The number of connections exceeds the maximum.\n");
 	}
-	else if (ip->protocol == IPPROTO_ICMP) 
-	{
-		src_port = -1;
-		dst_port = -1;
-		protocol = 3;
-	}
-
-	scode = src_ip ^ dst_ip ^ src_port ^ dst_port ^ protocol;
-	pos = get_hash(scode);
-
-	while(hashLock);  
-	hashLock = 1;	  
-
-	// 更新为当前时间戳
-	hashTable[pos] = get_seconds(); 
-	
-	hashLock = 0;	  
-	// printk("update hash table. pos:%d  zhi: %ld\n", pos, hashTable[pos]);
 }
 
-//获取系统当前时间
+// 定时器回调函数
+void time_out(struct timer_list *timer)
+{
+	Connection *p = connHead.next, *pre = &connHead;
+
+	while(hashLock);
+	hashLock = 1;    // 加锁
+	
+	while(p != &connEnd) {
+		hashTable[p->index]--;
+		if (hashTable[p->index] == 0) 
+		{
+			// 连接超时
+			pre->next = p->next;
+			kfree(p);
+			p = pre->next;
+			rules.connNum--;
+		}
+		else {
+			// printk("源IP地址: %d.%d.%d.%d\t目的IP地址: %d.%d.%d.%d\t源端口：%d\t目的端口：%d\n", 
+			// (p->src_ip & 0x000000ff) >> 0,
+			// (p->src_ip & 0x0000ff00) >> 8,
+			// (p->src_ip & 0x00ff0000) >> 16,
+			// (p->src_ip & 0xff000000) >> 24,
+			// (p->dst_ip & 0x000000ff) >> 0,
+			// (p->dst_ip & 0x0000ff00) >> 8,
+			// (p->dst_ip & 0x00ff0000) >> 16,
+			// (p->dst_ip & 0xff000000) >> 24,
+			// p->src_port,p->dst_port);
+			pre = p;
+			p = p->next;
+		}
+		
+	}
+            
+	hashLock = 0; // 开锁
+	// 重新设置过期时间为1s后
+	connect_timer.expires = jiffies + HZ;  
+	add_timer(&connect_timer);
+}
+
+// 获取系统当前时间
 struct rtc_time get_time(void)
 {
 	ktime_t k_time;
@@ -165,6 +235,19 @@ struct rtc_time get_time(void)
 	k_time = ktime_get_real();
 	tm = rtc_ktime_to_tm(k_time);  
 	return tm;
+}
+
+// 清空链表
+void release_list(Connection *head, Connection *tail) 
+{
+    Connection *p = head->next;
+    while (p != tail) {
+        Connection *temp = p;
+        p = p->next;
+        kfree(temp);
+    }
+    head->next = tail;
+    tail->next = NULL;
 }
 
 // IP地址格式转换
@@ -216,7 +299,7 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 	char buf[256]; 
 	struct rtc_time tm = get_time(); 
 
-	spin_lock(&log_lock);    //加锁
+	spin_lock(&log_lock);    // 加锁
 
 	f = filp_open(LOG_FILE, O_WRONLY|O_CREAT|O_APPEND, 0644);
     if (IS_ERR(f))
@@ -232,9 +315,8 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 	(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24, rule_str);
 	
 	kernel_write(f, buf, len, &f->f_pos);
-
 	filp_close(f, NULL);
-	spin_unlock(&log_lock);    //解锁
+	spin_unlock(&log_lock);    // 解锁
 }
 
 unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_state* state)
@@ -242,6 +324,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	struct iphdr *iph = ip_hdr(skb);                    
 	struct tcphdr *tcph = tcp_hdr(skb);    
 	struct udphdr *udph = udp_hdr(skb); 
+
 	char src_ip_str[16];
 	char dst_ip_str[16];
 	convert_ip(iph->saddr, src_ip_str, sizeof(src_ip_str));
@@ -262,7 +345,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 
 	if(rules.inp_status == 1)            
 	{
-		//状态检测
+		// 状态检测
 		if(check_conn(skb)) 
 		{
 			// printk("status check passed\n");
@@ -270,7 +353,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//基于源ip地址访问控制
+	// 基于源ip地址访问控制
 	if(rules.sip_status == 1)
 	{
 		int sip_number;
@@ -285,7 +368,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//基于目的ip地址访问控制
+	// 基于目的ip地址访问控制
 	if(rules.dip_status == 1)
 	{
 		int dip_number;
@@ -300,7 +383,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//基于源端口的访问控制
+	// 基于源端口的访问控制
 	if(rules.sport_status == 1)
 	{
 		switch(iph->protocol)  
@@ -338,7 +421,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//基于目的端口的访问控制
+	// 基于目的端口的访问控制
 	if(rules.dport_status == 1)
 	{
 		// int i;
@@ -381,7 +464,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 	
-	//PING功能的控制
+	// PING功能的控制
 	if(rules.ping_status == 1)
 	{
 		if(is_PING(iph))
@@ -392,7 +475,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//HTTP/HTTPS功能的控制
+	// HTTP/HTTPS功能的控制
 	if(rules.http_status == 1)
 	{
 		if(is_HTTP(iph, tcph))
@@ -403,7 +486,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//Telnet功能的控制
+	// Telnet功能的控制
 	if(rules.telnet_status == 1)
 	{
 		if(is_TELNET(iph, tcph))
@@ -414,7 +497,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	//关闭所有连接功能的控制
+	// 关闭所有连接功能的控制
 	if(rules.close_status == 1)
 	{
 		time_t current_time = get_seconds();
@@ -435,7 +518,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 
 	if(rules.inp_status == 1)
 	{
-		update_hashTable(skb);    //更新状态检测连接表
+		update_hashTable(skb);    // 更新状态检测连接表
 	}
 
 	return NF_ACCEPT;
@@ -448,13 +531,13 @@ unsigned int hookLocalOut(void* priv, struct sk_buff* skb, const struct nf_hook_
 
 unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hook_state* state)
 {
-
 	struct iphdr *iph = ip_hdr(skb); 	                    
 	struct tcphdr *tcph = tcp_hdr(skb);    
 	struct udphdr *udph = udp_hdr(skb);   
 	struct ethhdr *ethhdr = eth_hdr(skb);
-	unsigned short sport, dport;            //存储当前数据包的源端口号和目的端口号
-	unsigned char mac_source[ETH_ALEN];     //存储当前数据包的MAC地址
+
+	unsigned short sport, dport;            // 存储当前数据包的源端口号和目的端口号
+	unsigned char mac_source[ETH_ALEN];     // 存储当前数据包的MAC地址
 	char src_ip_str[16];
 	char dst_ip_str[16];
 	convert_ip(iph->saddr, src_ip_str, sizeof(src_ip_str));
@@ -474,6 +557,7 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		}
 	}
 
+	// 区分协议类型
 	switch(iph->protocol)  
 	{          
 		case IPPROTO_TCP:
@@ -490,7 +574,7 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		}
 	}  
 
-	//基于MAC地址的访问控制
+	// 基于MAC地址的访问控制
 	if(rules.mac_status == 1)
 	{					
 		int mac_number;
@@ -501,7 +585,7 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		   	(rules.ban_mac[mac_number][4] == mac_source[4]) && (rules.ban_mac[mac_number][5] == mac_source[5]))
 			{
 				// struct iphdr *iph = ip_hdr(skb); 
-				printk("Request is deny. \nMAC: %02X:%02X:%02X:%02X:%02X:%02X  Src IP: %s\n",
+				printk("Request is deny. \nMAC: %02X:%02X:%02X:%02X:%02X:%02X\tSrc IP: %s\n",
 				mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5], src_ip_str);
 				wirte_log(iph, "MAC");
 				return NF_DROP;
@@ -515,11 +599,11 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		}
 	}
 	
-	//基于用户自定义策略的访问控制
+	// 基于用户自定义策略的访问控制
 	if(rules.combin_status == 1)
 	{
 		int combin_numberi;
-		for(combin_numberi = 0; combin_numberi < rules.combineNum; combin_numberi++)      	//遍历每一个自定义的访问控制策略
+		for(combin_numberi = 0; combin_numberi < rules.combineNum; combin_numberi++)      	// 遍历每一个自定义的访问控制策略
 		{			
 			int flag_banSip = !rules.ban_combin[combin_numberi].banSip_status;
 			int flag_banDip = !rules.ban_combin[combin_numberi].banDip_status;
@@ -580,68 +664,74 @@ int hookSockoptSet(struct sock* sock, int cmd, void __user* user, unsigned int l
 {
 	int ret;
 	
-	//将用户空间的rules拷贝到内核空间，使用recv接收，保证用户和内核空间过滤规则的一致性
+	// 将用户空间的rules拷贝到内核空间，使用recv接收，保证用户和内核空间过滤规则的一致性
 	ret = copy_from_user(&recv, user, sizeof(recv));
 
 	switch(cmd)
 	{
-		case OPENSTATE:           //改变防火墙开启状态
+		case OPENSTATE:           // 改变防火墙开启状态
 			rules.open_status = recv.open_status;
 			break;
-		case INPSTATE:            //改变防火墙状态检测功能开启状态
+		case INPSTATE:            // 改变防火墙状态检测功能开启状态
 			rules.inp_status = recv.inp_status;
+			rules.connNum = recv.connNum;
+			memcpy(rules.connNode, recv.connNode, sizeof(rules.connNode));  
+			release_list(&connHead, &connEnd);
+			memset(&hashTable, 0, sizeof(hashTable));
 			break;
-		case SETTIME:             //改变防火墙开启时间段
+		case SETTIME:             // 改变防火墙开启时间段
 			rules.settime_status = recv.settime_status;
 			rules.start_date = recv.start_date;
 			rules.end_date = recv.end_date;
 			break;
-		case BANSIP:              //基于源IP地址的访问控制
+		case BANSIP:              // 基于源IP地址的访问控制
 			rules.sip_status = recv.sip_status;
 			rules.sipNum = recv.sipNum;
 			memcpy(rules.ban_sip, recv.ban_sip, sizeof(rules.ban_sip));  
 			break;
-		case BANDIP:              //基于目的IP地址的访问控制
+		case BANDIP:              // 基于目的IP地址的访问控制
 			rules.dip_status = recv.dip_status;
 			rules.dipNum = recv.dipNum;
 			memcpy(rules.ban_dip, recv.ban_dip, sizeof(rules.ban_dip));  
 			break;
-		case BANSPORT:            //基于源头端口的访问控制 
+		case BANSPORT:            // 基于源头端口的访问控制 
 			rules.sport_status = recv.sport_status;
 			rules.sportNum = recv.sportNum;    
 			memcpy(rules.ban_sport, recv.ban_sport, sizeof(rules.ban_sport));  
 			break;
-		case BANDPORT:            //基于目的端口的访问控制 
+		case BANDPORT:            // 基于目的端口的访问控制 
 			rules.dport_status = recv.dport_status;
 			rules.dportNum = recv.dportNum;   
 			memcpy(rules.ban_dport, recv.ban_dport, sizeof(rules.ban_dport)); 
 			break;
-		case BANMAC:              //基于MAC地址的访问控制
+		case BANMAC:              // 基于MAC地址的访问控制
 			rules.mac_status = recv.mac_status;
 			rules.macNum = recv.macNum;
 			memcpy(rules.ban_mac, recv.ban_mac, sizeof(rules.ban_mac)); 
 			break;
-		case BANCOMBIN:           //基于用户自定义策略的访问控制
+		case BANCOMBIN:           // 基于用户自定义策略的访问控制
 			rules.combin_status = recv.combin_status;
 			rules.combineNum = recv.combineNum; 
 			memcpy(rules.ban_combin, recv.ban_combin, sizeof(rules.ban_combin)); 
 			break;
-		case BANALL:              //关闭所有连接功能的控制
+		case BANALL:              // 关闭所有连接功能的控制
 			rules.close_status = recv.close_status;
 			rules.start_time = recv.start_time;
 			rules.end_time = recv.end_time;
 			break;
-		case BANPING:             //PING功能的控制 
+		case BANPING:             // PING功能的控制 
 			rules.ping_status = recv.ping_status;
 			break;
-		case BANHTTP:             //HTTP/HTTPS功能的控制
+		case BANHTTP:             // HTTP/HTTPS功能的控制
 			rules.http_status = recv.http_status;
 			break;
-		case BANTELNET:           //TELNET功能的控制
+		case BANTELNET:           // TELNET功能的控制
 			rules.telnet_status = recv.telnet_status;
 			break;
-		case RESTORE:             //恢复默认设置的控制
+		case RESTORE:             // 恢复默认设置的控制
 			memset(&rules, 0, sizeof(rules));	
+			release_list(&connHead, &connEnd);
+			memset(&hashTable, 0, sizeof(hashTable));
 			rules.open_status = 1;
 			break;
 		default:
@@ -659,33 +749,67 @@ int hookSockoptSet(struct sock* sock, int cmd, void __user* user, unsigned int l
 int hookSockoptGet(struct sock* sock, int cmd, void __user* user, int* len)
 {
 	int ret;
-	//将内核空间的rules拷贝到内核空间，保证用户和内核空间过滤规则的一致性
-	ret = copy_to_user(user, &rules, sizeof(rules));
 
+	if(cmd == CONNGET)
+	{
+		int i = 0;
+		Connection *p = connHead.next;
+		while (p != &connEnd)
+		{
+			rules.connNode[i++] = *p;
+			p = p->next;
+		}
+	}
+
+		// int i;
+		// for (i = 0; i < rules.connNum; i++)
+		// {
+		// 	printk("   hookSockoptGet       源IP地址: %d.%d.%d.%d     %d\n", 
+		// 	(rules.connNode[i].src_ip & 0x000000ff) >> 0,
+		// 	(rules.connNode[i].src_ip & 0x0000ff00) >> 8,
+		// 	(rules.connNode[i].src_ip & 0x00ff0000) >> 16,
+		// 	(rules.connNode[i].src_ip & 0xff000000) >> 24, rules.connNode[i].src_port);
+		// }
+
+	// 将内核空间的rules拷贝到用户空间，保证用户和内核空间过滤规则的一致性
+	ret = copy_to_user(user, &rules, sizeof(rules));
 	if (ret != 0)
 	{
 		ret = -EINVAL;
 		printk("Error copying from kernel space to user space");
 	}
+
 	return ret;
 }
 
-//初始化模块 
+// 初始化模块 
 int myfirewall_init(void)
 {
-	rules.open_status = 1;       //初始化防火墙的状态为开启
-	rules.inp_status = 1;        //初始化防火墙状态检测功能为开启
-	rules.sip_status = 0;        //初始化基于源IP访问控制的状态为不封禁 
-	rules.dip_status = 0;        //初始化基于目的IP访问控制的状态为不封禁 
-	rules.sport_status = 0;      //初始化基于源端口访问控制的状态为不封禁 
-	rules.dport_status = 0;      //初始化基于目的端口访问控制的状态为不封禁 
-	rules.settime_status = 0;	 //初始化防火墙时间段功能为关闭
-	rules.ping_status = 0;       //初始化不封禁PING功能
-	rules.http_status = 0;       //初始化不封禁HTTP/HTTPS功能
-	rules.telnet_status = 0;     //初始化不封禁TELNET功能
-	rules.mac_status = 0;		 //初始化基于MAC地址访问控制的状态为不封禁 
-	rules.close_status = 0;      //初始化开启所以连接
-	rules.combin_status = 0; 	 //初始化基于用户自定义策略访问控制的状态为不封禁 
+	rules.open_status = 1;       // 初始化防火墙的状态为开启
+	rules.inp_status = 0;        // 初始化防火墙状态检测功能为关闭
+	rules.sip_status = 0;        // 初始化基于源IP访问控制的状态为不封禁 
+	rules.dip_status = 0;        // 初始化基于目的IP访问控制的状态为不封禁 
+	rules.sport_status = 0;      // 初始化基于源端口访问控制的状态为不封禁 
+	rules.dport_status = 0;      // 初始化基于目的端口访问控制的状态为不封禁 
+	rules.settime_status = 0;	 // 初始化防火墙时间段功能为关闭
+	rules.ping_status = 0;       // 初始化不封禁PING功能
+	rules.http_status = 0;       // 初始化不封禁HTTP/HTTPS功能
+	rules.telnet_status = 0;     // 初始化不封禁TELNET功能
+	rules.mac_status = 0;		 // 初始化基于MAC地址访问控制的状态为不封禁 
+	rules.close_status = 0;      // 初始化开启所以连接
+	rules.combin_status = 0; 	 // 初始化基于用户自定义策略访问控制的状态为不封禁 
+
+    timer_setup(&connect_timer, time_out, 0);  // 初始化定时器，并设置回调函数
+    connect_timer.expires = jiffies + HZ;      // 过期时间为1s后
+    add_timer(&connect_timer);  // 启动定时器
+
+	// 初始化状态连接链表
+	connHead.next = &connEnd;
+	connEnd.next = NULL;
+
+	// 初始化状态链接存储结构 
+	rules.connNum = 0;		     
+	memset(rules.connNode, 0, sizeof(rules.connNode));   
 
 	nfhoLocalIn.hook = hookLocalIn;         
 	nfhoLocalIn.pf = PF_INET;
@@ -731,17 +855,20 @@ int myfirewall_init(void)
 	return 0;
 }
 
-//清理模块 
+// 清理模块 
 void myfirewall_exit(void)
 {
-	//注销钩子 
+	// 删除定时器
+	del_timer(&connect_timer);
+
+	// 注销钩子 
 	nf_unregister_net_hook(&init_net, &nfhoLocalIn);
 	nf_unregister_net_hook(&init_net, &nfhoLocalOut);
 	nf_unregister_net_hook(&init_net, &nfhoPreRouting);
 	nf_unregister_net_hook(&init_net, &nfhoForwarding);
 	nf_unregister_net_hook(&init_net, &nfhoPostRouting);
 	
-	//注销通信的钩子
+	// 注销通信的钩子
 	nf_unregister_sockopt(&nfhoSockopt);
 
 	printk("Firewall kernel module unloaded successfully\n");
@@ -752,3 +879,4 @@ module_exit(myfirewall_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("GY");
+MODULE_DESCRIPTION("Netfilter Firewall v2.0");

@@ -526,3 +526,16 @@ Time: 2023-5-31 16:26:59		Source IP: 34.120.208.123		Destination IP: 192.168.220
 Time: 2023-5-31 16:26:59		Source IP: 34.149.100.209		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
 Time: 2023-5-31 16:27:2		Source IP: 34.160.144.191		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
 Time: 2023-5-31 16:27:2		Source IP: 34.120.208.123		Destination IP: 192.168.220.128		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-5 15:53:41		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-5 15:53:42		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-5 15:53:43		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-5 15:53:45		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-5 15:53:46		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-5 15:53:47		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-7 19:42:47		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-7 19:42:48		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-7 19:42:49		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-7 19:42:50		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-7 19:42:51		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-7 19:42:52		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-7 19:42:53		Source IP: 127.0.0.1		Destination IP: 127.0.0.1		Filter Rule: PING Disabled		Action：Deny

@@ -11,28 +11,28 @@
 #include <errno.h>  
 #include "../kernel_module/myfirewall.h"
 
+void open_firewall(int sockfd, socklen_t len);              /*功能函数:开启/关闭防火墙*/
+void open_stateInp(int sockfd, socklen_t len);              /*功能函数:开启/关闭状态检测功能*/
+void set_opentime(int sockfd, socklen_t len);               /*功能函数:设置防火墙开启时间段*/
+void get_status();                                          /*功能函数:获取当前防火墙过滤规则*/
+void change_status(int sockfd, socklen_t len);              /*功能函数:改变防火墙过滤规则*/
+void change_ping(int sockfd, socklen_t len);                /*功能函数:改变PING规则*/
+void change_sip(int sockfd, socklen_t len);                 /*功能函数:改变源IP过滤规则*/
+void change_dip(int sockfd, socklen_t len);                 /*功能函数:改变目的IP过滤规则*/
+void change_sport(int sockfd, socklen_t len);               /*功能函数:改变源端口过滤规则*/
+void change_dport(int sockfd, socklen_t len);               /*功能函数:改变目的端口过滤规则*/
+void change_http(int sockfd, socklen_t len);                /*功能函数:改变HTTP/HTTPS规则*/
+void change_telnet(int sockfd, socklen_t len);              /*功能函数:改变Telnet规则*/
+void change_mac(int sockfd, socklen_t len);                 /*功能函数:改变MAC地址过滤规则*/		
+void change_close(int sockfd, socklen_t len);               /*功能函数:改变关闭所有连接规则*/
+void change_combin(int sockfd, socklen_t len);              /*功能函数:改变自定义过滤规则*/
+void mac_format(char *mac_str, unsigned char *mac_addr);    /*功能函数:将MAC地址分割并存入mac_addr*/
+void show_log();                                            /*功能函数:查看日志*/
+void restore_default(int sockfd, socklen_t len);            /*功能函数:恢复默认设置*/
+void printError(char *msg);                                 /*功能函数:打印错误信息*/
+
 // 防火墙过滤规则
 ban_status rules; 
-
-void open_firewall(int sockfd, socklen_t len);              /*功能函数：开启/关闭防火墙*/
-void open_stateInp(int sockfd, socklen_t len);              /*功能函数：开启/关闭状态检测功能*/
-void set_opentime(int sockfd, socklen_t len);               /*功能函数：设置防火墙开启时间段*/
-void get_status();                                          /*功能函数：获取当前防火墙过滤规则*/
-void change_status(int sockfd, socklen_t len);              /*功能函数：改变防火墙过滤规则*/
-void change_ping(int sockfd, socklen_t len);                /*功能函数：改变PING规则*/
-void change_sip(int sockfd, socklen_t len);                 /*功能函数：改变源IP过滤规则*/
-void change_dip(int sockfd, socklen_t len);                 /*功能函数：改变目的IP过滤规则*/
-void change_sport(int sockfd, socklen_t len);               /*功能函数：改变源端口过滤规则*/
-void change_dport(int sockfd, socklen_t len);               /*功能函数：改变目的端口过滤规则*/
-void change_http(int sockfd, socklen_t len);                /*功能函数：改变HTTP/HTTPS规则*/
-void change_telnet(int sockfd, socklen_t len);              /*功能函数：改变Telnet规则*/
-void change_mac(int sockfd, socklen_t len);                 /*功能函数：改变MAC地址过滤规则*/		
-void change_close(int sockfd, socklen_t len);               /*功能函数：改变关闭所有连接规则*/
-void change_combin(int sockfd, socklen_t len);              /*功能函数：改变自定义过滤规则*/
-void mac_format(char *mac_str, unsigned char *mac_addr);    /*功能函数：将MAC地址分割并存入mac_addr*/
-void show_log();                                            /*功能函数：查看日志*/
-void restore_default(int sockfd, socklen_t len);            /*功能函数：恢复默认设置*/
-void printError(char *msg);                                 /*功能函数：打印错误信息*/
 
 int main(void)
 {
@@ -56,11 +56,11 @@ int main(void)
 				if(rules.open_status == 1)              // 防火墙状态为开启
 				{
 					get_status();                       // 循环打印当前防火墙过滤规则
-					change_status(sockfd, len);         // 循环打印规则菜单，直至用户层选择退出
+					change_status(sockfd, len);         // 循环打印规则菜单,直至用户层选择退出
 				}
 				else
 				{
-					printf("防火墙当前状态：关闭\n");
+					printf("防火墙当前状态:关闭\n");
 					printf("是否开启防火墙（1 开启  0 exit）\n");
 					int choice;
 					scanf("%d", &choice);
@@ -73,7 +73,7 @@ int main(void)
 	return 0;
 }
 
-// 功能函数：获取当前防火墙过滤规则
+// 功能函数:获取当前防火墙过滤规则
 void get_status() 
 {	
 	time_t timer0;
@@ -97,7 +97,7 @@ void get_status()
 	printf("当前防火墙过滤规则为:\n");
 	printf("--------------------------------------\n");
 
-	printf("防火墙状态检测功能：\t\t");
+	printf("防火墙状态检测功能:\t\t");
 	if(rules.inp_status == 1)
 	{
 		printf("开启\n");
@@ -108,7 +108,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据源IP过滤功能：\t\t");
+	printf("根据源IP过滤功能:\t\t");
 	if(rules.sip_status == 1)
 	{
 		printf("开启\n");
@@ -126,7 +126,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据目的IP过滤功能：\t\t");
+	printf("根据目的IP过滤功能:\t\t");
 	if(rules.dip_status == 1)
 	{
 		printf("开启\n");
@@ -144,7 +144,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据源端口过滤功能：\t\t");
+	printf("根据源端口过滤功能:\t\t");
 	if(rules.sport_status == 1)
 	{
 		printf("开启\n");
@@ -161,7 +161,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据目的端口过滤功能：\t\t");
+	printf("根据目的端口过滤功能:\t\t");
 	if(rules.dport_status == 1)
 	{
 		printf("开启\n");
@@ -178,13 +178,13 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据MAC过滤功能：\t\t");
+	printf("根据MAC过滤功能:\t\t");
 	if(rules.mac_status == 1)
 	{
 		printf("开启\n");
 		for(int i = 0; i < rules.macNum; i++)
 		{
-			printf("过滤MAC地址：%02X:%02X:%02X:%02X:%02X:%02X\n",
+			printf("过滤MAC地址:%02X:%02X:%02X:%02X:%02X:%02X\n",
 			rules.ban_mac[i][0], rules.ban_mac[i][1], rules.ban_mac[i][2], 
 			rules.ban_mac[i][3], rules.ban_mac[i][4], rules.ban_mac[i][5]);
 		}
@@ -195,7 +195,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("自定义访问控制策略功能：\t");
+	printf("自定义访问控制策略功能:\t\t");
 	if(rules.combin_status == 1)
 	{
 		printf("开启\n");
@@ -233,7 +233,7 @@ void get_status()
 
 			if(rules.ban_combin[i].banMac_status == 1)
 			{
-				printf("MAC地址：\t%02X:%02X:%02X:%02X:%02X:%02X\n",
+				printf("MAC地址:\t%02X:%02X:%02X:%02X:%02X:%02X\n",
 				rules.ban_combin[i].banMac[0], rules.ban_combin[i].banMac[1], rules.ban_combin[i].banMac[2], 
 				rules.ban_combin[i].banMac[3], rules.ban_combin[i].banMac[4], rules.ban_combin[i].banMac[5]);
 			}
@@ -245,7 +245,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("关闭所有连接功能：\t\t");
+	printf("关闭所有连接功能:\t\t");
 	if(rules.close_status == 1)
 	{
 		printf("开启\n");		
@@ -256,7 +256,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("PING功能：\t\t\t");
+	printf("PING功能:\t\t\t");
 	if(rules.ping_status == 1)
 	{
 		printf("禁用\n");
@@ -267,7 +267,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("HTTP/HTTPS功能：\t\t");
+	printf("HTTP/HTTPS功能:\t\t\t");
 	if(rules.http_status == 1)
 	{
 		printf("禁用\n");		
@@ -278,7 +278,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("Telnet功能：\t\t\t");
+	printf("Telnet功能:\t\t\t");
 	if(rules.telnet_status == 1)
 	{
 		printf("禁用\n");		
@@ -290,7 +290,7 @@ void get_status()
 	printf("--------------------------------------\n");
 }
 
-// 功能函数：改变防火墙过滤规则
+// 功能函数:改变防火墙过滤规则
 void change_status(int sockfd, socklen_t len)
 {
 	int choice;
@@ -300,7 +300,7 @@ void change_status(int sockfd, socklen_t len)
 	printf("9.过滤MAC地址\t\t10.PING功能\t\t11.HTTP/HTTPS功能\t12.Telnet功能\n");
 	printf("13.查看日志\t\t14.关闭所有连接\t\t15.恢复默认设置\t\t0.exit\n");
 	printf("-------------------------------------------------------------------------------\n");
-	// printf("选项：\t");
+	// printf("选项:\t");
 
 	scanf("%d", &choice);
 	switch (choice)
@@ -358,7 +358,7 @@ void change_status(int sockfd, socklen_t len)
 	}
 }
 
-// 功能函数：开启/关闭防火墙
+// 功能函数:开启/关闭防火墙
 void open_firewall(int sockfd, socklen_t len)
 {
 	rules.open_status = !rules.open_status;     
@@ -380,11 +380,11 @@ void open_firewall(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：开启/关闭防火墙状态检测功能
+// 功能函数:开启/关闭防火墙状态检测功能
 void open_stateInp(int sockfd, socklen_t len)
 {
 	int choice;
-	printf("1. 开启/关闭状态检测功能     2. 查看当前连接     3. 清空当前连接\n");
+	printf("1. 开启/关闭状态检测功能   2. 查看当前连接   3. 清空当前连接\n");
 	scanf("%d", &choice);
 	if(choice == 1)   
 	{
@@ -397,6 +397,7 @@ void open_stateInp(int sockfd, socklen_t len)
 		{
 			printf("防火墙状态检测已关闭!\n");
 		}
+
 		rules.connNum = 0;
 		memset(rules.connNode, 0, sizeof(rules.connNode));   
 		if (setsockopt(sockfd, IPPROTO_IP, INPSTATE, &rules, len))
@@ -410,34 +411,67 @@ void open_stateInp(int sockfd, socklen_t len)
 		{
 			printError("get filtering rules from kernel space");
 		}
-		if (rules.connNum == 0)
+
+		if(rules.inp_status == 1)
 		{
-			printf("当前无连接\n");
+			if (rules.connNum == 0)
+			{
+				printf("当前无连接\n");
+			}
+			else
+			{
+				printf("当前共%d个连接,分别为:\n", rules.connNum);
+				for (int i = 0; i < rules.connNum; i++)
+				{
+					printf("源IP地址: %d.%d.%d.%d\t   目的IP地址: %d.%d.%d.%d\t   源端口: %d\t   目的端口: %d\t   协议:", 
+					(rules.connNode[i].src_ip & 0x000000ff) >> 0, (rules.connNode[i].src_ip & 0x0000ff00) >> 8,
+					(rules.connNode[i].src_ip & 0x00ff0000) >> 16, (rules.connNode[i].src_ip & 0xff000000) >> 24, 
+					(rules.connNode[i].dst_ip & 0x000000ff) >> 0, (rules.connNode[i].dst_ip & 0x0000ff00) >> 8,
+					(rules.connNode[i].dst_ip & 0x00ff0000) >> 16, (rules.connNode[i].dst_ip & 0xff000000) >> 24,
+					rules.connNode[i].src_port, rules.connNode[i].dst_port);
+
+					switch (rules.connNode[i].protocol)
+					{
+					case 1:
+						printf("TCP\n");
+						break;
+					case 2:
+						printf("UDP\n");
+						break;
+					case 3:
+						printf("ICMP\n");
+						break;				
+					default:
+						break;
+					}
+				}
+			}	
 		}
 		else
 		{
-			printf("当前共%d个连接，分别为：\n", rules.connNum);
-			for (int i = 0; i < rules.connNum; i++)
-			{
-				printf("源IP地址: %d.%d.%d.%d\t目的IP地址: %d.%d.%d.%d\t源端口:%d\t目的端口:%d\n", 
-				(rules.connNode[i].src_ip & 0x000000ff) >> 0, (rules.connNode[i].src_ip & 0x0000ff00) >> 8,
-				(rules.connNode[i].src_ip & 0x00ff0000) >> 16, (rules.connNode[i].src_ip & 0xff000000) >> 24, 
-				(rules.connNode[i].dst_ip & 0x000000ff) >> 0, (rules.connNode[i].dst_ip & 0x0000ff00) >> 8,
-				(rules.connNode[i].dst_ip & 0x00ff0000) >> 16, (rules.connNode[i].dst_ip & 0xff000000) >> 24,
-				rules.connNode[i].src_port, rules.connNode[i].dst_port);
-			}
-		}	
+			printf("状态检测功能未开启\n");
+		}
+		
+		
 	}
 	else if(choice == 3)
 	{
-		rules.inp_status = 1;    
-		rules.connNum = 0;
-		memset(rules.connNode, 0, sizeof(rules.connNode));   
-		if (setsockopt(sockfd, IPPROTO_IP, INPSTATE, &rules, len))
+		if(rules.inp_status == 1)
 		{
-			printf("Filter rule synchronization to kernel space failed\n");
+			rules.inp_status = 1;    
+			rules.connNum = 0;
+			memset(rules.connNode, 0, sizeof(rules.connNode));   
+
+			if (setsockopt(sockfd, IPPROTO_IP, INPSTATE, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+			printf("连接已清空\n");
 		}
-		printf("连接已清空\n");
+		else
+		{
+			printf("状态检测功能未开启\n");
+		}
 	}
 	else
 	{
@@ -449,7 +483,7 @@ void open_stateInp(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：改变源IP过滤规则
+// 功能函数:改变源IP过滤规则
 void change_sip(int sockfd, socklen_t len)
 {
 	char str_ip[20];
@@ -472,6 +506,7 @@ void change_sip(int sockfd, socklen_t len)
 			rules.ban_sip[i] = inet_addr(str_ip);   // 将字符串形式的IP地址转换为网络字节序
 			rules.sipNum = i + 1;
 		}
+
 		if (setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
 		{
 			printf("Filter rule synchronization to kernel space failed\n");
@@ -482,6 +517,7 @@ void change_sip(int sockfd, socklen_t len)
 		rules.sip_status = 0;
 		memset(rules.ban_sip, '\0', sizeof(rules.ban_sip));   
 		rules.sipNum = 0;
+
 		if(setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
 		{
 			printf("Filter rule synchronization to kernel space failed\n");
@@ -497,7 +533,7 @@ void change_sip(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：设置防火墙开启时间段
+// 功能函数:设置防火墙开启时间段
 void set_opentime(int sockfd, socklen_t len)
 {
 	rules.settime_status = !rules.settime_status;
@@ -507,13 +543,13 @@ void set_opentime(int sockfd, socklen_t len)
 		char start_date_str[32];
 		char end_date_str[32];	
 
-		printf("请输入防火墙开始日期（格式：YYYY-MM-DD）：\n");
+		printf("请输入防火墙开始日期（格式:YYYY-MM-DD）:\n");
 		scanf("%s", start_date_str);
-		printf("请输入防火墙结束日期（格式：YYYY-MM-DD）：\n");
+		printf("请输入防火墙结束日期（格式:YYYY-MM-DD）:\n");
 		scanf("%s", end_date_str);
 
 		if (strptime(start_date_str, "%Y-%m-%d", &start_date) == NULL) {
-			printf("输入格式有误，请重新设置！\n");
+			printf("输入格式有误,请重新设置！\n");
 			rules.settime_status = 0;
 			printf("Press enter to continue...\n");
 			getchar(); 
@@ -526,7 +562,7 @@ void set_opentime(int sockfd, socklen_t len)
 		start_date.tm_isdst = -1;  // 自动判断夏令时
 
 		if (strptime(end_date_str, "%Y-%m-%d", &end_date) == NULL) {
-			printf("输入格式有误，请重新设置！\n");
+			printf("输入格式有误,请重新设置！\n");
 			rules.settime_status = 0;
 			printf("Press enter to continue...\n");
 			getchar(); 
@@ -554,7 +590,7 @@ void set_opentime(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：改变目的IP过滤规则
+// 功能函数:改变目的IP过滤规则
 void change_dip(int sockfd, socklen_t len)
 {
 	char str_ip[20];
@@ -577,6 +613,7 @@ void change_dip(int sockfd, socklen_t len)
 			rules.ban_dip[i] = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
 			rules.dipNum = i + 1;
 		}
+
 		if (setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
 		{
 			printf("Filter rule synchronization to kernel space failed\n");
@@ -587,6 +624,7 @@ void change_dip(int sockfd, socklen_t len)
 		rules.dip_status = 0;
 		memset(rules.ban_dip, '\0', sizeof(rules.ban_dip));   
 		rules.dipNum = 0;
+
 		if(setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
 		{
 			printf("Filter rule synchronization to kernel space failed\n");
@@ -602,7 +640,7 @@ void change_dip(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：改变源端口过滤规则
+// 功能函数:改变源端口过滤规则
 void change_sport(int sockfd, socklen_t len)
 {
 	int choice;
@@ -618,10 +656,11 @@ void change_sport(int sockfd, socklen_t len)
 			printf("请输入第 %d 个需要过滤的端口号 (退出: 0):", i + 1);
 			unsigned short sport;
 			scanf("%hu", &sport);
-			if(sport == 0) break;	        // 0代表输入完成，提前退出循环
+			if(sport == 0) break;	        // 0代表输入完成,提前退出循环
 			rules.ban_sport[i] = sport;     
 			rules.sportNum = i + 1;         
 		}
+
 		if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
 		{
 			printf("Filter rule synchronization to kernel space failed\n");
@@ -632,6 +671,7 @@ void change_sport(int sockfd, socklen_t len)
 		rules.sport_status = 0;
 		memset(rules.ban_sport, 0, sizeof(rules.ban_sport));  
 		rules.sportNum = 0;
+
 		if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
 		{
 			printf("Filter rule synchronization to kernel space failed\n");
@@ -647,7 +687,7 @@ void change_sport(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：改变目的端口过滤规则
+// 功能函数:改变目的端口过滤规则
 void change_dport(int sockfd, socklen_t len)
 {
 	int choice;
@@ -664,10 +704,11 @@ void change_dport(int sockfd, socklen_t len)
 			printf("请输入第 %d 个需要过滤的端口号 (退出: 0):", i + 1);
 			unsigned short dport;
 			scanf("%hu", &dport);
-			if(dport == 0) break;	         // 0代表输入完成，提前退出循环
+			if(dport == 0) break;	         // 0代表输入完成,提前退出循环
 			rules.ban_dport[i] = dport;      
 			rules.dportNum = i + 1;          
 		}
+
 		if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
 		{
 			printf("Filter rule synchronization to kernel space failed\n");
@@ -678,6 +719,7 @@ void change_dport(int sockfd, socklen_t len)
 		rules.dport_status = 0;
 		memset(rules.ban_dport, 0, sizeof(rules.ban_dport));   
 		rules.dportNum = 0;
+
 		if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
 		{
 			printf("Filter rule synchronization to kernel space failed\n");
@@ -693,7 +735,7 @@ void change_dport(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：改变自定义访问控制规则
+// 功能函数:改变自定义访问控制规则
 void change_combin(int sockfd, socklen_t len)
 {
 	unsigned char mac_str[20];  	// 存储输入的MAC地址字符串
@@ -712,7 +754,7 @@ void change_combin(int sockfd, socklen_t len)
 		{
 			printf("\n请输入第 %d 个自定义访问控制策略 (退出: 0):\n", i + 1);
 			int select;
-			printf("是否根据源IP地址过滤(是：1  否：2):\n");
+			printf("是否根据源IP地址过滤(是:1  否:2):\n");
 			scanf("%d", &select);
 			if(select == 1)
 			{
@@ -730,7 +772,7 @@ void change_combin(int sockfd, socklen_t len)
 				break;
 			}
 
-			printf("是否根据目的IP地址过滤(是：1  否：2):\n");
+			printf("是否根据目的IP地址过滤(是:1  否:2):\n");
 			scanf("%d", &select);
 			if(select == 1)
 			{
@@ -748,7 +790,7 @@ void change_combin(int sockfd, socklen_t len)
 				break;
 			}
 
-			printf("是否根据源端口过滤(是：1  否：2):\n");
+			printf("是否根据源端口过滤(是:1  否:2):\n");
 			scanf("%d", &select);
 			if(select == 1)
 			{
@@ -765,7 +807,7 @@ void change_combin(int sockfd, socklen_t len)
 				break;
 			}
 
-			printf("是否根据目的端口过滤(是：1  否：2):\n");
+			printf("是否根据目的端口过滤(是:1  否:2):\n");
 			scanf("%d", &select);
 			if(select == 1)
 			{
@@ -782,7 +824,7 @@ void change_combin(int sockfd, socklen_t len)
 				break;
 			}
 
-			printf("是否根据MAC地址过滤(是：1  否：2):\n");
+			printf("是否根据MAC地址过滤(是:1  否:2):\n");
 			scanf("%d", &select);
 			if(select == 1)
 			{
@@ -829,10 +871,11 @@ void change_combin(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：改变PING规则
+// 功能函数:改变PING规则
 void change_ping(int sockfd, socklen_t len)
 {
 	rules.ping_status = !rules.ping_status;
+
 	if(setsockopt(sockfd, IPPROTO_IP, BANPING, &rules, len))
 	{
 		printf("Filter rule synchronization to kernel space failed\n");
@@ -842,10 +885,11 @@ void change_ping(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：改变HTTP/HTTPS规则
+// 功能函数:改变HTTP/HTTPS规则
 void change_http(int sockfd, socklen_t len)
 {
 	rules.http_status = !rules.http_status;
+
 	if(setsockopt(sockfd, IPPROTO_IP, BANHTTP, &rules, len))  
 	{
 		printf("Filter rule synchronization to kernel space failed\n");		
@@ -855,10 +899,11 @@ void change_http(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：改变Telnet规则
+// 功能函数:改变Telnet规则
 void change_telnet(int sockfd, socklen_t len)
 {
 	rules.telnet_status = !rules.telnet_status;
+
 	if(setsockopt(sockfd, IPPROTO_IP, BANTELNET, &rules, len))  
 	{
 		printf("Filter rule synchronization to kernel space failed\n");		
@@ -868,19 +913,18 @@ void change_telnet(int sockfd, socklen_t len)
 	getchar(); 
 }     
 
-// 工具函数：将MAC地址分割并存入mac_addr
+// 工具函数:将MAC地址分割并存入mac_addr
 void mac_format(char *mac_str, unsigned char *mac_addr)
 {
-    char *ptr = strtok(mac_str, ":");      // 将字符串按“:”分割，返回第一个子字符串的指针
-
+    char *ptr = strtok(mac_str, ":");      // 将字符串按“:”分割,返回第一个子字符串的指针
     for (int i = 0; i < 6; i++)
 	{
         mac_addr[i] = (unsigned char)strtol(ptr, NULL, 16);    // 将子字符串转换为 unsigned char 类型的数字
-        ptr = strtok(NULL, ":");                               // 继续按“:”分割，返回下一个子字符串的指针
+        ptr = strtok(NULL, ":");                               // 继续按“:”分割,返回下一个子字符串的指针
     }
 }
 
-// 功能函数：改变MAC地址过滤规则	
+// 功能函数:改变MAC地址过滤规则	
 void change_mac(int sockfd, socklen_t len)
 {
 	unsigned char mac_str[20];  	// 存储输入的MAC地址字符串
@@ -911,7 +955,6 @@ void change_mac(int sockfd, socklen_t len)
 	else
 	{  
 		rules.mac_status = 0;
-
 		memset(rules.ban_mac, 0, sizeof(rules.ban_mac));		
 
 		if(setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len)) 
@@ -924,7 +967,7 @@ void change_mac(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：改变关闭所有连接规则
+// 功能函数:改变关闭所有连接规则
 void change_close(int sockfd, socklen_t len)
 {
 	rules.close_status = !rules.close_status;
@@ -939,9 +982,9 @@ void change_close(int sockfd, socklen_t len)
 
 		int start_hour, end_hour;
 
-		printf("请输入规则开启时间(h)：\n");
+		printf("请输入规则开启时间(h):\n");
 		scanf("%d", &start_hour);
-		printf("请输入规则结束时间(h)：\n");
+		printf("请输入规则结束时间(h):\n");
 		scanf("%d", &end_hour);
 
 		// 设置修改后的开始时间
@@ -971,7 +1014,7 @@ void change_close(int sockfd, socklen_t len)
 	getchar(); 
 }
 
-// 功能函数：查看当前日志
+// 功能函数:查看当前日志
 void show_log()
 {
     FILE *fp;
@@ -994,7 +1037,7 @@ void show_log()
 	getchar(); 
 }
 
-// 功能函数：恢复默认设置
+// 功能函数:恢复默认设置
 void restore_default(int sockfd, socklen_t len)
 {
 	memset(&rules, 0, sizeof(rules));	
@@ -1009,7 +1052,7 @@ void restore_default(int sockfd, socklen_t len)
 	getchar(); 	
 }
 
-// 功能函数：打印错误信息
+// 功能函数:打印错误信息
 void printError(char * msg)
 {
 	printf("%s error %d: %s\n", msg, errno, strerror(errno));

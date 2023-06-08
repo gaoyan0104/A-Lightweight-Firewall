@@ -51,6 +51,7 @@ static unsigned get_hash(int k)
 	a -= b; a -= c; a ^= (c >> 3);  
 	b -= c; b -= a; b ^= (a << 10); 
 	c -= a; c -= b; c ^= (b >> 15); 
+
     return c % TABLE_SIZE;
 }
 
@@ -126,7 +127,7 @@ void update_hashTable(struct sk_buff *skb)
 	int protocol;
 	unsigned int scode;
 	unsigned int pos;   
-	Connection *p;
+	Connection *conn_node;
 
 	if (rules.connNum < CONN_NUM_MAX)
 	{
@@ -163,22 +164,21 @@ void update_hashTable(struct sk_buff *skb)
 		hashLock = 0;
 
 		++rules.connNum;
-		p = (Connection *)kmalloc(sizeof(Connection), GFP_ATOMIC);
-		p->src_ip = src_ip;
-		p->dst_ip = dst_ip;
-		p->src_port = src_port;
-		p->dst_port = dst_port;
-		p->index = pos;
+		conn_node = (Connection *)kmalloc(sizeof(Connection), GFP_ATOMIC);
+		conn_node->src_ip = src_ip;
+		conn_node->dst_ip = dst_ip;
+		conn_node->src_port = src_port;
+		conn_node->dst_port = dst_port;
+		conn_node->protocol = protocol;
+		conn_node->index = pos;
 
-		// printk("Add connnection.   src IP: %d.%d.%d.%d\n", 
-		// (src_ip & 0x000000ff) >> 0,
-		// (src_ip & 0x0000ff00) >> 8,
-		// (src_ip & 0x00ff0000) >> 16,
-		// (src_ip & 0xff000000) >> 24);
+		// printk("Add connnection. src IP: %d.%d.%d.%d\n", 
+		// (src_ip & 0x000000ff) >> 0, (src_ip & 0x0000ff00) >> 8,
+		// (src_ip & 0x00ff0000) >> 16, (src_ip & 0xff000000) >> 24);
 
 		// 头插法
-		p->next = connHead.next;  
-		connHead.next = p;	
+		conn_node->next = connHead.next;  
+		connHead.next = conn_node;	
 	}
 	else
 	{
@@ -205,20 +205,9 @@ void time_out(struct timer_list *timer)
 			rules.connNum--;
 		}
 		else {
-			// printk("源IP地址: %d.%d.%d.%d\t目的IP地址: %d.%d.%d.%d\t源端口：%d\t目的端口：%d\n", 
-			// (p->src_ip & 0x000000ff) >> 0,
-			// (p->src_ip & 0x0000ff00) >> 8,
-			// (p->src_ip & 0x00ff0000) >> 16,
-			// (p->src_ip & 0xff000000) >> 24,
-			// (p->dst_ip & 0x000000ff) >> 0,
-			// (p->dst_ip & 0x0000ff00) >> 8,
-			// (p->dst_ip & 0x00ff0000) >> 16,
-			// (p->dst_ip & 0xff000000) >> 24,
-			// p->src_port,p->dst_port);
 			pre = p;
 			p = p->next;
 		}
-		
 	}
             
 	hashLock = 0; // 开锁
@@ -304,7 +293,7 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 	f = filp_open(LOG_FILE, O_WRONLY|O_CREAT|O_APPEND, 0644);
     if (IS_ERR(f))
 	{
-        // printk("Failed to open file\n");
+        printk("Failed to open file\n");
         spin_unlock(&log_lock);
         return;
     }
@@ -396,7 +385,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short sport = ntohs(rules.ban_sport[sport_numberi]);
 					if(tcph->source == sport)
 					{
-						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n", src_ip_str, dst_ip_str, sport);
+						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n", src_ip_str, dst_ip_str, rules.ban_sport[sport_numberi]);
 						wirte_log(iph, "Source port");
 						return NF_DROP;
 					}
@@ -411,7 +400,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short sport = ntohs(rules.ban_sport[sport_numberj]);
 					if(udph->source == sport)
 					{
-						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n", src_ip_str, dst_ip_str, sport);
+						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n", src_ip_str, dst_ip_str, rules.ban_sport[sport_numberj]);
 						wirte_log(iph, "Source port");
 						return NF_DROP;
 					}
@@ -439,7 +428,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short dport = ntohs(rules.ban_dport[dport_numberi]);
 					if(tcph->dest == dport)
 					{	
-						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n", src_ip_str, dst_ip_str, dport);
+						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n", src_ip_str, dst_ip_str, rules.ban_dport[dport_numberi]);
 						wirte_log(iph, "Destination port");
 						return NF_DROP;
 					}
@@ -454,7 +443,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short dport = ntohs(rules.ban_dport[dport_numberj]);
 					if(udph->dest == dport)
 					{
-						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n", src_ip_str, dst_ip_str, dport);
+						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n", src_ip_str, dst_ip_str, rules.ban_dport[dport_numberj]);
 						wirte_log(iph, "Destination port");
 						return NF_DROP;
 					}
@@ -761,16 +750,6 @@ int hookSockoptGet(struct sock* sock, int cmd, void __user* user, int* len)
 		}
 	}
 
-		// int i;
-		// for (i = 0; i < rules.connNum; i++)
-		// {
-		// 	printk("   hookSockoptGet       源IP地址: %d.%d.%d.%d     %d\n", 
-		// 	(rules.connNode[i].src_ip & 0x000000ff) >> 0,
-		// 	(rules.connNode[i].src_ip & 0x0000ff00) >> 8,
-		// 	(rules.connNode[i].src_ip & 0x00ff0000) >> 16,
-		// 	(rules.connNode[i].src_ip & 0xff000000) >> 24, rules.connNode[i].src_port);
-		// }
-
 	// 将内核空间的rules拷贝到用户空间，保证用户和内核空间过滤规则的一致性
 	ret = copy_to_user(user, &rules, sizeof(rules));
 	if (ret != 0)
@@ -807,7 +786,7 @@ int myfirewall_init(void)
 	connHead.next = &connEnd;
 	connEnd.next = NULL;
 
-	// 初始化状态链接存储结构 
+	// 初始化状态连接存储结构 
 	rules.connNum = 0;		     
 	memset(rules.connNode, 0, sizeof(rules.connNode));   
 

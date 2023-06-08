@@ -21,11 +21,10 @@
 #define MAC_NUM_MAX           10                                  // 过滤MAC地址个数的最大值
 #define COMBINE_NUM_MAX       10                                  // 用户自定义访问控制策略个数的最大值
 #define MAC_LEN               6                                   // MAC地址的字节数
-#define CONN_NUM_MAX          50                                  // 保留状态连接的最大值
+#define CONN_NUM_MAX          100                                 // 保留状态连接的最大值
 #define CONNECT_TIME	      60								  // 状态检测连接超时时间
 #define TABLE_SIZE            1000001							  // 状态检测哈希表长度
 #define LOG_FILE              "/home/ubuntu/Firewall/log.txt"     // 日志文件存储路径
-
 
 // 用户自定义访问控制策略
 typedef struct banCombin{
@@ -47,6 +46,7 @@ typedef struct conn{
 	unsigned int dst_ip;                                          // 目的IP地址
 	int src_port;                                                 // 源端口号
 	int dst_port;                                                 // 目的端口号
+	int protocol;												  // 协议类型
 	int index;                                                    // 状态检测Hash表的指针
 	struct conn *next;                                            // next指针
 }Connection;

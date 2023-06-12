@@ -11,7 +11,7 @@
 
 一键使用：
 
-    cd /home/ubuntu/Firewall/kernel_module/
+    cd Firewall/kernel_module/
   
     make load
   

@@ -94,10 +94,10 @@ void get_status()
 		start_date.tm_mon + 1, start_date.tm_mday + 1, end_date.tm_year+1900, end_date.tm_mon + 1, end_date.tm_mday);
 	}
 	
-	printf("当前防火墙过滤规则为:\n");
+	printf("当前防火墙功能:\n");
 	printf("--------------------------------------\n");
 
-	printf("防火墙状态检测功能:\t\t");
+	printf("防火墙状态检测功能: \t\t");
 	if(rules.inp_status == 1)
 	{
 		printf("开启\n");
@@ -108,7 +108,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据源IP过滤功能:\t\t");
+	printf("根据源IP过滤功能: \t\t");
 	if(rules.sip_status == 1)
 	{
 		printf("开启\n");
@@ -126,12 +126,12 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据目的IP过滤功能:\t\t");
+	printf("根据目的IP过滤功能: \t\t");
 	if(rules.dip_status == 1)
 	{
 		printf("开启\n");
 		for(int i = 0; i < rules.dipNum; i++){
-			printf("过滤源IP地址: %d.%d.%d.%d\n", 
+			printf("过滤目的IIP地址: %d.%d.%d.%d\n", 
 			(rules.ban_dip[i] & 0x000000ff) >> 0,
 			(rules.ban_dip[i] & 0x0000ff00) >> 8,
 			(rules.ban_dip[i] & 0x00ff0000) >> 16,
@@ -144,7 +144,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据源端口过滤功能:\t\t");
+	printf("根据源端口过滤功能: \t\t");
 	if(rules.sport_status == 1)
 	{
 		printf("开启\n");
@@ -161,7 +161,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据目的端口过滤功能:\t\t");
+	printf("根据目的端口过滤功能: \t\t");
 	if(rules.dport_status == 1)
 	{
 		printf("开启\n");
@@ -178,7 +178,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("根据MAC过滤功能:\t\t");
+	printf("根据MAC过滤功能: \t\t");
 	if(rules.mac_status == 1)
 	{
 		printf("开启\n");
@@ -195,7 +195,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("自定义访问控制策略功能:\t\t");
+	printf("自定义访问控制策略功能: \t");
 	if(rules.combin_status == 1)
 	{
 		printf("开启\n");
@@ -245,7 +245,7 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("关闭所有连接功能:\t\t");
+	printf("关闭所有连接功能: \t\t");
 	if(rules.close_status == 1)
 	{
 		printf("开启\n");		
@@ -256,36 +256,36 @@ void get_status()
 	}
 	printf("--------------------------------------\n");
 
-	printf("PING功能:\t\t\t");
+	printf("禁用PING功能: \t\t\t");
 	if(rules.ping_status == 1)
 	{
-		printf("禁用\n");
+		printf("开启\n");
 	}
 	else
 	{
-		printf("不禁用\n");
+		printf("关闭\n");
 	}
 	printf("--------------------------------------\n");
 
-	printf("HTTP/HTTPS功能:\t\t\t");
+	printf("禁用HTTP/HTTPS功能: \t\t");
 	if(rules.http_status == 1)
 	{
-		printf("禁用\n");		
+		printf("开启\n");		
 	}
 	else
 	{
-		printf("不禁用\n");		
+		printf("关闭\n");		
 	}
 	printf("--------------------------------------\n");
 
-	printf("Telnet功能:\t\t\t");
+	printf("禁用Telnet功能: \t\t");
 	if(rules.telnet_status == 1)
 	{
-		printf("禁用\n");		
+		printf("开启\n");		
 	}
 	else
 	{
-		printf("不禁用\n");		
+		printf("关闭\n");		
 	}
 	printf("--------------------------------------\n");
 }
@@ -294,7 +294,7 @@ void get_status()
 void change_status(int sockfd, socklen_t len)
 {
 	int choice;
-	printf("\n选择需要修改的防火墙过滤规则:\n");
+	printf("\n选择需要设置的防火墙功能:\n");
 	printf("1.开启/关闭防火墙\t2.状态检测功能\t\t3.设置防火墙生效时间\t4.自定义访问控制策略\n");
 	printf("5.过滤源IP\t\t6.过滤目的IP\t\t7.过滤源端口\t\t8.过滤目的端口\n"); 
 	printf("9.过滤MAC地址\t\t10.PING功能\t\t11.HTTP/HTTPS功能\t12.Telnet功能\n");
@@ -423,12 +423,12 @@ void open_stateInp(int sockfd, socklen_t len)
 				printf("当前共%d个连接,分别为:\n", rules.connNum);
 				for (int i = 0; i < rules.connNum; i++)
 				{
-					printf("源IP地址: %d.%d.%d.%d\t   目的IP地址: %d.%d.%d.%d\t   源端口: %d\t   目的端口: %d\t   协议:", 
+					printf("源IP: %d.%d.%d.%d  \t目的IP: %d.%d.%d.%d  \t源端口: %d  \t目的端口: %d  \t协议:", 
 					(rules.connNode[i].src_ip & 0x000000ff) >> 0, (rules.connNode[i].src_ip & 0x0000ff00) >> 8,
 					(rules.connNode[i].src_ip & 0x00ff0000) >> 16, (rules.connNode[i].src_ip & 0xff000000) >> 24, 
 					(rules.connNode[i].dst_ip & 0x000000ff) >> 0, (rules.connNode[i].dst_ip & 0x0000ff00) >> 8,
 					(rules.connNode[i].dst_ip & 0x00ff0000) >> 16, (rules.connNode[i].dst_ip & 0xff000000) >> 24,
-					rules.connNode[i].src_port, rules.connNode[i].dst_port);
+					 rules.connNode[i].src_port, rules.connNode[i].dst_port);
 
 					switch (rules.connNode[i].protocol)
 					{
@@ -451,8 +451,6 @@ void open_stateInp(int sockfd, socklen_t len)
 		{
 			printf("状态检测功能未开启\n");
 		}
-		
-		
 	}
 	else if(choice == 3)
 	{
@@ -478,56 +476,6 @@ void open_stateInp(int sockfd, socklen_t len)
 		printf("Bad parameter.\n");
 	}
 
-    printf("Press enter to continue...\n");
-    getchar(); 
-	getchar(); 
-}
-
-// 功能函数:改变源IP过滤规则
-void change_sip(int sockfd, socklen_t len)
-{
-	char str_ip[20];
-	int choice;
-
-	printf("是否开启过滤源IP功能? (1 开启   2 关闭)\n");
-	scanf("%d", &choice);
-	if(choice == 1)   // 1 开启 、 2 关闭
-	{
-		rules.sip_status = 1;
-		for(int i = 0; i < IP_NUM_MAX; i++)
-		{
-			printf("请输入第 %d 个 需要过滤的IP地址（退出: 0）:", i + 1);
-			scanf("%s", str_ip);
-			if(!strcmp(str_ip, "0"))
-			{
-				// printf("\n输入完毕\n");
-				break;
-			}
-			rules.ban_sip[i] = inet_addr(str_ip);   // 将字符串形式的IP地址转换为网络字节序
-			rules.sipNum = i + 1;
-		}
-
-		if (setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
-		{
-			printf("Filter rule synchronization to kernel space failed\n");
-		}
-	}
-	else if(choice == 2)
-	{
-		rules.sip_status = 0;
-		memset(rules.ban_sip, '\0', sizeof(rules.ban_sip));   
-		rules.sipNum = 0;
-
-		if(setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
-		{
-			printf("Filter rule synchronization to kernel space failed\n");
-		}
-	}
-	else
-	{
-		// 输入错误
-		printf("Bad parameter.\n");
-	}
     printf("Press enter to continue...\n");
     getchar(); 
 	getchar(); 
@@ -590,51 +538,323 @@ void set_opentime(int sockfd, socklen_t len)
 	getchar(); 
 }
 
+// 功能函数:改变源IP过滤规则
+void change_sip(int sockfd, socklen_t len)
+{
+	char str_ip[20];
+	int choice;
+	
+	printf("1. 开启/关闭源IP过滤功能   2. 查看过滤的源IP地址   3. 新增源IP地址   4. 删除源IP地址   5. 清空源IP地址\n");
+	scanf("%d", &choice);
+	if(choice == 1)   
+	{
+		rules.sip_status = !rules.sip_status;     
+		if(rules.sip_status == 1)
+		{
+			printf("源IP过滤功能已开启\n");
+			for(int i = 0; i < IP_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个需要过滤的IP地址（退出: 0）:", i + 1);
+				scanf("%s", str_ip);
+				if(!strcmp(str_ip, "0"))
+				{
+					// printf("\n输入完毕\n");
+					break;
+				}
+				rules.ban_sip[i] = inet_addr(str_ip);   // 将字符串形式的IP地址转换为网络字节序
+				rules.sipNum = i + 1;
+			}
+
+			if (setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("源IP过滤功能已关闭\n");
+			rules.sip_status = 0;
+			memset(rules.ban_sip, '\0', sizeof(rules.ban_sip));   
+			rules.sipNum = 0;
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+	}
+	else if(choice == 2)
+	{
+		if(rules.sip_status == 1)
+		{
+			if (rules.sipNum == 0)
+			{
+				printf("尚未设置过滤的源IP地址\n");
+			}
+			else
+			{
+				for (int i = 0; i < rules.sipNum; i++)
+				{
+					printf("第%d个过滤的源IP地址为: %d.%d.%d.%d\n", i + 1, 
+					(rules.ban_sip[i] & 0x000000ff) >> 0, (rules.ban_sip[i] & 0x0000ff00) >> 8,
+					(rules.ban_sip[i] & 0x00ff0000) >> 16, (rules.ban_sip[i] & 0xff000000) >> 24);
+				}
+			}
+		}
+		else
+		{
+			printf("过滤源IP功能未开启\n");
+		}
+	}
+	else if(choice == 3)
+	{
+		if(rules.sip_status == 1)
+		{
+			for(int i = rules.sipNum; i < IP_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个需要过滤的IP地址（退出: 0）:", i + 1);
+				scanf("%s", str_ip);
+				if(!strcmp(str_ip, "0"))
+				{
+					// printf("\n输入完毕\n");
+					break;
+				}
+				rules.ban_sip[i] = inet_addr(str_ip);   // 将字符串形式的IP地址转换为网络字节序
+				rules.sipNum = i + 1;
+			}
+
+			if (setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("过滤源IP功能未开启\n");
+		}
+	}
+	else if(choice == 4)
+	{
+		if(rules.sip_status == 1)
+		{
+			for (int i = 0; i < rules.sipNum; i++)
+			{
+				printf("第%d个过滤的源IP地址为: %d.%d.%d.%d\n", i + 1, 
+				(rules.ban_sip[i] & 0x000000ff) >> 0, (rules.ban_sip[i] & 0x0000ff00) >> 8,
+				(rules.ban_sip[i] & 0x00ff0000) >> 16, (rules.ban_sip[i] & 0xff000000) >> 24);
+			}
+
+			int pos;
+			printf("请输入需要删除的IP地址编号: ");
+			scanf("%d", &pos);
+
+			if(pos < 0 || pos > rules.sipNum) 
+			{ 
+        		printf("Invalid position!\n");
+    		}
+			else
+			{
+				for (int i = pos - 1; i < rules.sipNum - 1; i++)
+				{ 
+					rules.ban_sip[i] = rules.ban_sip[i + 1];
+				}
+				rules.sipNum--; 
+
+				if (setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
+				{
+					printf("Filter rule synchronization to kernel space failed\n");
+				}
+			}
+		}
+		else
+		{
+			printf("过滤源IP功能未开启\n");
+		}
+	}
+	else if(choice == 5)
+	{
+		if(rules.sip_status == 1)
+		{
+			memset(rules.ban_sip, '\0', sizeof(rules.ban_sip));   
+			rules.sipNum = 0;
+			printf("源IP地址已清空\n");
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANSIP, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("过滤源IP功能未开启\n");
+		}
+	}
+	else
+	{
+		printf("Bad parameter.\n");
+	}
+
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
+}
+
 // 功能函数:改变目的IP过滤规则
 void change_dip(int sockfd, socklen_t len)
 {
 	char str_ip[20];
 	int choice;
 	
-	printf("是否开启过滤目的IP功能? (1 开启   2 关闭)\n");
+	printf("1. 开启/关闭目的IP过滤功能   2. 查看过滤的目的IP地址   3. 新增目的IP地址   4. 删除目的IP地址   5. 清空目的IP地址\n");
 	scanf("%d", &choice);
-	if(choice == 1)
+	if(choice == 1)   
 	{
-		rules.dip_status = 1;
-		for(int i = 0; i < IP_NUM_MAX; i++)
+		rules.dip_status = !rules.dip_status;     
+		if(rules.dip_status == 1)
 		{
-			printf("请输入第 %d 个 需要过滤的IP地址（退出: 0）:", i + 1);
-			scanf("%s", str_ip);
-			if(!strcmp(str_ip, "0"))
+			printf("目的IP过滤功能已开启\n");
+			for(int i = 0; i < IP_NUM_MAX; i++)
 			{
-				// printf("\n输入完毕\n");
-				break;
+				printf("请输入第 %d 个需要过滤的IP地址（退出: 0）:", i + 1);
+				scanf("%s", str_ip);
+				if(!strcmp(str_ip, "0"))
+				{
+					// printf("\n输入完毕\n");
+					break;
+				}
+				rules.ban_dip[i] = inet_addr(str_ip);   // 将字符串形式的IP地址转换为网络字节序
+				rules.dipNum = i + 1;
 			}
-			rules.ban_dip[i] = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
-			rules.dipNum = i + 1;
-		}
 
-		if (setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
+			if (setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
 		{
-			printf("Filter rule synchronization to kernel space failed\n");
+			printf("目的IP过滤功能已关闭\n");
+			rules.dip_status = 0;
+			memset(rules.ban_dip, '\0', sizeof(rules.ban_dip));   
+			rules.dipNum = 0;
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
 		}
 	}
 	else if(choice == 2)
 	{
-		rules.dip_status = 0;
-		memset(rules.ban_dip, '\0', sizeof(rules.ban_dip));   
-		rules.dipNum = 0;
-
-		if(setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
+		if(rules.dip_status == 1)
 		{
-			printf("Filter rule synchronization to kernel space failed\n");
+			if (rules.dipNum == 0)
+			{
+				printf("尚未设置过滤的目的IP地址\n");
+			}
+			else
+			{
+				for (int i = 0; i < rules.dipNum; i++)
+				{
+					printf("第%d个过滤的目的IP地址为: %d.%d.%d.%d\n", i + 1, 
+					(rules.ban_dip[i] & 0x000000ff) >> 0, (rules.ban_dip[i] & 0x0000ff00) >> 8,
+					(rules.ban_dip[i] & 0x00ff0000) >> 16, (rules.ban_dip[i] & 0xff000000) >> 24);
+				}
+			}
+		}
+		else
+		{
+			printf("过滤目的IP功能未开启\n");
+		}
+	}
+	else if(choice == 3)
+	{
+		if(rules.dip_status == 1)
+		{
+			for(int i = rules.dipNum; i < IP_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个需要过滤的IP地址（退出: 0）:", i + 1);
+				scanf("%s", str_ip);
+				if(!strcmp(str_ip, "0"))
+				{
+					// printf("\n输入完毕\n");
+					break;
+				}
+				rules.ban_dip[i] = inet_addr(str_ip);   // 将字符串形式的IP地址转换为网络字节序
+				rules.dipNum = i + 1;
+			}
+
+			if (setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("过滤目的IP功能未开启\n");
+		}
+	}
+	else if(choice == 4)
+	{
+		if(rules.dip_status == 1)
+		{
+			for (int i = 0; i < rules.dipNum; i++)
+			{
+				printf("第%d个过滤的目的IP地址为: %d.%d.%d.%d\n", i + 1, 
+				(rules.ban_dip[i] & 0x000000ff) >> 0, (rules.ban_dip[i] & 0x0000ff00) >> 8,
+				(rules.ban_dip[i] & 0x00ff0000) >> 16, (rules.ban_dip[i] & 0xff000000) >> 24);
+			}
+
+			int pos;
+			printf("请输入需要删除的IP地址编号: ");
+			scanf("%d", &pos);
+
+			if(pos < 0 || pos > rules.dipNum) 
+			{ 
+        		printf("Invalid position!\n");
+    		}
+			else
+			{
+				for (int i = pos - 1; i < rules.dipNum - 1; i++)
+				{ 
+					rules.ban_dip[i] = rules.ban_dip[i + 1];
+				}
+				rules.dipNum--; 
+
+				if (setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
+				{
+					printf("Filter rule synchronization to kernel space failed\n");
+				}
+			}
+		}
+		else
+		{
+			printf("过滤目的IP功能未开启\n");
+		}
+	}
+	else if(choice == 5)
+	{
+		if(rules.dip_status == 1)
+		{
+			memset(rules.ban_dip, '\0', sizeof(rules.ban_dip));   
+			rules.dipNum = 0;
+			printf("目的IP地址已清空\n");
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANDIP, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("过滤目的IP功能未开启\n");
 		}
 	}
 	else
 	{
-		// 输入错误
 		printf("Bad parameter.\n");
 	}
+
     printf("Press enter to continue...\n");
     getchar(); 
 	getchar(); 
@@ -644,44 +864,163 @@ void change_dip(int sockfd, socklen_t len)
 void change_sport(int sockfd, socklen_t len)
 {
 	int choice;
-	printf("是否开启过滤源端口功能? (1 开启   2 关闭)\n");
+	printf("1. 开启/关闭源端口号过滤功能   2. 查看过滤的源端口号   3. 新增源端口号   4. 删除源端口号   5. 清空源端口号\n");
 	scanf("%d", &choice);
 
-	if(choice == 1)
+	if(choice == 1)   
 	{
-		rules.sport_status = 1;
-		int i;
-		for(i = 0; i < PORT_NUM_MAX; i++)
+		rules.sport_status = !rules.sport_status;     
+		if(rules.sport_status == 1)
 		{
-			printf("请输入第 %d 个需要过滤的端口号 (退出: 0):", i + 1);
-			unsigned short sport;
-			scanf("%hu", &sport);
-			if(sport == 0) break;	        // 0代表输入完成,提前退出循环
-			rules.ban_sport[i] = sport;     
-			rules.sportNum = i + 1;         
-		}
+			printf("源端口号过滤功能已开启\n");
+			for(int i = 0; i < PORT_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个需要过滤的端口号 (退出: 0):", i + 1);
+				unsigned short sport;
+				scanf("%hu", &sport);
+				if(sport == 0) break;	        // 0代表输入完成,提前退出循环
+				rules.ban_sport[i] = sport;     
+				rules.sportNum = i + 1;         
+			}
 
-		if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
+			if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+
+		}
+		else
 		{
-			printf("Filter rule synchronization to kernel space failed\n");
+			printf("源端口号过滤功能已关闭\n");
+			memset(rules.ban_sport, 0, sizeof(rules.ban_sport));  
+			rules.sportNum = 0;
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}	
 		}
 	}
 	else if(choice == 2)
 	{
-		rules.sport_status = 0;
-		memset(rules.ban_sport, 0, sizeof(rules.ban_sport));  
-		rules.sportNum = 0;
-
-		if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
+		if(rules.sport_status == 1)
 		{
-			printf("Filter rule synchronization to kernel space failed\n");
-		}	
+			if (rules.sportNum == 0)
+			{
+				printf("尚未设置过滤的源端口号\n");
+			}
+			else
+			{
+				printf("过滤的源端口号为: ");
+				for (int i = 0; i < rules.sportNum; i++)
+				{
+					printf("%hu ", rules.ban_sport[i]);   
+				}
+				printf("\n");
+			}
+		}
+		else
+		{
+			printf("过滤源端口号功能未开启\n");
+		}
+	}
+	else if(choice == 3)
+	{
+		if(rules.sport_status == 1)
+		{
+			for(int i = rules.sportNum; i < PORT_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个需要过滤的端口号 (退出: 0):", i + 1);
+				unsigned short sport;
+				scanf("%hu", &sport);
+				if(sport == 0) break;	        // 0代表输入完成,提前退出循环
+				rules.ban_sport[i] = sport;     
+				rules.sportNum = i + 1;         
+			}
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("过滤源端口号功能未开启\n");
+		}
+	}
+	else if(choice == 4)
+	{
+		if(rules.sport_status == 1)
+		{
+			printf("过滤的源端口号为: ");
+			for (int i = 0; i < rules.sportNum; i++)
+			{
+				printf("%hu ", rules.ban_sport[i]);   
+			}
+			printf("\n");
+
+			unsigned short del_port;
+			printf("请输入需要删除的源端口号: ");
+			scanf("%hu", &del_port);
+
+			if(del_port < 1 || del_port > 65535) 
+			{ 
+        		printf("Illegal port!\n");
+    		}
+			else
+			{
+				for(int i = 0; i < rules.sportNum; i++)
+				{ 
+					if (rules.ban_sport[i] == del_port)
+					{
+						for (int j = i; j < rules.sportNum - 1; j++)
+						{ 
+							rules.ban_sport[j] = rules.ban_sport[j + 1];
+						}
+						rules.sportNum--;
+						printf("端口号: %hu 已删除\n", del_port);
+
+						if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
+						{
+							printf("Filter rule synchronization to kernel space failed\n");
+						}
+						break;
+					}
+					if(i == rules.sportNum - 1)
+					{
+						printf("要删除的端口号不存在\n");
+					}				
+				}
+			}
+		}
+		else
+		{
+			printf("过滤源端口号功能未开启\n");
+		}
+	}
+	else if(choice == 5)
+	{
+		if(rules.sport_status == 1)
+		{
+			memset(rules.ban_sport, 0, sizeof(rules.ban_sport));  
+			rules.sportNum = 0;
+			printf("源端口号已清空\n");
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANSPORT, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}	
+		}
+		else
+		{
+			printf("过滤源端口号功能未开启\n");
+		}
 	}
 	else
 	{
-		// 输入错误
 		printf("Bad parameter.\n");
 	}
+
     printf("Press enter to continue...\n");
     getchar(); 
 	getchar(); 
@@ -691,45 +1030,162 @@ void change_sport(int sockfd, socklen_t len)
 void change_dport(int sockfd, socklen_t len)
 {
 	int choice;
-	printf("是否开启过滤目的端口功能? (1 开启   2 关闭)\n");
+	printf("1. 开启/关闭目的端口号过滤功能   2. 查看过滤的目的端口号   3. 新增目的端口号   4. 删除目的端口号   5. 清空目的端口号\n");
 	scanf("%d", &choice);
 
-	if(choice == 1)
+	if(choice == 1)   
 	{
-		// 开启
-		rules.dport_status = 1;
-		int i;
-		for(i = 0; i < PORT_NUM_MAX; i++)
+		rules.dport_status = !rules.dport_status;     
+		if(rules.dport_status == 1)
 		{
-			printf("请输入第 %d 个需要过滤的端口号 (退出: 0):", i + 1);
-			unsigned short dport;
-			scanf("%hu", &dport);
-			if(dport == 0) break;	         // 0代表输入完成,提前退出循环
-			rules.ban_dport[i] = dport;      
-			rules.dportNum = i + 1;          
-		}
+			printf("目的端口号过滤功能已开启\n");
+			for(int i = 0; i < PORT_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个需要过滤的目的口号 (退出: 0):", i + 1);
+				unsigned short dport;
+				scanf("%hu", &dport);
+				if(dport == 0) break;	        // 0代表输入完成,提前退出循环
+				rules.ban_dport[i] = dport;     
+				rules.dportNum = i + 1;         
+			}
 
-		if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
+			if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
 		{
-			printf("Filter rule synchronization to kernel space failed\n");
+			printf("目的端口号过滤功能已关闭\n");
+			memset(rules.ban_dport, 0, sizeof(rules.ban_dport));  
+			rules.dportNum = 0;
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}	
 		}
 	}
 	else if(choice == 2)
 	{
-		rules.dport_status = 0;
-		memset(rules.ban_dport, 0, sizeof(rules.ban_dport));   
-		rules.dportNum = 0;
-
-		if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
+		if(rules.dport_status == 1)
 		{
-			printf("Filter rule synchronization to kernel space failed\n");
-		}	
+			if (rules.dportNum == 0)
+			{
+				printf("尚未设置过滤的目的端口号\n");
+			}
+			else
+			{
+				printf("过滤的目的端口号为: ");
+				for (int i = 0; i < rules.dportNum; i++)
+				{
+					printf("%hu ", rules.ban_dport[i]);   
+				}
+				printf("\n");
+			}
+		}
+		else
+		{
+			printf("过滤目的端口号功能未开启\n");
+		}
+	}
+	else if(choice == 3)
+	{
+		if(rules.dport_status == 1)
+		{
+			for(int i = rules.dportNum; i < PORT_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个需要过滤的目的口号 (退出: 0):", i + 1);
+				unsigned short dport;
+				scanf("%hu", &dport);
+				if(dport == 0) break;	        // 0代表输入完成,提前退出循环
+				rules.ban_dport[i] = dport;     
+				rules.dportNum = i + 1;         
+			}
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("过滤目的端口号功能未开启\n");
+		}
+	}
+	else if(choice == 4)
+	{
+		if(rules.dport_status == 1)
+		{
+			printf("过滤的目的端口号为: ");
+			for (int i = 0; i < rules.dportNum; i++)
+			{
+				printf("%hu ", rules.ban_dport[i]);   
+			}
+			printf("\n");
+
+			unsigned short del_port;
+			printf("请输入需要删除的目的端口号: ");
+			scanf("%hu", &del_port);
+
+			if(del_port < 1 || del_port > 65535) 
+			{ 
+        		printf("Illegal port!\n");
+    		}
+			else
+			{
+				for(int i = 0; i < rules.dportNum; i++)
+				{ 
+					if (rules.ban_dport[i] == del_port)
+					{
+						for (int j = i; j < rules.dportNum - 1; j++)
+						{ 
+							rules.ban_dport[j] = rules.ban_dport[j + 1];
+						}
+						rules.dportNum--;
+						printf("端口号: %hu 已删除\n", del_port);
+
+						if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
+						{
+							printf("Filter rule synchronization to kernel space failed\n");
+						}
+						break;
+					}
+					if(i == rules.dportNum - 1)
+					{
+						printf("要删除的目的口号不存在\n");
+					}				
+				}
+			}
+		}
+		else
+		{
+			printf("过滤目的端口号功能未开启\n");
+		}
+	}
+	else if(choice == 5)
+	{
+		if(rules.dport_status == 1)
+		{
+			memset(rules.ban_dport, 0, sizeof(rules.ban_dport));  
+			rules.dportNum = 0;
+			printf("目的端口号已清空\n");
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANDPORT, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}	
+		}
+		else
+		{
+			printf("过滤目的端口号功能未开启\n");
+		}
 	}
 	else
 	{
-		// 输入错误
 		printf("Bad parameter.\n");
 	}
+
     printf("Press enter to continue...\n");
     getchar(); 
 	getchar(); 
@@ -741,131 +1197,399 @@ void change_combin(int sockfd, socklen_t len)
 	unsigned char mac_str[20];  	// 存储输入的MAC地址字符串
 	unsigned char mac_addr[6];      // 存储将字符串分割后的MAC地址
 	char str_ip[20];                // 存储输入的IP地址
-
+		
+	printf("1. 开启/关闭自定义过滤规则功能   2. 查看自定义规则   3. 新增自定义规则   4. 删除自定义规则   5. 清空自定义规则\n");
 	int choice;
-	printf("是否开启自定义访问控制策略功能? (1 开启   2 关闭)\n");
 	scanf("%d", &choice);
-
-	if(choice == 1)
+	if(choice == 1)   
 	{
-		// 开启
-		rules.combin_status = 1;
-		for(int i = 0; i < COMBINE_NUM_MAX; i++)
+		rules.combin_status = !rules.combin_status;     
+		if(rules.combin_status == 1)
 		{
-			printf("\n请输入第 %d 个自定义访问控制策略 (退出: 0):\n", i + 1);
-			int select;
-			printf("是否根据源IP地址过滤(是:1  否:2):\n");
-			scanf("%d", &select);
-			if(select == 1)
+			printf("自定义访问控制策略功能已开启\n");
+			for(int i = 0; i < COMBINE_NUM_MAX; i++)
 			{
-				rules.ban_combin[i].banSip_status = 1;
-				printf("请输入需要过滤的源IP地址:");
-				scanf("%s", str_ip);
-				rules.ban_combin[i].banSip = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
-			}
-			else if(select == 2)
-			{
-				rules.ban_combin[i].banSip_status = 0;
-			}
-			else
-			{
-				break;
+				printf("\n请输入第 %d 个自定义访问控制策略 (退出: 0):\n", i + 1);
+				int select;
+				printf("是否根据源IP地址过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banSip_status = 1;
+					printf("请输入需要过滤的源IP地址:");
+					scanf("%s", str_ip);
+					rules.ban_combin[i].banSip = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banSip_status = 0;
+				}
+				else if(select == 0)
+				{
+					break;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				printf("是否根据目的IP地址过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banDip_status = 1;
+					printf("请输入需要过滤的目的IP地址:");
+					scanf("%s", str_ip);
+					rules.ban_combin[i].banDip = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banDip_status = 0;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				printf("是否根据源端口过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banSport_status = 1;
+					printf("请输入需要过滤的源端口号:");
+					scanf("%hu", &rules.ban_combin[i].ban_sport);
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banSport_status = 0;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				printf("是否根据目的端口过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banDport_status = 1;
+					printf("请输入需要过滤的目的端口号:");
+					scanf("%hu", &rules.ban_combin[i].ban_dport);
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banDport_status = 0;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				printf("是否根据MAC地址过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banMac_status = 1;
+					printf("请输入需要过滤的输入MAC:");
+					scanf("%s", mac_str);
+					mac_format(mac_str, mac_addr);
+					memcpy(rules.ban_combin[i].banMac, mac_addr, sizeof(rules.ban_combin[i].banMac));
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banMac_status = 0;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				rules.combineNum = i + 1;
 			}
 
-			printf("是否根据目的IP地址过滤(是:1  否:2):\n");
-			scanf("%d", &select);
-			if(select == 1)
+			if (setsockopt(sockfd, IPPROTO_IP, BANCOMBIN, &rules, len))
 			{
-				rules.ban_combin[i].banDip_status = 1;
-				printf("请输入需要过滤的目的IP地址:");
-				scanf("%s", str_ip);
-				rules.ban_combin[i].banDip = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
+				printf("Filter rule synchronization to kernel space failed\n");			
 			}
-			else if(select == 2)
-			{
-				rules.ban_combin[i].banDip_status = 0;
-			}
-			else
-			{
-				break;
-			}
-
-			printf("是否根据源端口过滤(是:1  否:2):\n");
-			scanf("%d", &select);
-			if(select == 1)
-			{
-				rules.ban_combin[i].banSport_status = 1;
-				printf("请输入需要过滤的源端口号:");
-				scanf("%hu", &rules.ban_combin[i].ban_sport);
-			}
-			else if(select == 2)
-			{
-				rules.ban_combin[i].banSport_status = 0;
-			}
-			else
-			{
-				break;
-			}
-
-			printf("是否根据目的端口过滤(是:1  否:2):\n");
-			scanf("%d", &select);
-			if(select == 1)
-			{
-				rules.ban_combin[i].banDport_status = 1;
-				printf("请输入需要过滤的目的端口号:");
-				scanf("%hu", &rules.ban_combin[i].ban_dport);
-			}
-			else if(select == 2)
-			{
-				rules.ban_combin[i].banDport_status = 0;
-			}
-			else
-			{
-				break;
-			}
-
-			printf("是否根据MAC地址过滤(是:1  否:2):\n");
-			scanf("%d", &select);
-			if(select == 1)
-			{
-				rules.ban_combin[i].banMac_status = 1;
-				printf("请输入需要过滤的输入MAC:");
-    			scanf("%s", mac_str);
-				mac_format(mac_str, mac_addr);
-				memcpy(rules.ban_combin[i].banMac, mac_addr, sizeof(rules.ban_combin[i].banMac));
-			}
-			else if(select == 2)
-			{
-				rules.ban_combin[i].banMac_status = 0;
-			}
-			else
-			{
-				break;
-			}
-
-			rules.combineNum = i + 1;
 		}
-
-		if (setsockopt(sockfd, IPPROTO_IP, BANCOMBIN, &rules, len))
+		else
 		{
-			printf("Filter rule synchronization to kernel space failed\n");			
+			printf("自定义访问控制策略功能已关闭\n");
+			rules.combin_status = 0;
+			rules.combineNum = 0;
+			memset(rules.ban_combin, 0, sizeof(rules.ban_combin));  
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANCOMBIN, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
 		}
 	}
 	else if(choice == 2)
 	{
-		rules.combin_status = 0;
-		memset(rules.ban_combin, 0, sizeof(rules.ban_combin));
-
-		if(setsockopt(sockfd, IPPROTO_IP, BANCOMBIN, &rules, len)) 
+		if(rules.combin_status == 1)
 		{
-			printf("Filter rule synchronization to kernel space failed\n");			
+			if (rules.combineNum == 0)
+			{
+				printf("尚未设置自定义访问控制策略\n");
+			}
+			else
+			{
+				printf("共%d个自定义访问控制策略\n", rules.combineNum);
+				for(int i = 0; i < rules.combineNum; i++)
+				{
+					printf("\n第%d个自定义访问控制策略:\n", i + 1);
+					if (rules.ban_combin[i].banSip_status == 1)
+					{
+						printf("源IP地址: \t%d.%d.%d.%d\n", 
+						(rules.ban_combin[i].banSip & 0x000000ff) >> 0, (rules.ban_combin[i].banSip & 0x0000ff00) >> 8,
+						(rules.ban_combin[i].banSip & 0x00ff0000) >> 16, (rules.ban_combin[i].banSip & 0xff000000) >> 24);
+					}
+
+					if (rules.ban_combin[i].banDip_status == 1)
+					{
+						printf("目的IP地址: \t%d.%d.%d.%d\n", 
+						(rules.ban_combin[i].banDip & 0x000000ff) >> 0, (rules.ban_combin[i].banDip & 0x0000ff00) >> 8,
+						(rules.ban_combin[i].banDip & 0x00ff0000) >> 16, (rules.ban_combin[i].banDip & 0xff000000) >> 24);
+					}	
+
+					if (rules.ban_combin[i].banSport_status == 1)
+					{
+						printf("源端口号: \t%hu\n", rules.ban_combin[i].ban_sport);
+					}	
+
+					if (rules.ban_combin[i].banDport_status == 1)
+					{
+						printf("目的端口号: \t%hu\n", rules.ban_combin[i].ban_dport);
+					}	
+
+					if(rules.ban_combin[i].banMac_status == 1)
+					{
+						printf("MAC地址:\t%02X:%02X:%02X:%02X:%02X:%02X\n",
+						rules.ban_combin[i].banMac[0], rules.ban_combin[i].banMac[1], rules.ban_combin[i].banMac[2], 
+						rules.ban_combin[i].banMac[3], rules.ban_combin[i].banMac[4], rules.ban_combin[i].banMac[5]);
+					}
+				}
+			}
+		}
+		else
+		{
+			printf("自定义访问控制策略功能未开启\n");
+		}
+	}
+	else if(choice == 3)
+	{
+		if(rules.combin_status == 1)
+		{
+			for(int i = rules.combineNum; i < COMBINE_NUM_MAX; i++)
+			{
+				printf("\n请输入第 %d 个自定义访问控制策略 (退出: 0):\n", i + 1);
+				int select;
+				printf("是否根据源IP地址过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banSip_status = 1;
+					printf("请输入需要过滤的源IP地址:");
+					scanf("%s", str_ip);
+					rules.ban_combin[i].banSip = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banSip_status = 0;
+				}
+				else if(select == 0)
+				{
+					break;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				printf("是否根据目的IP地址过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banDip_status = 1;
+					printf("请输入需要过滤的目的IP地址:");
+					scanf("%s", str_ip);
+					rules.ban_combin[i].banDip = inet_addr(str_ip);    // 将字符串形式的IP地址转换为网络字节序
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banDip_status = 0;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				printf("是否根据源端口过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banSport_status = 1;
+					printf("请输入需要过滤的源端口号:");
+					scanf("%hu", &rules.ban_combin[i].ban_sport);
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banSport_status = 0;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				printf("是否根据目的端口过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banDport_status = 1;
+					printf("请输入需要过滤的目的端口号:");
+					scanf("%hu", &rules.ban_combin[i].ban_dport);
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banDport_status = 0;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				printf("是否根据MAC地址过滤(是:1  否:2):\n");
+				scanf("%d", &select);
+				if(select == 1)
+				{
+					rules.ban_combin[i].banMac_status = 1;
+					printf("请输入需要过滤的输入MAC:");
+					scanf("%s", mac_str);
+					mac_format(mac_str, mac_addr);
+					memcpy(rules.ban_combin[i].banMac, mac_addr, sizeof(rules.ban_combin[i].banMac));
+				}
+				else if(select == 2)
+				{
+					rules.ban_combin[i].banMac_status = 0;
+				}
+				else
+				{
+					printf("Bad parameter.\n");
+					break;
+				}
+
+				rules.combineNum = i + 1;
+			}
+
+			if (setsockopt(sockfd, IPPROTO_IP, BANCOMBIN, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("自定义访问控制策略功能未开启\n");
+		}
+	}
+	else if(choice == 4)
+	{
+		if(rules.combin_status == 1)
+		{
+			for(int i = 0; i < rules.combineNum; i++)
+			{
+				printf("\n第%d个自定义访问控制策略:\n", i + 1);
+				if (rules.ban_combin[i].banSip_status == 1)
+				{
+					printf("源IP地址: \t%d.%d.%d.%d\n", 
+					(rules.ban_combin[i].banSip & 0x000000ff) >> 0, (rules.ban_combin[i].banSip & 0x0000ff00) >> 8,
+					(rules.ban_combin[i].banSip & 0x00ff0000) >> 16, (rules.ban_combin[i].banSip & 0xff000000) >> 24);
+				}
+
+				if (rules.ban_combin[i].banDip_status == 1)
+				{
+					printf("目的IP地址: \t%d.%d.%d.%d\n", 
+					(rules.ban_combin[i].banDip & 0x000000ff) >> 0, (rules.ban_combin[i].banDip & 0x0000ff00) >> 8,
+					(rules.ban_combin[i].banDip & 0x00ff0000) >> 16, (rules.ban_combin[i].banDip & 0xff000000) >> 24);
+				}	
+
+				if (rules.ban_combin[i].banSport_status == 1)
+				{
+					printf("源端口号: \t%hu\n", rules.ban_combin[i].ban_sport);
+				}	
+
+				if (rules.ban_combin[i].banDport_status == 1)
+				{
+					printf("目的端口号: \t%hu\n", rules.ban_combin[i].ban_dport);
+				}	
+
+				if(rules.ban_combin[i].banMac_status == 1)
+				{
+					printf("MAC地址:\t%02X:%02X:%02X:%02X:%02X:%02X\n",
+					rules.ban_combin[i].banMac[0], rules.ban_combin[i].banMac[1], rules.ban_combin[i].banMac[2], 
+					rules.ban_combin[i].banMac[3], rules.ban_combin[i].banMac[4], rules.ban_combin[i].banMac[5]);
+				}
+			}
+
+			int pos;
+			printf("请输入需要删除的自定义访问控制策略编号: ");
+			scanf("%d", &pos);
+
+			if(pos < 0 || pos > rules.combineNum) 
+			{ 
+        		printf("Invalid position!\n");
+    		}
+			else
+			{
+				for (int i = pos - 1; i < rules.combineNum - 1; i++)
+				{ 
+					rules.ban_combin[i] = rules.ban_combin[i + 1];
+				}
+				rules.combineNum--; 
+
+				if (setsockopt(sockfd, IPPROTO_IP, BANCOMBIN, &rules, len))
+				{
+					printf("Filter rule synchronization to kernel space failed\n");
+				}
+			}
+		}
+		else
+		{
+			printf("自定义访问控制策略功能未开启\n");
+		}
+	}
+	else if(choice == 5)
+	{
+		if(rules.combin_status == 1)
+		{
+			rules.combineNum = 0;
+			memset(rules.ban_combin, 0, sizeof(rules.ban_combin));  
+			printf("自定义访问控制策略已清空\n");
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANCOMBIN, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("自定义访问控制策略功能未开启\n");
 		}
 	}
 	else
 	{
-		// 输入错误
 		printf("Bad parameter.\n");
 	}
+
     printf("Press enter to continue...\n");
     getchar(); 
 	getchar(); 
@@ -930,38 +1654,158 @@ void change_mac(int sockfd, socklen_t len)
 	unsigned char mac_str[20];  	// 存储输入的MAC地址字符串
 	unsigned char mac_addr[6];      // 存储将字符串分割后的MAC地址
 
-	if(rules.mac_status == 0)
-	{  
-		rules.mac_status = 1;
-
-		for(int i = 0; i < MAC_NUM_MAX; i++)
+	printf("1. 开启/关闭MAC地址过滤功能   2. 查看过滤的MAC地址   3. 新增MAC地址   4. 删除MAC地址   5. 清空MAC地址\n");
+	int choice;
+	scanf("%d", &choice);
+	if(choice == 1)   
+	{
+		rules.mac_status = !rules.mac_status;     
+		if(rules.mac_status == 1)
 		{
-			printf("请输入第 %d 个 需要过滤的MAC地址（退出: 0）:", i + 1);
-			scanf("%s", mac_str);
-			if(!strcmp(mac_str, "0"))
+			printf("MAC地址过滤功能已开启\n");
+			for(int i = 0; i < MAC_NUM_MAX; i++)
 			{
-				break;
+				printf("请输入第 %d 个 需要过滤的MAC地址（退出: 0）:", i + 1);
+				scanf("%s", mac_str);
+				if(!strcmp(mac_str, "0"))
+				{
+					break;
+				}
+				mac_format(mac_str, mac_addr);
+				memcpy(rules.ban_mac[i], mac_addr, sizeof(rules.ban_mac[i]));
+				rules.macNum = i + 1;
 			}
-			mac_format(mac_str, mac_addr);
-			memcpy(rules.ban_mac[i], mac_addr, sizeof(rules.ban_mac[i]));
-			rules.macNum = i + 1;
-		}
 
-		if (setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len))
+			if (setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");			
+			}
+		}
+		else
 		{
-			printf("Filter rule synchronization to kernel space failed\n");			
+			printf("MAC地址过滤功能已关闭\n");
+			rules.mac_status = 0;
+			rules.macNum = 0;
+			memset(rules.ban_mac, 0, sizeof(rules.ban_mac));		
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len)) 
+			{
+				printf("Filter rule synchronization to kernel space failed\n");			
+			}
+		}
+	}
+	else if(choice == 2)
+	{
+		if(rules.mac_status == 1)
+		{
+			if (rules.macNum == 0)
+			{
+				printf("尚未设置过滤的MAC地址\n");
+			}
+			else
+			{
+				for(int i = 0; i < rules.macNum; i++)
+				{
+					printf("第%d个过滤MAC地址:%02X:%02X:%02X:%02X:%02X:%02X\n", i + 1,
+					rules.ban_mac[i][0], rules.ban_mac[i][1], rules.ban_mac[i][2], 
+					rules.ban_mac[i][3], rules.ban_mac[i][4], rules.ban_mac[i][5]);
+				}
+			}
+		}
+		else
+		{
+			printf("过滤MAC功能未开启\n");
+		}
+	}
+	else if(choice == 3)
+	{
+		if(rules.mac_status == 1)
+		{
+			for(int i = rules.macNum; i < MAC_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个 需要过滤的MAC地址（退出: 0）:", i + 1);
+				scanf("%s", mac_str);
+				if(!strcmp(mac_str, "0"))
+				{
+					break;
+				}
+				mac_format(mac_str, mac_addr);
+				memcpy(rules.ban_mac[i], mac_addr, sizeof(rules.ban_mac[i]));
+				rules.macNum = i + 1;
+			}
+
+			if (setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");			
+			}
+		}
+		else
+		{
+			printf("过滤MAC功能未开启\n");
+		}
+	}
+	else if(choice == 4)
+	{
+		if(rules.mac_status == 1)
+		{
+			for(int i = 0; i < rules.macNum; i++)
+			{
+				printf("第%d个过滤MAC地址:%02X:%02X:%02X:%02X:%02X:%02X\n", i + 1,
+				rules.ban_mac[i][0], rules.ban_mac[i][1], rules.ban_mac[i][2], 
+				rules.ban_mac[i][3], rules.ban_mac[i][4], rules.ban_mac[i][5]);
+			}
+			
+			int pos;
+			printf("请输入需要删除的MAC地址编号: ");
+			scanf("%d", &pos);
+
+			if(pos < 0 || pos > rules.macNum) 
+			{ 
+        		printf("Invalid position!\n");
+    		}
+			else
+			{
+				for (int i = pos - 1; i < rules.macNum - 1; i++)
+				{ 
+					memcpy(rules.ban_mac[i], rules.ban_mac[i + 1], sizeof(rules.ban_mac[i]));
+				}
+				rules.macNum--; 
+				printf("删除成功\n");
+
+				if (setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len))
+				{
+					printf("Filter rule synchronization to kernel space failed\n");
+				}
+			}
+		}
+		else
+		{
+			printf("过滤MAC功能未开启\n");
+		}
+	}
+	else if(choice == 5)
+	{
+		if(rules.mac_status == 1)
+		{
+			memset(rules.ban_mac, 0, sizeof(rules.ban_mac));	
+			rules.macNum = 0;	
+			printf("MAC地址已清空\n");
+
+			if(setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len)) 
+			{
+				printf("Filter rule synchronization to kernel space failed\n");			
+			}
+		}
+		else
+		{
+			printf("过滤MAC功能未开启\n");
 		}
 	}
 	else
-	{  
-		rules.mac_status = 0;
-		memset(rules.ban_mac, 0, sizeof(rules.ban_mac));		
-
-		if(setsockopt(sockfd, IPPROTO_IP, BANMAC, &rules, len)) 
-		{
-			printf("Filter rule synchronization to kernel space failed\n");			
-		}
+	{
+		printf("Bad parameter.\n");
 	}
+
     printf("Press enter to continue...\n");
     getchar(); 
 	getchar(); 

@@ -211,19 +211,21 @@ void time_out(struct timer_list *timer)
 	}
             
 	hashLock = 0; // 开锁
-	// 重新设置过期时间为1s后
-	connect_timer.expires = jiffies + HZ;  
+	connect_timer.expires = jiffies + HZ;  	// 重新设置过期时间为1s后
 	add_timer(&connect_timer);
 }
 
 // 获取系统当前时间
-struct rtc_time get_time(void)
+void get_time(char *time_buf, int len)
 {
 	ktime_t k_time;
 	struct rtc_time tm;  
+
 	k_time = ktime_get_real();
 	tm = rtc_ktime_to_tm(k_time);  
-	return tm;
+
+	snprintf(time_buf, len, "%d-%d-%d %d:%d:%d", 
+	tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec);
 }
 
 // 清空链表
@@ -286,20 +288,20 @@ void wirte_log(struct iphdr *iph, char *rule_str)
 	struct file *f;
 	int len;         
 	char buf[256]; 
-	struct rtc_time tm = get_time(); 
+	char time_buf[64]; 
+	get_time(time_buf, sizeof(time_buf)); 
 
 	spin_lock(&log_lock);    // 加锁
 
 	f = filp_open(LOG_FILE, O_WRONLY|O_CREAT|O_APPEND, 0644);
     if (IS_ERR(f))
 	{
-        printk("Failed to open file\n");
+        // printk("Failed to open file\n");
         spin_unlock(&log_lock);
         return;
     }
 
-	len = snprintf(buf, sizeof(buf), "Time: %d-%d-%d %d:%d:%d\t\tSource IP: %d.%d.%d.%d\t\tDestination IP: %d.%d.%d.%d\t\tFilter Rule: %s\t\tAction：Deny\n", 
-	tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour + 8, tm.tm_min, tm.tm_sec, 
+	len = snprintf(buf, sizeof(buf), "Time: %s\t\tSource IP: %d.%d.%d.%d\t\tDestination IP: %d.%d.%d.%d\t\tFilter Rule: %s\t\tAction：Deny\n", time_buf,
 	(iph->saddr & 0x000000ff) >> 0,(iph->saddr & 0x0000ff00) >> 8,(iph->saddr & 0x00ff0000) >> 16,(iph->saddr & 0xff000000) >> 24, 
 	(iph->daddr & 0x000000ff) >> 0,(iph->daddr & 0x0000ff00) >> 8,(iph->daddr & 0x00ff0000) >> 16,(iph->daddr & 0xff000000) >> 24, rule_str);
 	
@@ -316,8 +318,11 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 
 	char src_ip_str[16];
 	char dst_ip_str[16];
+	char time_buf[64]; 
+
 	convert_ip(iph->saddr, src_ip_str, sizeof(src_ip_str));
 	convert_ip(iph->daddr, dst_ip_str, sizeof(dst_ip_str));
+	get_time(time_buf, sizeof(time_buf)); 
 
 	if(rules.open_status == 0) return NF_ACCEPT;   
 
@@ -327,7 +332,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		// printk("current date： %ld  Start date： %ld  end date： %ld\n", current_time, rules.start_date, rules.end_date);
 		if(current_time < rules.start_date || current_time >= rules.end_date)
 		{
-			printk("The firewall is not in effect at the current time\n");
+			printk("Time: %s.\tThe firewall is not in effect at the current time\n", time_buf);
 			return NF_ACCEPT;
 		}
 	}
@@ -342,22 +347,26 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		}
 	}
 
-	// 基于源ip地址访问控制
+	// 基于源IP地址访问控制
 	if(rules.sip_status == 1)
 	{
 		int sip_number;
 		for(sip_number = 0; sip_number < rules.sipNum; sip_number++)
 		{
+			// printk("Src IP: %d.%d.%d.%d\n",
+			// (rules.ban_dip[sip_number] & 0x000000ff) >> 0, (rules.ban_dip[sip_number] & 0x0000ff00) >> 8,
+			// (rules.ban_dip[sip_number] & 0x00ff0000) >> 16, (rules.ban_dip[sip_number] & 0xff000000) >> 24);
+			
 			if (rules.ban_sip[sip_number] == iph->saddr)
 			{  	
-				printk("Request is deny. \nSrc IP: %s\tDest IP: %s\n", src_ip_str, dst_ip_str);
+				printk("Time: %s.\tRequest is deny. \nSrc IP: %s\tDest IP: %s\n\n", time_buf, src_ip_str, dst_ip_str);
 				wirte_log(iph, "Source IP");
 				return NF_DROP;
 			}
 		}
 	}
 
-	// 基于目的ip地址访问控制
+	// 基于目的IP地址访问控制
 	if(rules.dip_status == 1)
 	{
 		int dip_number;
@@ -365,7 +374,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		{
 			if (rules.ban_dip[dip_number] == iph->daddr)
 			{  
-				printk("Request is deny. \nSrc IP: %s\tDest IP: %s\n", src_ip_str, dst_ip_str);
+				printk("Time: %s.\tRequest is deny. \nSrc IP: %s\tDest IP: %s\n\n", time_buf, src_ip_str, dst_ip_str);
 				wirte_log(iph, "Destination IP");
 				return NF_DROP;
 			}
@@ -385,7 +394,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short sport = ntohs(rules.ban_sport[sport_numberi]);
 					if(tcph->source == sport)
 					{
-						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n", src_ip_str, dst_ip_str, rules.ban_sport[sport_numberi]);
+						printk("Time: %s.\tRequest is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n\n", time_buf, src_ip_str, dst_ip_str, rules.ban_sport[sport_numberi]);
 						wirte_log(iph, "Source port");
 						return NF_DROP;
 					}
@@ -400,7 +409,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short sport = ntohs(rules.ban_sport[sport_numberj]);
 					if(udph->source == sport)
 					{
-						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n", src_ip_str, dst_ip_str, rules.ban_sport[sport_numberj]);
+						printk("Time: %s.\tRequest is deny. \nSrc IP: %s\tDest IP: %s\tSrc port: %hu\n\n", time_buf, src_ip_str, dst_ip_str, rules.ban_sport[sport_numberj]);
 						wirte_log(iph, "Source port");
 						return NF_DROP;
 					}
@@ -428,7 +437,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short dport = ntohs(rules.ban_dport[dport_numberi]);
 					if(tcph->dest == dport)
 					{	
-						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n", src_ip_str, dst_ip_str, rules.ban_dport[dport_numberi]);
+						printk("Time: %s.\tRequest is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n\n", time_buf, src_ip_str, dst_ip_str, rules.ban_dport[dport_numberi]);
 						wirte_log(iph, "Destination port");
 						return NF_DROP;
 					}
@@ -443,7 +452,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 					unsigned short dport = ntohs(rules.ban_dport[dport_numberj]);
 					if(udph->dest == dport)
 					{
-						printk("Request is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n", src_ip_str, dst_ip_str, rules.ban_dport[dport_numberj]);
+						printk("Time: %s.\tRequest is deny. \nSrc IP: %s\tDest IP: %s\tDest port: %hu\n\n", time_buf, src_ip_str, dst_ip_str, rules.ban_dport[dport_numberj]);
 						wirte_log(iph, "Destination port");
 						return NF_DROP;
 					}
@@ -458,7 +467,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	{
 		if(is_PING(iph))
 		{
-			printk("PING from %s is deny\n", src_ip_str);
+			printk("Time: %s.\tPING from %s is deny\n", time_buf, src_ip_str);
 			wirte_log(iph, "PING Disabled");
 			return NF_DROP;
 		}
@@ -469,7 +478,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	{
 		if(is_HTTP(iph, tcph))
 		{
-			printk("HTTP/HTTPS request is deny\n");
+			printk("Time: %s.\tHTTP/HTTPS request is deny\n", time_buf);
 			wirte_log(iph, "HTTP/HTTPS Disabled");
 			return NF_DROP;		
 		}
@@ -480,7 +489,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 	{
 		if(is_TELNET(iph, tcph))
 		{
-			printk("Telnet request is deny\n");
+			printk("Time: %s.\tTelnet request is deny\n", time_buf);
 			wirte_log(iph, "Telnet Disabled");
 			return NF_DROP;
 		}
@@ -495,7 +504,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 		// printk("end: %ld\n", rules.end_time);
 		if(rules.start_time <= current_time && rules.end_time >= current_time)
 		{
-			printk("Request is deny. \nSrc IP: %s\tDest IP: %s\n", src_ip_str, dst_ip_str);
+			printk("Time: %s.\tRequest is deny. \nSrc IP: %s\tDest IP: %s\n\n", time_buf, src_ip_str, dst_ip_str);
 			wirte_log(iph, "Close all connections");
 			return NF_DROP;
 		}
@@ -507,7 +516,7 @@ unsigned int hookLocalIn(void* priv, struct sk_buff* skb, const struct nf_hook_s
 
 	if(rules.inp_status == 1)
 	{
-		update_hashTable(skb);    // 更新状态检测连接表
+		update_hashTable(skb);    // 更新状态连接表
 	}
 
 	return NF_ACCEPT;
@@ -529,8 +538,11 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 	unsigned char mac_source[ETH_ALEN];     // 存储当前数据包的MAC地址
 	char src_ip_str[16];
 	char dst_ip_str[16];
+	char time_buf[64]; 
+
 	convert_ip(iph->saddr, src_ip_str, sizeof(src_ip_str));
 	convert_ip(iph->daddr, dst_ip_str, sizeof(dst_ip_str));
+	get_time(time_buf, sizeof(time_buf)); 
 	memcpy(mac_source, ethhdr->h_source, ETH_ALEN);  
 
 	if(rules.open_status == 0) return NF_ACCEPT;   
@@ -538,10 +550,10 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 	if(rules.settime_status == 1)
 	{
 		time_t current_time = get_seconds();
-		// printk("当前日期： %ld  开始日期： %ld  结束日期： %ld\n", current_time, rules.start_date, rules.end_date);
+		// printk("current date： %ld  start date： %ld  end date： %ld\n", current_time, rules.start_date, rules.end_date);
 		if(current_time < rules.start_date || current_time >= rules.end_date)
 		{
-			printk("The firewall is not in effect at the current time\n");
+			printk("Time: %s.\tThe firewall is not in effect at the current time\n", time_buf);
 			return NF_ACCEPT;
 		}
 	}
@@ -574,7 +586,7 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 		   	(rules.ban_mac[mac_number][4] == mac_source[4]) && (rules.ban_mac[mac_number][5] == mac_source[5]))
 			{
 				// struct iphdr *iph = ip_hdr(skb); 
-				printk("Request is deny. \nMAC: %02X:%02X:%02X:%02X:%02X:%02X\tSrc IP: %s\n",
+				printk("Time: %s.\tRequest is deny. \nMAC: %02X:%02X:%02X:%02X:%02X:%02X\tSrc IP: %s\n\n", time_buf,
 				mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5], src_ip_str);
 				wirte_log(iph, "MAC");
 				return NF_DROP;
@@ -628,8 +640,8 @@ unsigned int hookPreRouting(void* priv, struct sk_buff* skb, const struct nf_hoo
 
 			if(flag_banSip && flag_banDip && flag_banSport && flag_banDport && flag_banMAC == 1)
 			{
-				printk("Custom filter rules hits, request is deny.\nSrc IP: %s\tDest IP: %s\tMAC: %02X:%02X:%02X:%02X:%02X:%02X\n", 
-				src_ip_str, dst_ip_str, mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5]);
+				printk("Time: %s.\tCustom filter rules hits, request is deny.\nSrc IP: %s\tDest IP: %s\tMAC: %02X:%02X:%02X:%02X:%02X:%02X\n\n", 
+				time_buf, src_ip_str, dst_ip_str, mac_source[0], mac_source[1], mac_source[2], mac_source[3], mac_source[4], mac_source[5]);
 				wirte_log(iph, "Custom filter rules");
 				return NF_DROP;
 			}
@@ -830,7 +842,7 @@ int myfirewall_init(void)
 
 	nf_register_sockopt(&nfhoSockopt);
 
-	printk("Firewall kernel module loaded successfully\n");
+	printk("Firewall kernel module loaded successfully!\n");
 	return 0;
 }
 
@@ -850,7 +862,7 @@ void myfirewall_exit(void)
 	// 注销通信的钩子
 	nf_unregister_sockopt(&nfhoSockopt);
 
-	printk("Firewall kernel module unloaded successfully\n");
+	printk("Firewall kernel module unloaded successfully!\n");
 }
 
 module_init(myfirewall_init);

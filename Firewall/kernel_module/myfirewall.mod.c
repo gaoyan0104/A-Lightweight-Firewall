@@ -38,8 +38,8 @@ __used __section(__versions) = {
 	{ 0x4e1bcc1b, "kernel_write" },
 	{ 0xddd346a3, "filp_open" },
 	{ 0xdbf17652, "_raw_spin_lock" },
-	{ 0x656e4a6e, "snprintf" },
 	{ 0xdecd0b29, "__stack_chk_fail" },
+	{ 0x656e4a6e, "snprintf" },
 	{ 0xe4c2c66c, "rtc_ktime_to_tm" },
 	{ 0xc4f0da12, "ktime_get_with_offset" },
 	{ 0xca7a3159, "kmem_cache_alloc_trace" },
@@ -57,4 +57,4 @@ __used __section(__versions) = {
 MODULE_INFO(depends, "");
 
 
-MODULE_INFO(srcversion, "4983E2D3BA448A1463398CA");
+MODULE_INFO(srcversion, "3D9204E50D521B96D73493D");

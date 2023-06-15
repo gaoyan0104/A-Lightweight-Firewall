@@ -16,14 +16,14 @@
 #define RESTORE               0x1015                              // 恢复默认设置功能编号
 #define CONNGET               0x1016                              // 获取状态链接功能编号
 #define SOE_MAX		          0x1100                              // 驱动程序处理最大值 
+#define CONN_NUM_MAX          100                                 // 保留状态连接的最大值
+#define CONNECT_TIME	      60								  // 状态检测连接超时时间
+#define TABLE_SIZE            1000001							  // 状态检测哈希表长度
 #define IP_NUM_MAX            10                                  // 过滤IP地址个数的最大值
 #define PORT_NUM_MAX          10                                  // 过滤端口个数的最大值
 #define MAC_NUM_MAX           10                                  // 过滤MAC地址个数的最大值
 #define COMBINE_NUM_MAX       10                                  // 用户自定义访问控制策略个数的最大值
 #define MAC_LEN               6                                   // MAC地址的字节数
-#define CONN_NUM_MAX          100                                 // 保留状态连接的最大值
-#define CONNECT_TIME	      60								  // 状态检测连接超时时间
-#define TABLE_SIZE            1000001							  // 状态检测哈希表长度
 #define LOG_FILE              "/home/ubuntu/Firewall/log.txt"     // 日志文件存储路径
 
 // 用户自定义访问控制策略

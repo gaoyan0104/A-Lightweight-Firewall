@@ -1,368 +1,401 @@
-Time: 2023-6-21 14:16:23		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49932		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:23		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49932		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:23		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49920		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:23		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49932		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:23		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49920		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:23		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:23		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:23		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49920		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:24		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:24		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49932		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:24		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49920		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:24		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:25		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49932		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:25		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:25		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49920		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:26		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:26		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49932		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:26		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49920		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:28		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:28		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:28		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:29		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49932		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:30		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49920		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:33		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:33		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:33		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:36		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49932		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:37		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49920		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:38		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:38		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:41		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:41		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:41		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:42		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:42		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:43		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 49676		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:49		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49932		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:50		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 49920		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:53		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:54		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:16:55		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:17:1		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:20:8		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 54694		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:8		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 54694		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:8		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 43568		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:8		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 54694		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:8		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 43568		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:8		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:8		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 54694		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 43568		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 54694		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 54694		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 54694		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 43568		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:9		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 54694		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:10		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 54694		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:10		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 43568		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:10		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:10		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 54694		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:11		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 54694		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:11		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 43568		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:12		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:12		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 54694		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:13		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:14		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:15		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 43568		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:15		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 54694		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:15		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 54694		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:15		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:15		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:17		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:18		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:19		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:20		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:21		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 43568		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:21		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 54694		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:22		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:22		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 54694		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:35		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 43568		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:35		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 54694		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:35		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43568		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:20:36		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 54694		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:21:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37476		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37456		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37476		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37456		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37476		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37456		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37476		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37456		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:45		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:45		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:45		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37476		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:45		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37456		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:46		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:46		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:47		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37476		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:47		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37456		Dst Port: 34751		Filter Rule: MAC		Action：Deny
-Time: 2023-6-21 14:21:52		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:52		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:53		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:53		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:53		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:53		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:53		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:53		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:53		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:53		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:54		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:54		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:54		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:54		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:54		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:54		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:54		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:55		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:55		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37456		Dst Port: 34751		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37456		Dst Port: 34751		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:58		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 37456		Dst Port: 34751		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:58		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:21:58		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:1		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:1		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:1		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:1		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:1		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:1		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:2		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:2		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:3		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:3		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:3		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:4		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:4		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:4		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:4		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:5		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:5		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:6		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:6		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:6		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:8		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:8		Protocol: UDP		Src IP: 192.168.220.254		Dst IP: 192.168.220.128		Src Port: 67		Dst Port: 68		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:8		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:8		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:8		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:9		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:10		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:10		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:11		Protocol: UDP		Src IP: 127.0.0.1		Dst IP: 127.0.0.53		Src Port: 38301		Dst Port: 53		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:11		Protocol: UDP		Src IP: 127.0.0.1		Dst IP: 127.0.0.53		Src Port: 38301		Dst Port: 53		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:13		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:13		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:13		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:15		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:17		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:18		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:18		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:19		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:19		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:19		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:20		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:20		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 52981		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:21		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:22		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:23		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53050		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:23		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:28		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:29		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:30		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:30		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37476		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:31		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:32		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:32		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:32		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:33		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:34		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:35		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:36		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Protocol		Action：Deny
-Time: 2023-6-21 14:22:53		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:53		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:53		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:54		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:54		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:54		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:54		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:54		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:54		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:55		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:55		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:55		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:22:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 37456		Filter Rule: Customized filter rules		Action：Deny
-Time: 2023-6-21 14:23:2		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:3		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:3		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:3		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:3		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:3		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:3		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:4		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:4		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:4		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:4		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:5		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:5		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:6		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:6		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53082		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:6		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Close all connections		Action：Deny
-Time: 2023-6-21 14:23:13		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:23:14		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:23:15		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:23:16		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:23:18		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43004		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33714		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43004		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33714		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57174		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43004		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33714		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57174		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43344		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33728		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43006		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51562		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33726		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43820		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43004		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33714		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57174		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43360		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43344		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33728		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43006		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57180		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51562		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33726		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43820		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57174		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43360		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43344		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43372		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33728		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43006		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57180		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51562		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33730		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:25		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43374		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33726		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43820		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43360		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43344		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43372		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51566		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33728		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43832		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43378		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43006		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57180		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51562		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33730		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43374		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33726		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43820		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43360		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43372		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51566		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43832		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43378		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43386		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57180		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33730		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43374		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43372		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51566		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43832		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43378		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43386		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33730		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43374		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51566		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43832		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43378		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43386		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43386		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43004		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33714		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:26		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57174		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43344		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33728		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 43006		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51562		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33726		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43820		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43360		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 57180		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43372		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 220.181.174.33		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33730		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43374		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 51566		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43832		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43378		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:27		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43386		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
-Time: 2023-6-21 14:23:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:45		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:45		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:47		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:23:47		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Source IP		Action：Deny
-Time: 2023-6-21 14:24:14		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:24:15		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:24:16		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:24:17		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:24:18		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:24:19		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:24:28		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:24:29		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: -1		Dst Port: -1		Filter Rule: PING Disabled		Action：Deny
-Time: 2023-6-21 14:25:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:57		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 48204		Dst Port: 34751		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 48204		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 34751		Dst Port: 51438		Filter Rule: Destination IP		Action：Deny
-Time: 2023-6-21 14:25:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 51438		Dst Port: 34751		Filter Rule: Destination IP		Action：Deny
+Time: 2023-6-29 15:51:31		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 47616		Dst Port: 34717		Filter Rule: Source IP		Action：Deny
+Time: 2023-6-29 15:51:32		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 47616		Dst Port: 34717		Filter Rule: Source IP		Action：Deny
+Time: 2023-6-29 15:51:34		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 47616		Dst Port: 34717		Filter Rule: Source IP		Action：Deny
+Time: 2023-6-29 15:51:38		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 47616		Dst Port: 34717		Filter Rule: Source IP		Action：Deny
+Time: 2023-6-29 15:51:46		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 47616		Dst Port: 34717		Filter Rule: Source IP		Action：Deny
+Time: 2023-6-29 15:51:56		Protocol: UDP		Src IP: 127.0.0.1		Dst IP: 224.0.0.251		Src Port: 5353		Dst Port: 5353		Filter Rule: Source IP		Action：Deny
+Time: 2023-6-29 15:52:29		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Source IP		Action：Deny
+Time: 2023-6-29 15:52:30		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Source IP		Action：Deny
+Time: 2023-6-29 15:52:31		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Source IP		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52202		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52202		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39598		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52718		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52202		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52216		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39598		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56108		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52718		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52202		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52216		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39598		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53958		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56108		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52718		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39614		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52216		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39598		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53958		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56108		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52718		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56114		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39614		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56116		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52680		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52216		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53958		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56108		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53972		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56114		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39614		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56116		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56132		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52680		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53958		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53972		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56114		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39614		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56116		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56132		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52680		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56142		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53972		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52694		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56114		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56116		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56132		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:41		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52680		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56142		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56150		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53972		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52694		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56132		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56142		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56150		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52694		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56142		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56150		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52694		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56150		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52202		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39598		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52718		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33574		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52216		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56108		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33574		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53958		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33574		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39614		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33586		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33574		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56114		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56116		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52680		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:42		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33586		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:43		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53972		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:43		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56132		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:43		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33586		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:43		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33586		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:43		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56142		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:43		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52694		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:43		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56150		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:43		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33574		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:44		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 33586		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:44		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52202		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:44		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39598		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:44		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52718		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:44		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 52216		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:44		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 56108		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:44		Protocol: TCP		Src IP: 220.181.174.225		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 53958		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:44		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 39614		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:52:44		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 52720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:53:10		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Destination IP		Action：Deny
+Time: 2023-6-29 15:53:11		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Destination IP		Action：Deny
+Time: 2023-6-29 15:58:2		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:3		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:4		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43218		Dst Port: 42385		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:4		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43226		Dst Port: 42385		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:4		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:5		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43226		Dst Port: 42385		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:5		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43218		Dst Port: 42385		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:5		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:6		Protocol: UDP		Src IP: 127.0.0.1		Dst IP: 127.0.0.53		Src Port: 49414		Dst Port: 53		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:6		Protocol: UDP		Src IP: 127.0.0.1		Dst IP: 127.0.0.53		Src Port: 49414		Dst Port: 53		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:7		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43218		Dst Port: 42385		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:7		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 43226		Dst Port: 42385		Filter Rule: MAC		Action：Deny
+Time: 2023-6-29 15:58:47		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 15:58:48		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 15:58:49		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 15:58:50		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 15:58:51		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 15:58:52		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41118		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41118		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48658		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41118		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41130		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48658		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 37220		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41118		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41130		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48658		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 37220		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48664		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41130		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48658		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40724		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 37220		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42278		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48664		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41130		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40724		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 37220		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42278		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:57		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48664		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40724		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42278		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40740		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40746		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48664		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40724		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42278		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40740		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40746		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36276		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40740		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40746		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36276		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40740		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40746		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36276		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36276		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41118		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48658		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41130		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40758		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 37220		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:58		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40758		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48664		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40758		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40724		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42278		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40770		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40758		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40770		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40770		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40740		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40746		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40770		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43596		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36276		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43596		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40778		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43596		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40778		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43604		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43596		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40778		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43604		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40790		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40778		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43604		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:58:59		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40790		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43604		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 104.208.16.88		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42548		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40790		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40790		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40758		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40770		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41118		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43596		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48658		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41130		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 37220		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:0		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40778		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 110.242.68.66		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 43604		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 48664		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40720		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40724		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 42278		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40790		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36268		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40740		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40746		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:1		Protocol: TCP		Src IP: 34.117.65.55		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 36276		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:2		Protocol: TCP		Src IP: 34.120.208.123		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 40758		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:2		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41140		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:2		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 41140		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 15:59:16		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45378		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:16		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45378		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:16		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45372		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:16		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:16		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:16		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45378		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:16		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45372		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:16		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:17		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45372		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:17		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:17		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45378		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:17		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45372		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:17		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:18		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45378		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:18		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45372		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:19		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:19		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45378		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:20		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45372		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:21		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:21		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:21		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:23		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45378		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:23		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45372		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:26		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:26		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:26		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:29		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45378		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:30		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45372		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:31		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:31		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:34		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:34		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:34		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:35		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:35		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53611		Dst Port: 22		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:43		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45378		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:44		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 42385		Dst Port: 45372		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:46		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:47		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:48		Protocol: UDP		Src IP: 192.168.220.1		Dst IP: 192.168.220.255		Src Port: 137		Dst Port: 137		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:48		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:49		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:50		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:51		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:52		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:53		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:54		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:55		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:56		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:57		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:58		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 15:59:59		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Close all connections		Action：Deny
+Time: 2023-6-29 16:7:22		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:22		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:22		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:23		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:24		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:24		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:24		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:25		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:25		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:25		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:26		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:26		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:27		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:29		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:30		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:31		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:31		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:34		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:36		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:36		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:37		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:41		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:41		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:7:43		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 53749		Dst Port: 22		Filter Rule: Source port		Action：Deny
+Time: 2023-6-29 16:15:2		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:3		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:4		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:4		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:5		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:6		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:7		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:8		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:8		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Destination port		Action：Deny
+Time: 2023-6-29 16:15:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:58		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56232		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56222		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56222		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56232		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56232		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:15:59		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56222		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:16:0		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:16:0		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56222		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:16:0		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56232		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:16:1		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56232		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:16:1		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 56222		Dst Port: 36219		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:16:1		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:16:1		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Customized filter rules		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:48		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:49		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:49		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:49		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:50		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:50		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:50		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:51		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56222		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:51		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:51		Protocol: TCP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 36219		Dst Port: 56232		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:52		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:52		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:53		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:53		Protocol: TCP		Src IP: 192.168.220.1		Dst IP: 192.168.220.128		Src Port: 54019		Dst Port: 22		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:17:53		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: Protocol		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 39546		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 39546		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 55782		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 34242		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 39546		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 39552		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 55782		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 34242		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 39546		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 55174		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 39552		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 55782		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 34242		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 55174		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 55792		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 34254		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.107.221.82		Dst IP: 192.168.220.128		Src Port: 80		Dst Port: 39552		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.117.237.239		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 55782		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.160.144.191		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 34242		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:18:16		Protocol: TCP		Src IP: 34.149.100.209		Dst IP: 192.168.220.128		Src Port: 443		Dst Port: 55174		Filter Rule: HTTP/HTTPS Disabled		Action：Deny
+Time: 2023-6-29 16:19:28		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 16:19:29		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 16:19:30		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 16:19:31		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny
+Time: 2023-6-29 16:19:32		Protocol: ICMP		Src IP: 127.0.0.1		Dst IP: 127.0.0.1		Src Port: 30001		Dst Port: 30001		Filter Rule: PING Disabled		Action：Deny

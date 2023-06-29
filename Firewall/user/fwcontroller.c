@@ -17,8 +17,11 @@ void set_opentime(int sockfd, socklen_t len);               /*功能函数:设�
 void get_status();                                          /*功能函数:获取当前防火墙过滤规则*/
 void change_status(int sockfd, socklen_t len);              /*功能函数:改变防火墙过滤规则*/
 void change_ping(int sockfd, socklen_t len);                /*功能函数:改变PING规则*/
+void change_nat(int sockfd, socklen_t len);                 /*功能函数:开启/关闭防火墙NAT功能*/
+void change_ip(int sockfd, socklen_t len);                  /*功能函数:改变IP过滤规则*/
 void change_sip(int sockfd, socklen_t len);                 /*功能函数:改变源IP过滤规则*/
 void change_dip(int sockfd, socklen_t len);                 /*功能函数:改变目的IP过滤规则*/
+void change_port(int sockfd, socklen_t len);                /*功能函数:改变端口过滤规则*/
 void change_sport(int sockfd, socklen_t len);               /*功能函数:改变源端口过滤规则*/
 void change_dport(int sockfd, socklen_t len);               /*功能函数:改变目的端口过滤规则*/
 void change_http(int sockfd, socklen_t len);                /*功能函数:改变HTTP/HTTPS规则*/
@@ -27,7 +30,7 @@ void change_protocol(int sockfd, socklen_t len);            /*功能函数:改�
 void change_mac(int sockfd, socklen_t len);                 /*功能函数:改变MAC地址过滤规则*/		
 void change_close(int sockfd, socklen_t len);               /*功能函数:改变关闭所有连接规则*/
 void change_combin(int sockfd, socklen_t len);              /*功能函数:改变自定义过滤规则*/
-void mac_format(char *mac_str, unsigned char *mac_addr);    /*功能函数:将MAC地址分割并存入mac_addr*/
+void mac_format(char *mac_str, unsigned char *mac_addr);    /*功能函数:分割MAC地址*/
 void show_log();                                            /*功能函数:查看日志*/
 void restore_default(int sockfd, socklen_t len);            /*功能函数:恢复默认设置*/
 void printError(char *msg);                                 /*功能函数:打印错误信息*/
@@ -87,12 +90,7 @@ int main(void)
 // 功能函数:获取当前防火墙过滤规则
 void get_status() 
 {	
-	time_t timer0;
-	timer0= time(NULL);
-	struct tm* tm = localtime(&timer0);
-	printf("\nTime:%d-%d-%d %d:%d:%d\n", tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, tm->tm_hour + 8, tm->tm_min, tm->tm_sec);
 	printf("-------------------------------------------------------------------------------\n");
-	
 	if (rules.settime_status == 1)
 	{
 		// 将时间戳转换为tm结构体
@@ -110,6 +108,17 @@ void get_status()
 
 	printf("防火墙状态检测功能: \t\t");
 	if (rules.inp_status == 1)
+	{
+		printf("开启\n");
+	}
+	else
+	{
+		printf("关闭\n");
+	}
+	printf("--------------------------------------\n");
+
+	printf("防火墙NAT功能: \t\t\t");
+	if (rules.nat_status == 1)
 	{
 		printf("开启\n");
 	}
@@ -329,6 +338,11 @@ void get_status()
 		printf("关闭\n");
 	}
 	printf("--------------------------------------\n");
+
+	time_t timer0;
+	timer0= time(NULL);
+	struct tm* tm = localtime(&timer0);
+	printf("Time:%d-%d-%d %d:%d:%d\n", tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, tm->tm_hour + 8, tm->tm_min, tm->tm_sec);
 }
 
 // 功能函数:改变防火墙过滤规则
@@ -336,10 +350,10 @@ void change_status(int sockfd, socklen_t len)
 {
 	int choice;
 	printf("\n选择需要设置的防火墙功能:\n");
-	printf("1.开启/关闭防火墙\t2.设置防火墙生效时间\t3.查看日志\t\t4.状态检测功能\n");
-	printf("5.根据源IP过滤\t\t6.根据目的IP过滤\t7.根据源端口过滤\t8.根据目的端口过滤\n"); 
-	printf("9.根据MAC地址过滤\t10.根据协议类型过滤\t11.自定义访问控制策略\t12.关闭所有连接\t\n");
-	printf("13.PING功能\t\t14.HTTP/HTTPS功能\t15.Telnet功能\t\t16.恢复默认设置\t\t0.exit\n");
+	printf("1.开启/关闭防火墙\t2.查看日志\t\t3.状态检测功能\t\t4.NAT功能\n");
+	printf("5.IP过滤功能\t\t6.端口号过滤功能\t7.协议类型过滤功能\t8.MAC地址过滤功能\n"); 
+	printf("9.自定义访问控制策略\t10.PING功能\t\t11.HTTP/HTTPS功能\t12.Telnet功能\n");
+	printf("13.关闭所有连接\t\t14.防火墙生效时间\t15.恢复默认设置\t\t0.exit\n");
 	printf("-------------------------------------------------------------------------------\n");
 	// printf("选项:\t");
 
@@ -349,49 +363,46 @@ void change_status(int sockfd, socklen_t len)
 		case 1:   
 			open_firewall(sockfd, len);
 			break;	
-		case 2:
-			set_opentime(sockfd, len);
-			break;
-		case 3:   
+		case 2:   
 			show_log();
 			break;
-		case 4:   
+		case 3:   
 			open_stateInp(sockfd, len);	
 			break;
+		case 4:
+			change_nat(sockfd, len);
+			break;
 		case 5:   
-			change_sip(sockfd, len);
+			change_ip(sockfd, len);
 			break;
 		case 6:
-			change_dip(sockfd, len);   
+			change_port(sockfd, len);   
 			break;
-		case 7:   
-			change_sport(sockfd, len);	
-			break;
-		case 8:
-			change_dport(sockfd, len);
-			break;
-		case 9:
-			change_mac(sockfd, len);
-			break;
-		case 10:
+		case 7:
 			change_protocol(sockfd, len);   
 			break;
-		case 11:   
+		case 8:
+			change_mac(sockfd, len);
+			break;
+		case 9:   
 			change_combin(sockfd, len); 
 			break;
-		case 12:
-			change_close(sockfd, len);
-			break;
-		case 13:
+		case 10:
 			change_ping(sockfd, len);
 			break;
-		case 14:
+		case 11:
 			change_http(sockfd, len);	
 			break;
-		case 15:
+		case 12:
 			change_telnet(sockfd, len);
 			break;
-		case 16:
+		case 13:
+			change_close(sockfd, len);
+			break;
+		case 14:
+			set_opentime(sockfd, len);
+			break;
+		case 15:
 			restore_default(sockfd, len);
 			break;
 		case 0:
@@ -526,6 +537,193 @@ void open_stateInp(int sockfd, socklen_t len)
 	getchar(); 
 }
 
+// 功能函数:开启/关闭防火墙NAT功能
+void change_nat(int sockfd, socklen_t len)
+{
+	char str_ip[20];
+	unsigned short port;
+	int choice;
+	
+	printf("1. 开启/关闭NAT功能   2. 查看NAT转换表   3. 新增NAT转换   4. 删除NAT转换   5. 清空NAT转换表\n");
+	scanf("%d", &choice);
+	if (choice == 1)   
+	{
+		rules.nat_status = !rules.nat_status;     
+		if (rules.nat_status == 1)
+		{
+			printf("NAT功能已开启\n");
+			for (int i = 0; i < NAT_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个需要NAT转换的组合（退出: 0）:\n", i + 1);
+				printf("请输入内网源IP:");
+				scanf("%s", str_ip);
+				if (!strcmp(str_ip, "0"))
+				{
+					// printf("\n输入完毕\n");
+					break;
+				}
+				rules.natTable[i].firewall_ip = inet_addr(str_ip);
+
+				printf("请输入内网源端口号:");
+				scanf("%hu", &port);
+				rules.natTable[i].firewall_port = port;
+
+				printf("请输入对应的外网源IP:");
+				scanf("%s", str_ip);
+				rules.natTable[i].nat_ip = inet_addr(str_ip);
+
+				printf("请输入对应的外网源端口号:");
+				scanf("%hu", &port);
+				rules.natTable[i].nat_port = port;
+
+				rules.natNum = i + 1;
+			}
+
+			if (setsockopt(sockfd, IPPROTO_IP, NATSTATE, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("NAT功能已关闭\n");
+			rules.nat_status = 0;
+			memset(rules.natTable, 0, sizeof(rules.natTable));   
+			rules.natNum = 0;
+
+			if (setsockopt(sockfd, IPPROTO_IP, NATSTATE, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+	}
+	else if (choice == 2)
+	{
+		if (rules.nat_status == 1)
+		{
+			if (rules.natNum == 0)
+			{
+				printf("尚未设置NAT\n");
+			}
+			else
+			{
+				printf("内网地址\t\t外网地址\n");
+				for (int i = 0; i < rules.natNum; i++)
+				{
+					printf("%d.%d.%d.%d:%hu\t\t",(rules.natTable[i].firewall_ip & 0x000000ff) >> 0, (rules.natTable[i].firewall_ip & 0x0000ff00) >> 8,
+					(rules.natTable[i].firewall_ip & 0x00ff0000) >> 16, (rules.natTable[i].firewall_ip & 0xff000000) >> 24, rules.natTable[i].firewall_port);
+
+					printf("%d.%d.%d.%d:%hu\n",(rules.natTable[i].nat_ip & 0x000000ff) >> 0, (rules.natTable[i].nat_ip & 0x0000ff00) >> 8,
+					(rules.natTable[i].nat_ip & 0x00ff0000) >> 16, (rules.natTable[i].nat_ip & 0xff000000) >> 24, rules.natTable[i].nat_port);
+				}
+			}
+		}
+		else
+		{
+			printf("NAT功能未开启\n");
+		}
+	}
+	else if (choice == 3)
+	{
+		if (rules.nat_status == 1)
+		{
+			for (int i = rules.natNum; i < NAT_NUM_MAX; i++)
+			{
+				printf("请输入第 %d 个需要NAT转换的组合（退出: 0）:\n", i + 1);
+				printf("请输入内网源IP:");
+				scanf("%s", str_ip);
+				if (!strcmp(str_ip, "0"))
+				{
+					// printf("\n输入完毕\n");
+					break;
+				}
+				rules.natTable[i].firewall_ip = inet_addr(str_ip);
+
+				printf("请输入内网源端口号:");
+				scanf("%hu", &port);
+				rules.natTable[i].firewall_port = port;
+
+				printf("请输入对应的外网源IP:");
+				scanf("%s", str_ip);
+				rules.natTable[i].nat_ip = inet_addr(str_ip);
+
+				printf("请输入对应的外网源端口号:");
+				scanf("%hu", &port);
+				rules.natTable[i].nat_port = port;
+
+				rules.natNum = i + 1;
+			}
+
+			if (setsockopt(sockfd, IPPROTO_IP, NATSTATE, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("NAT功能未开启\n");
+		}
+	}
+	else if (choice == 4)
+	{
+		if (rules.nat_status == 1)
+		{
+
+			int pos;
+			printf("请输入需要删除的NAT转化编号: ");
+			scanf("%d", &pos);
+
+			if (pos < 0 || pos > rules.natNum) 
+			{ 
+        		printf("Invalid position!\n");
+    		}
+			else
+			{
+				for (int i = pos - 1; i < rules.natNum - 1; i++)
+				{ 
+					memcpy(&rules.natTable[i], &rules.natTable[i + 1], sizeof(rules.natTable[i]));
+				}
+				rules.natNum--; 
+
+				if (setsockopt(sockfd, IPPROTO_IP, NATSTATE, &rules, len))
+				{
+					printf("Filter rule synchronization to kernel space failed\n");
+				}
+			}
+		}
+		else
+		{
+			printf("NAT功能未开启\n");
+		}
+	}
+	else if (choice == 5)
+	{
+		if (rules.nat_status == 1)
+		{
+			memset(rules.natTable, 0, sizeof(rules.natTable));   
+			rules.natNum = 0;
+			printf("NAT转化表已清空\n");
+
+			if (setsockopt(sockfd, IPPROTO_IP, NATSTATE, &rules, len))
+			{
+				printf("Filter rule synchronization to kernel space failed\n");
+			}
+		}
+		else
+		{
+			printf("NAT功能未开启\n");
+		}
+	}
+	else
+	{
+		printf("Bad parameter.\n");
+	}
+
+    printf("Press enter to continue...\n");
+    getchar(); 
+	getchar(); 
+}
+
 // 功能函数:设置防火墙开启时间段
 void set_opentime(int sockfd, socklen_t len)
 {
@@ -583,6 +781,26 @@ void set_opentime(int sockfd, socklen_t len)
     printf("Press enter to continue...\n");
 	getchar(); 
 	getchar(); 
+}
+
+// 功能函数:改变IP过滤规则
+void change_ip(int sockfd, socklen_t len)                
+{
+	int choice;
+	printf("1. 源IP过滤功能   2. 目的IP过滤功能\n");
+	scanf("%d", &choice);
+	if (choice == 1) 
+	{
+		change_sip(sockfd, len);
+	}
+	else if (choice == 2)
+	{
+		change_dip(sockfd, len);
+	}
+	else
+	{
+		printf("Bad parameter.\n");
+	}
 }
 
 // 功能函数:改变源IP过滤规则
@@ -901,10 +1119,26 @@ void change_dip(int sockfd, socklen_t len)
 	{
 		printf("Bad parameter.\n");
 	}
+}
 
-    printf("Press enter to continue...\n");
-    getchar(); 
-	getchar(); 
+// 功能函数:改变端口号过滤规则
+void change_port(int sockfd, socklen_t len)                
+{
+	int choice;
+	printf("1. 源端口过滤功能   2. 目的端口过滤功能\n");
+	scanf("%d", &choice);
+	if (choice == 1) 
+	{
+		change_sport(sockfd, len);
+	}
+	else if (choice == 2)
+	{
+		change_dport(sockfd, len);
+	}
+	else
+	{
+		printf("Bad parameter.\n");
+	}
 }
 
 // 功能函数:改变源端口过滤规则

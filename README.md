@@ -25,10 +25,13 @@
 
 小提示：记得在头文件 myfirewall.h 中修改一下防火墙日志文件的路径 LOG_FILE，我的路径是 /home/ubuntu/Firewall/log.txt。
 
+
 Netfilter框架：
 
 Netfilter 是 Linux 内核中进行数据包过滤，连接跟踪（Connect Track），网络地址转换（NAT）等功能的主要实现框架；该框架在网络协议栈处理数据包的关键流程中定义了一系列钩子点（Hook 点），并在这些钩子点中注册一系列函数对数据包进行处理。这些注册在钩子点的函数即为设置在网络协议栈内的数据包通行策略，也就意味着，这些函数可以决定内核是接受还是丢弃某个数据包，换句话说，这些函数的处理结果决定了这些网络数据包的“命运”。
+
 <img src="https://github.com/gaoyan0104/A-Lightweight-Firewall/blob/master/img/netfilter.jpg" width="700px">
+
 其中，矩形方框中的即为 Netfilter 的钩子节点。从图中可以看到，三个方向的数据包需要经过的钩子节点不完全相同：
 
 发往本地：NF_INET_PRE_ROUTING-->NF_INET_LOCAL_IN
@@ -36,6 +39,7 @@ Netfilter 是 Linux 内核中进行数据包过滤，连接跟踪（Connect Trac
 转发：NF_INET_PRE_ROUTING-->NF_INET_FORWARD-->NF_INET_POST_ROUTING
 
 本地发出：NF_INET_LOCAL_OUT-->NF_INET_POST_ROUTING
+
 
 sk_buff 结构：
 

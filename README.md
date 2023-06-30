@@ -41,8 +41,9 @@ Netfilter 是 Linux 内核中进行数据包过滤，连接跟踪（Connect Trac
 本地发出：NF_INET_LOCAL_OUT-->NF_INET_POST_ROUTING
 
 
+
 sk_buff 结构：
 
 在 Linux 内核中，系统使用 sk_buff 数据结构对数据包进行存储和管理。在数据包接收过程中，该数据结构从网卡驱动收包开始，一直贯穿到内核网络协议栈的顶层，直到用户态程序从内核获取数据。使用图形表示 sk_buff 的结构如下：
-<img src="https://github.com/gaoyan0104/A-Lightweight-Firewall/blob/master/img/sk_buff.jpg" width="700px">
+<img src="https://github.com/gaoyan0104/A-Lightweight-Firewall/blob/master/img/sk_buff.jpg" width="500px">
 在 sk_buff 数据结构中包含了诸多关于数据包存储，定位和管理的指针，数据包在网络协议栈各层次之间进行传输的过程中，内核通过操作指针的方式对数据包进行逐层解析，避免频繁的大数据段拷贝操作，从而提高数据包处理效率。
